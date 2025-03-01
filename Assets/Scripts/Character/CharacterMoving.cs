@@ -32,7 +32,7 @@ public class CharacterMoving : MonoBehaviour
         {
             targetPos = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
             MoveTo(targetPos);
-            if (Vector3.Distance(transform.position, targetPos) < 1.2f)
+            if (Vector3.Distance(transform.position, targetPos) < 13.2f)
             {
                 isAttacking = false;
                 StartCoroutine(ComeBack());
@@ -74,7 +74,6 @@ public class CharacterMoving : MonoBehaviour
     public void ForwardStep()
     {
         animatorController.StepForward(true);
-        //gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z);
         StartCoroutine(ResetStepForward());
     }
 
