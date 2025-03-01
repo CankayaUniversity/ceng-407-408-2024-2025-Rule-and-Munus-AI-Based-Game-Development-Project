@@ -22,6 +22,12 @@ public class CharacterMovingButtons : MonoBehaviour
 
     }
 
+    public void DefenceButton()
+    {
+        characterMoving.Defence();
+        StartCoroutine(WaitAndResetCounter());
+    }
+
     public void forwardStepButton()
     {
         characterMoving.ForwardStep();

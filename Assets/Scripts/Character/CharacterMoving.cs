@@ -71,6 +71,12 @@ public class CharacterMoving : MonoBehaviour
         LookAt(targetPos); // targetPos kullanýyoruz
     }
 
+    public void Defence()
+    {
+        animatorController.SetDefence(true);
+        StartCoroutine(ResetDefence());
+        LookAt(targetPos);
+    }
     public void ForwardStep()
     {
         animatorController.StepForward(true);
@@ -88,6 +94,12 @@ public class CharacterMoving : MonoBehaviour
     {
         animatorController.StepBackward(true);
         StartCoroutine(ResetStepBack());
+    }
+
+    private IEnumerator ResetDefence()
+    {
+        yield return new WaitForSeconds(1f);
+        animatorController.SetDefence(false);
     }
 
     private IEnumerator ResetStepBack()

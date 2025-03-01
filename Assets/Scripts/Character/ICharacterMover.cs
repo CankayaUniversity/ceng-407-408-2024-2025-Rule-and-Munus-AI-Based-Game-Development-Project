@@ -8,4 +8,6 @@ public interface ICharacterMover
     void MoveBack(Vector3 startingPosition);
 
     void Attacking();
+
+    void Defence();
 }

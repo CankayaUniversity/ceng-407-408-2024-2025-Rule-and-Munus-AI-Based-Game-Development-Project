@@ -51,6 +51,12 @@ public class AnimatorController
         isTurn = false;
     }
 
+    public void SetDefence(bool isDefence)
+    {
+        animator.SetBool("isDefence", isDefence);
+        isTurn = false;
+    }
+
     public bool IsIdle()
     {
         isTurn = true;
