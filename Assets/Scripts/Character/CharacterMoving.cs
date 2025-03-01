@@ -74,6 +74,7 @@ public class CharacterMoving : MonoBehaviour
     public void ForwardStep()
     {
         animatorController.StepForward(true);
+        //gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z);
         StartCoroutine(ResetStepForward());
     }
 
