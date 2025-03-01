@@ -68,7 +68,7 @@ public class CharacterMoving : MonoBehaviour
     {
         animatorController.SetRunning(false);
         animatorController.SetAttacking(true);
-        LookAt(targetPos); // targetPos kullanýyoruz
+        LookAt(targetPos); 
     }
 
     public void Defence()
@@ -115,7 +115,7 @@ public class CharacterMoving : MonoBehaviour
         animatorController.SetRunning(true);
         animatorController.SetIdle(false);
 
-        // Karakterin yönünü güncelle
+       
         LookAt(targetPosition);
     }
 
@@ -125,8 +125,8 @@ public class CharacterMoving : MonoBehaviour
         animatorController.SetAttacking(false);
         animatorController.SetBackwarding(true);
 
-        // Karakterin yönünü güncelle
-        LookAt(targetPos); // startingPosition kullanýyoruz
+        
+        LookAt(targetPos); 
     }
 
     public void Returned()
@@ -145,9 +145,9 @@ public class CharacterMoving : MonoBehaviour
 
     private void LookAt(Vector3 targetPosition)
     {
-        // Karakterin yönünü güncelleme
+       
         Vector3 direction = (targetPosition - transform.position).normalized;
-        if (direction != Vector3.zero) // Sýfýr vektör kontrolü
+        if (direction != Vector3.zero) 
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
