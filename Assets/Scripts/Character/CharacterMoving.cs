@@ -8,7 +8,10 @@ public class CharacterMoving : MonoBehaviour
     //public AIMoving aiMoving;
     private Vector3 targetPos;
     private Vector3 startingPos;
-    private bool isAttacking = false;
+    private bool isAttacking0 = false;
+    private bool isAttacking1 = false;
+    private bool isAttacking2 = false;
+    private bool isAttacking3 = false;
     private bool isComeBack = false;
     private AnimatorController animatorController;
 
@@ -28,15 +31,34 @@ public class CharacterMoving : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (isAttacking)
+        if (isAttacking0)
         {
             targetPos = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
             MoveTo(targetPos);
             if (Vector3.Distance(transform.position, targetPos) < 13.2f)
             {
-                isAttacking = false;
+                isAttacking0 = false;
                 StartCoroutine(ComeBack());
             }
+        }
+        else if (isAttacking1)
+        {
+            Attacking1();
+            isAttacking1 = false;
+
+        }
+        else if(isAttacking2)
+        {
+            Attacking2();
+            isAttacking2 = false;
+            
+
+        }
+        else if(isAttacking3)
+        {
+            Attacking3();
+            isAttacking3 = false;
+            
         }
 
         if (isComeBack)
@@ -50,27 +72,60 @@ public class CharacterMoving : MonoBehaviour
             }
         }
 
-
-
-
     }
 
 
 
-    public void Attack()
+    public void Attack0()
     {
 
-        isAttacking = true;
+        isAttacking0 = true;
 
     }
 
-    public void Attacking()
+    public void Attack1()
+    {
+        isAttacking1 = true;
+    }
+    public void Attack2()
+    {
+        isAttacking2 = true;
+    }
+
+    public void Attack3()
+    {
+        isAttacking3 = true;
+    }   
+
+    public void Attacking0()
     {
         animatorController.SetRunning(false);
-        animatorController.SetAttacking(true);
+        animatorController.SetAttacking0(true);
         LookAt(targetPos); 
     }
 
+    public void Attacking1()
+    {
+        animatorController.SetAttacking1(true);
+        LookAt(targetPos);
+        
+    }
+
+    public void Attacking2()
+    {
+        animatorController.SetAttacking2(true);
+        LookAt(targetPos);
+        
+    }
+   
+
+    public void Attacking3()
+    {
+        animatorController.SetAttacking3(true);
+        LookAt(targetPos);
+        
+    }
+    
     public void Defence()
     {
         animatorController.SetDefence(true);
@@ -122,7 +177,7 @@ public class CharacterMoving : MonoBehaviour
     public void MoveBack(Vector3 startingPosition)
     {
         transform.position = Vector3.MoveTowards(transform.position, startingPosition, Time.deltaTime * speed);
-        animatorController.SetAttacking(false);
+        animatorController.SetAttacking0(false);
         animatorController.SetBackwarding(true);
 
         
@@ -138,7 +193,7 @@ public class CharacterMoving : MonoBehaviour
 
     private IEnumerator ComeBack()
     {
-        Attacking();
+        Attacking0();
         yield return new WaitForSeconds(1f);
         isComeBack = true;
     }

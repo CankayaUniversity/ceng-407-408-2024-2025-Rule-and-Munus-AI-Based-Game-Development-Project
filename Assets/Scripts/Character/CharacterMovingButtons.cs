@@ -15,13 +15,30 @@ public class CharacterMovingButtons : MonoBehaviour
     }
 
 
-    public void AttackButton()
+    public void AttackButton0()
     {
-        characterMoving.Attack();
+        characterMoving.Attack0();
         StartCoroutine(WaitAndResetCounter());
 
     }
 
+    public void AttackButton1()
+    {
+        characterMoving.Attack1();
+        StartCoroutine(WaitAndResetCounter());
+    }
+
+    public void AttackButton2()
+    {
+        characterMoving.Attack2();
+        StartCoroutine(WaitAndResetCounter());
+    }
+
+    public void AttackButton3()
+    {
+        characterMoving.Attack3();
+        StartCoroutine(WaitAndResetCounter());
+    }
     public void DefenceButton()
     {
         characterMoving.Defence();

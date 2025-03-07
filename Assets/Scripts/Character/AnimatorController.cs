@@ -25,11 +25,31 @@ public class AnimatorController
         isTurn = false;
     }
 
-    public void SetAttacking(bool isAttacking)
+    public void SetAttacking0(bool isAttacking)
     {
         animator.SetBool("isAttacking", isAttacking);
         isTurn = false;
 
+    }
+
+    public void SetAttacking1(bool isAttacking)
+    {
+        //animator.SetBool("isAttacking2", isAttacking);
+        animator.SetTrigger("isAttacking1");
+        isTurn = false;
+    }
+    public void SetAttacking2(bool isAttacking)
+    {
+        //animator.SetBool("isAttacking1", isAttacking);
+        animator.SetTrigger("isAttacking2");
+        isTurn = false;
+    }
+
+    public void SetAttacking3(bool isAttacking)
+    {
+        //animator.SetBool("isAttacking3", isAttacking);
+        animator.SetTrigger("isAttacking3");
+        isTurn = false;
     }
 
     public void SetBackwarding(bool isBackwarding)
