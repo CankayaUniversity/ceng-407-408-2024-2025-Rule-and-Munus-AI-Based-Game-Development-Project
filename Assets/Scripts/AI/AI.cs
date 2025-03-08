@@ -1,28 +1,36 @@
 using System;
 using UnityEngine;
 using BehaviorTree;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform playerTransform; // Oyuncunun konumunu almak için
+    public Transform playerTransform;
     public string playerClass;
     public string enemyClass;
     private Node root;
-    [SerializeField] private float distanceToPlayer;
-    private bool isPlayerTurn = true; // Oyuncunun sýrasý
-    private bool isEnemyTurn = false; // Düþmanýn sýrasý
+    private float distanceToPlayer;
+    private bool isPlayerTurn = true;
+    private bool isEnemyTurn = false;
+    private EnemyStats enemyStats;
 
     void Start()
     {
+        enemyStats = GetComponent<EnemyStats>(); // Düzeltme: GetComponent ile baðlandý
+        if (enemyStats == null)
+        {
+            Debug.LogError("EnemyStats bileþeni eksik!");
+            return;
+        }
+
         root = CreateBehaviorTree();
         StartCoroutine(GameTurn());
     }
 
     IEnumerator GameTurn()
     {
-        while (true) // Sürekli oyun sýrasýný kontrol eder
+        while (true)
         {
             if (isPlayerTurn)
             {
@@ -32,50 +40,39 @@ public class EnemyAI : MonoBehaviour
             {
                 yield return StartCoroutine(EnemyTurn());
             }
-
-            yield return null; // Bir sonraki frame'e geçmeden önce bekler
+            yield return null;
         }
     }
 
-    // Oyuncunun sýrasý
     private IEnumerator PlayerTurn()
     {
-        // Buraya oyuncunun yapacaðý aksiyonlarý ekleyebilirsiniz
-        // Örneðin oyuncu hareket edebilir veya saldýrabilir
         Debug.Log("Oyuncu sýrasý.");
-
-        // Oyuncu sýrasý bittiðinde düþmana geçiyoruz
-        yield return new WaitForSeconds(1f); // 1 saniye bekle
+        yield return new WaitForSeconds(1f);
         SwitchToEnemyTurn();
     }
 
-    // Düþmanýn sýrasý
     private IEnumerator EnemyTurn()
     {
-        Debug.Log("Düþman sýra.");
+        Debug.Log("Düþman sýrasý.");
 
         if (playerTransform != null)
         {
-            distanceToPlayer = Mathf.RoundToInt(Vector3.Distance(transform.position, playerTransform.position));
+            distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         }
 
-        // Eðer mesafe 1'den büyükse, düþman 1 adým hareket eder
         if (distanceToPlayer > 1)
         {
             MoveTowardsPlayer();
         }
-        // Mesafe 1 olduðunda, düþman saldýrýr
-        else if (distanceToPlayer == 1)
+        else if (distanceToPlayer <= 1)
         {
-            root.Evaluate(); // Düþman yakýnsa saldýrý yapar
+            root.Evaluate();
         }
 
-        // Düþman sýrasý bittiðinde tekrar oyuncuya geçiyoruz
-        yield return new WaitForSeconds(1f); // 1 saniye bekle
+        yield return new WaitForSeconds(1f);
         SwitchToPlayerTurn();
     }
 
-    // Sýralarý deðiþtiren yardýmcý fonksiyonlar
     private void SwitchToPlayerTurn()
     {
         isPlayerTurn = true;
@@ -93,7 +90,7 @@ public class EnemyAI : MonoBehaviour
         Node combatStrategy = new Selector(new List<Node>
         {
             new Sequence(new List<Node> {
-                new ConditionNode(() => distanceToPlayer == 1),
+                new ConditionNode(() => distanceToPlayer <= 1),
                 new ActionNode(() => Attack())
             }),
             new Sequence(new List<Node> {
@@ -116,24 +113,34 @@ public class EnemyAI : MonoBehaviour
     {
         string[] attackAreas = { "Kafa", "Göðüs", "Bacak" };
         string attackChoice = attackAreas[UnityEngine.Random.Range(0, attackAreas.Length)];
-        Debug.Log($"Düþman {attackChoice} bölgesine saldýrýyor!");
+
+        if (enemyStats != null)
+        {
+            int attackPower = enemyStats.GetAttackPower();
+            Debug.Log($"Düþman {attackChoice} bölgesine {attackPower} gücünde saldýrýyor!");
+        }
     }
 
     private void MoveTowardsPlayer()
     {
+        if (playerTransform == null) return;
         transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, 1f);
         Debug.Log("Düþman oyuncuya yaklaþýyor!");
     }
 
     private void UseRangedAttack()
     {
+        if (enemyStats == null) return;
+
         if (enemyClass == "Mage")
         {
-            Debug.Log("Düþman büyü yapýyor!");
+            int spellPower = enemyStats.GetSpellPower();
+            Debug.Log($"Düþman büyü yapýyor! Gücü: {spellPower}");
         }
         else if (enemyClass == "Archer")
         {
-            Debug.Log("Düþman ok atýyor!");
+            int arrowPower = enemyStats.GetArrowPower();
+            Debug.Log($"Düþman ok atýyor! Gücü: {arrowPower}");
         }
     }
 }
