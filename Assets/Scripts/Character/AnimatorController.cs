@@ -71,9 +71,21 @@ public class AnimatorController
         isTurn = false;
     }
 
-    public void SetDefence(bool isDefence)
+    public void SetDefence1(bool isDefence)
     {
         animator.SetBool("isDefence", isDefence);
+        isTurn = false;
+    }
+
+    public void SetDefence2(bool isDefence)
+    {
+        animator.SetBool("isDefence2", isDefence);
+        isTurn = false;
+    }
+
+    public void SetDefence3(bool isDefence)
+    {
+        animator.SetBool("isDefence3", isDefence);
         isTurn = false;
     }
 

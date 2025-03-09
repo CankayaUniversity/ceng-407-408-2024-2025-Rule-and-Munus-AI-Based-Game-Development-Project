@@ -126,10 +126,24 @@ public class CharacterMoving : MonoBehaviour
         
     }
     
-    public void Defence()
+    public void Defence1()
     {
-        animatorController.SetDefence(true);
+        animatorController.SetDefence1(true);
         StartCoroutine(ResetDefence());
+        LookAt(targetPos);
+    }
+
+    public void Defence2()
+    {
+        animatorController.SetDefence2(true);
+        StartCoroutine(ResetDefence2());
+        LookAt(targetPos);
+    }
+
+    public void Defence3()
+    {
+        animatorController.SetDefence3(true);
+        StartCoroutine(ResetDefence3());
         LookAt(targetPos);
     }
     public void ForwardStep()
@@ -154,7 +168,19 @@ public class CharacterMoving : MonoBehaviour
     private IEnumerator ResetDefence()
     {
         yield return new WaitForSeconds(1f);
-        animatorController.SetDefence(false);
+        animatorController.SetDefence1(false);
+    }
+
+    private IEnumerator ResetDefence2()
+    {
+        yield return new WaitForSeconds(.5f);
+        animatorController.SetDefence2(false);
+    }
+
+    private IEnumerator ResetDefence3()
+    {
+        yield return new WaitForSeconds(1f);
+        animatorController.SetDefence3(false);
     }
 
     private IEnumerator ResetStepBack()
