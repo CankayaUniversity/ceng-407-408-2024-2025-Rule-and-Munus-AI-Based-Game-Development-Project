@@ -3257,6 +3257,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterMoving: {fileID: 806424257}
   isTurn: 0
+  isSelectedAttack: 0
+  isSelectedDefence: 0
+  attackButtons: []
+  defenceButtons: []
 --- !u!4 &1434675945
 Transform:
   m_ObjectHideFlags: 0
@@ -3620,6 +3624,8 @@ MonoBehaviour:
   playerTransform: {fileID: 806424259}
   playerClass: Archer
   enemyClass: Archer
+  enemyDEX: 0
+  arrowCount: 10
 --- !u!114 &1648765681
 MonoBehaviour:
   m_ObjectHideFlags: 0
