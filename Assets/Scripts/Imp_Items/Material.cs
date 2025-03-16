@@ -11,6 +11,7 @@ public class Material : ScriptableObject
 
     public string Name = "Default";
     public int Count = 0;
+    public int Limit = 100;
     public Material(string name, int count)
     {
         Name = name;
@@ -19,7 +20,7 @@ public class Material : ScriptableObject
 
     public void AddCount(int amount)
     {
-        Count = Math.Clamp(Count + amount, 0, 100);
+        Count = (int)Math.Clamp(Count + amount, 0, Limit);
     }
 
 }

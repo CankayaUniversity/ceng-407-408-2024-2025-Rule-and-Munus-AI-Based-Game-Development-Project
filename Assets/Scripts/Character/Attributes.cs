@@ -3,24 +3,19 @@ using UnityEngine.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 
 public class Attributes : MonoBehaviour 
 {
     public string Name = "Lorem";
     public string _class = "Fighter";
     public string race = "Ipsum";
-    public int BaseSTR = 0;
-    public int BaseDEX = 0;
-    public int BaseCON = 0;
-    public int BaseINT = 0;
-
-    private Dictionary<string, Item> equippedItems = new Dictionary<string, Item> ();
-    private Inventory inventory = new Inventory();
-
-    public int TotalSTR = 0;
-    public int TotalDEX = 0;
-    public int TotalCON = 0;
-    public int TotalINT = 0;
+    public int MaxHealth = 100;
+    public int CurrentHealth = 0;
+    public int MaxStamina = 100;
+    public int CurrentStamina = 0;
+    public Dictionary<string, int> stats = new Dictionary<string, int> ();
+    public int Limit = 100;
 
     #region Singleton
 
@@ -33,48 +28,39 @@ public class Attributes : MonoBehaviour
 
 	#endregion
 
-    public bool EquipItem(Item item)
+    public void Add(string name, int value)
     {
-        if (equippedItems.ContainsKey(item.name))
+		stats.Add(name, value);
+        Debug.Log($"{name} Stat Added {value}!");
+    }
+
+    public bool UpdateStats(string stat, int value)
+    {
+        if (stats.ContainsKey(stat))
         {
-            Console.WriteLine("You can't equip more than 1 " + item.name);
+            Debug.Log("Unrecognized Stat Type!" + stat);
             return false;
         }
-        equippedItems.Add(item.name, item);
-        Console.WriteLine($"{Name} equipped {item.name}!");
+        stats[stat] = math.clamp(value, 0, Limit);
+        Debug.Log($"{stat} Stat Adjusted {value}!");
         return true;
     }
 
-    public bool UnequipItem(Item item)
+    public void UpdateHealth(int value)
     {
-        if (equippedItems.ContainsKey(item.name))
-        {
-            Console.WriteLine(item.name + "slot is empty!");
-            return false;
-        }
-        equippedItems.Remove(item.name);
-        equippedItems.Remove(item.name);
-        Console.WriteLine($"{Name} unequipped {item.name}.");
-        return true;
+        this.CurrentHealth = (int)math.clamp(value, 0, MaxHealth);
+        Debug.Log($"{CurrentHealth} Health Adjusted {value}.");
     }
 
-    // public void AutoEquipBestItem(List<Item> availableItems)
-    // {
-    //     var bestItem = availableItems.OrderByDescending(i => i.STR + i.DEX + i.CON + i.INT).FirstOrDefault();
-    //     if (bestItem != null)
-    //     {
-    //         EquipItem(bestItem);
-    //     }
-    // }
-
-    public void CollectMaterial(string material, int amount)
+    public void UpdateStamina(int value)
     {
-        inventory.Add(material, amount);
+        this.CurrentStamina = (int)math.clamp(value, 0, MaxStamina);
+        Debug.Log($"{CurrentStamina} Health Adjusted {value}.");
     }
 
     public void ShowStats()
     {
-        Console.WriteLine($"{Name} - STR: {TotalSTR}, DEX: {TotalDEX}, CON: {TotalCON}, INT: {TotalINT}");
+        Debug.Log($"{Name} - STR: {stats["STR"]}, DEX: {stats["DEX"]}, CON: {stats["CON"]}, INT: {stats["INT"]}, WIS: {stats["WIS"]}, CHA: {stats["CHA"]}");
     }
 
 	

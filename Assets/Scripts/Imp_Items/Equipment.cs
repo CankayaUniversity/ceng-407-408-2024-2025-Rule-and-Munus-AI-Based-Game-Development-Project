@@ -14,6 +14,14 @@ public class Equipment : Item {
 
 	public int armorModifier;		// Increase/decrease in armor
 	public int damageModifier;      // Increase/decrease in damage
+    public int attack = 0;
+    public int defence = 0;
+    public int STR = 0;
+    public int DEX = 0;
+    public int INT = 0;
+    public int WIS = 0;
+    public int CON = 0;
+    public int CHA = 0;
     public SkinnedMeshRenderer mesh;
     public EquipmentManager.MeshBlendShape[] coveredMeshRegions;
 

@@ -40,12 +40,7 @@ public class EquipmentManager : MonoBehaviour {
 		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new Equipment[numSlots];
         currentMeshes = new SkinnedMeshRenderer[numSlots];
-
-		inventory.materials.Add("Wood", new Material("Wood", 0));
-        inventory.materials.Add("Stone", new Material("Stone", 0));
-        inventory.materials.Add("Iron", new Material("Iron", 0));
-        inventory.materials.Add("Cloth", new Material("Cloth", 0));
-
+		
         EquipDefaults();
 	}
 

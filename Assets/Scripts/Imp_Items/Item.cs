@@ -18,17 +18,7 @@ public class Item : ScriptableObject
     public string description = "Null";
     public Sprite icon = null;
     public bool isDefaultItem = false;
-
     public string tag = "Item";
-    public int attack = 0;
-    public int defence = 0;
-    public int STR = 0;
-    public int DEX = 0;
-    public int INT = 0;
-    public int WIS = 0;
-    public int CON = 0;
-    public int CHA = 0;
-
 
     // Called when the item is pressed in the inventory
     public virtual void Use ()
