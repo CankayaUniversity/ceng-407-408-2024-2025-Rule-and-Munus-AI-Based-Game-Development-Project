@@ -9,6 +9,8 @@ public class EnemyAI : MonoBehaviour
     public Transform playerTransform;
     public string playerClass;
     public string enemyClass;
+    public int enemyDEX;
+    public int arrowCount=10;  // Ok sayÄ±sÄ±
     private Node root;
     private float distanceToPlayer;
     private bool isPlayerTurn = true;
@@ -17,10 +19,10 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        enemyStats = GetComponent<EnemyStats>(); // Düzeltme: GetComponent ile baðlandý
+        enemyStats = GetComponent<EnemyStats>();
         if (enemyStats == null)
         {
-            Debug.LogError("EnemyStats bileþeni eksik!");
+            Debug.LogError("EnemyStats bileÅŸeni eksik!");
             return;
         }
 
@@ -46,28 +48,21 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator PlayerTurn()
     {
-        Debug.Log("Oyuncu sýrasý.");
+        Debug.Log("Oyuncu sÄ±rasÄ±.");
         yield return new WaitForSeconds(1f);
         SwitchToEnemyTurn();
     }
 
     private IEnumerator EnemyTurn()
     {
-        Debug.Log("Düþman sýrasý.");
+        Debug.Log("DÃ¼ÅŸman sÄ±rasÄ±.");
 
         if (playerTransform != null)
         {
             distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         }
 
-        if (distanceToPlayer > 1)
-        {
-            MoveTowardsPlayer();
-        }
-        else if (distanceToPlayer <= 1)
-        {
-            root.Evaluate();
-        }
+        root.Evaluate();
 
         yield return new WaitForSeconds(1f);
         SwitchToPlayerTurn();
@@ -89,17 +84,26 @@ public class EnemyAI : MonoBehaviour
     {
         Node combatStrategy = new Selector(new List<Node>
         {
+            // YakÄ±n dÃ¶vÃ¼ÅŸÃ§Ã¼ler mesafe kapatana kadar saldÄ±rmaz
+            new Sequence(new List<Node> {
+                new ConditionNode(() => enemyClass == "Warrior" && distanceToPlayer > 1),
+                new ActionNode(() => MoveTowardsPlayer())
+            }),
+
+            // Uzak dÃ¶vÃ¼ÅŸÃ§Ã¼lerin (Archer/Mage) Ranged Attack kararÄ±
+            new Sequence(new List<Node> {
+                new ConditionNode(() => enemyClass == "Archer" || enemyClass == "Mage"),
+                new ConditionNode(() => ShouldUseRangedAttack()), 
+                new ActionNode(() => UseRangedAttack())
+            }),
+
+            // YakÄ±n mesafedeyse saldÄ±r
             new Sequence(new List<Node> {
                 new ConditionNode(() => distanceToPlayer <= 1),
                 new ActionNode(() => Attack())
             }),
-            new Sequence(new List<Node> {
-                new ConditionNode(() => distanceToPlayer > 1 && playerClass == "Archer"),
-                new Selector(new List<Node> {
-                    new ProbabilityNode(0.7f, new ActionNode(() => MoveTowardsPlayer())),
-                    new ProbabilityNode(0.3f, new ActionNode(() => UseRangedAttack()))
-                })
-            }),
+
+            // Mesafe kapat
             new Sequence(new List<Node> {
                 new ConditionNode(() => distanceToPlayer > 1),
                 new ActionNode(() => MoveTowardsPlayer())
@@ -111,13 +115,13 @@ public class EnemyAI : MonoBehaviour
 
     private void Attack()
     {
-        string[] attackAreas = { "Kafa", "Göðüs", "Bacak" };
+        string[] attackAreas = { "Kafa", "GÃ¶ÄŸÃ¼s", "Bacak" };
         string attackChoice = attackAreas[UnityEngine.Random.Range(0, attackAreas.Length)];
 
         if (enemyStats != null)
         {
             int attackPower = enemyStats.GetAttackPower();
-            Debug.Log($"Düþman {attackChoice} bölgesine {attackPower} gücünde saldýrýyor!");
+            Debug.Log($"DÃ¼ÅŸman {attackChoice} bÃ¶lgesine {attackPower} gÃ¼cÃ¼nde saldÄ±rÄ±yor!");
         }
     }
 
@@ -125,22 +129,56 @@ public class EnemyAI : MonoBehaviour
     {
         if (playerTransform == null) return;
         transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, 1f);
-        Debug.Log("Düþman oyuncuya yaklaþýyor!");
+        Debug.Log("DÃ¼ÅŸman oyuncuya yaklaÅŸÄ±yor!");
     }
 
     private void UseRangedAttack()
     {
         if (enemyStats == null) return;
+        if (arrowCount <= 0) return; // Ok bitmiÅŸse saldÄ±rma
 
-        if (enemyClass == "Mage")
+        float hitChance = CalculateHitChance();
+
+        if (UnityEngine.Random.value <= hitChance)
         {
-            int spellPower = enemyStats.GetSpellPower();
-            Debug.Log($"Düþman büyü yapýyor! Gücü: {spellPower}");
+            if (enemyClass == "Mage")
+            {
+                int spellPower = enemyStats.GetSpellPower();
+                Debug.Log($"DÃ¼ÅŸman bÃ¼yÃ¼ yapÄ±yor! GÃ¼cÃ¼: {spellPower}");
+            }
+            else if (enemyClass == "Archer")
+            {
+                int arrowPower = enemyStats.GetArrowPower();
+                Debug.Log($"DÃ¼ÅŸman ok atÄ±yor! GÃ¼cÃ¼: {arrowPower}");
+                arrowCount--; // Ok azalÄ±yor
+            }
         }
-        else if (enemyClass == "Archer")
+        else
         {
-            int arrowPower = enemyStats.GetArrowPower();
-            Debug.Log($"Düþman ok atýyor! Gücü: {arrowPower}");
+            Debug.Log("DÃ¼ÅŸmanÄ±n saldÄ±rÄ±sÄ± baÅŸarÄ±sÄ±z oldu!");
         }
+    }
+
+    private bool ShouldUseRangedAttack()
+    {
+        if (enemyClass == "Archer" && arrowCount > 0)
+        {
+            Debug.Log("heyeeyyy ok saldÄ±rÄ±sÄ± yaptÄ±");
+            return enemyDEX >= 10 || UnityEngine.Random.value <= 0.7f;
+        }
+        else if (enemyClass == "Mage")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private float CalculateHitChance()
+    {
+        float baseChance = (enemyClass == "Archer") ? 0.4f : 0.2f;
+        float distanceFactor = Mathf.Clamp(distanceToPlayer * 0.1f, 0.1f, 1f);
+        float dexFactor = (enemyDEX / 10f);
+
+        return Mathf.Clamp(baseChance + dexFactor - distanceFactor, 0.1f, 1f);
     }
 }

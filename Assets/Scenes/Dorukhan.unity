@@ -3184,6 +3184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920523639}
   - component: {fileID: 1920523638}
+  - component: {fileID: 1920523640}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3209,6 +3210,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3e6d78ca299e3d499940a2ba8f15ba2, type: 2}
   - {fileID: 11400000, guid: c3e6d78ca299e3d499940a2ba8f15ba2, type: 2}
   - {fileID: 11400000, guid: c3e6d78ca299e3d499940a2ba8f15ba2, type: 2}
+  mat:
+  - {fileID: 11400000, guid: 7d0bbd0bb7d929942abf581015282b63, type: 2}
+  - {fileID: 11400000, guid: 7d0bbd0bb7d929942abf581015282b63, type: 2}
+  - {fileID: 11400000, guid: 7d0bbd0bb7d929942abf581015282b63, type: 2}
+  - {fileID: 11400000, guid: 7d0bbd0bb7d929942abf581015282b63, type: 2}
+  - {fileID: 11400000, guid: 7d0bbd0bb7d929942abf581015282b63, type: 2}
+  MaxMaterialAmount: 100
+  MaxMaterialTypes: 4
 --- !u!4 &1920523639
 Transform:
   m_ObjectHideFlags: 0
@@ -3224,6 +3233,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1920523640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920523637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f311c5acc12eddf4d8b67ec90f807eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultEquipment: []
+  targetMesh: {fileID: 0}
 --- !u!1001 &2084008963
 PrefabInstance:
   m_ObjectHideFlags: 0
