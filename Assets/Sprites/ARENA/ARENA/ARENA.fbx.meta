@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 55ffc00973541e342844c5df3a633d2f
+guid: a85cfedba90916245aa7c42c65e85d1c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,57 +8,57 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: 49f89979314ad074a8681e6e45e72acf, type: 2}
+    second: {fileID: 2100000, guid: 490487edbe15a284e805287bb84ecbdb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.002
-    second: {fileID: 2100000, guid: bb5dd3c63f8480e499917aac63fead38, type: 2}
+    second: {fileID: 2100000, guid: 14653c442c804254e84025405c18d6d7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.003
-    second: {fileID: 2100000, guid: d2a3eb2bfa931904298d15ef3d1f1bb5, type: 2}
+    second: {fileID: 2100000, guid: 9b7050887e69d1b47b86e115b290a1e6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.005
-    second: {fileID: 2100000, guid: 7972763c39a97084581fbe73d794b129, type: 2}
+    second: {fileID: 2100000, guid: 5edf6db8422c5f24ab4d6cdd8e68ca62, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.011
-    second: {fileID: 2100000, guid: 34eaa2db1c7ae4c4e8ee26f755755e2d, type: 2}
+    second: {fileID: 2100000, guid: 4ed03701ad6af284bb13c5b28ad0eb69, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.014
-    second: {fileID: 2100000, guid: 0c7bc3623e49b9d4da069986ae7310d7, type: 2}
+    second: {fileID: 2100000, guid: c5ecb316a90975a46b9277dc10faa4ae, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.017
-    second: {fileID: 2100000, guid: 07c2082193bdc6347953f305bf39f9d3, type: 2}
+    second: {fileID: 2100000, guid: b818c5a54b57ded4f9c3a0933e45f9c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.018
-    second: {fileID: 2100000, guid: 66fcafe2ace49f04aa6d5dcf7dc50794, type: 2}
+    second: {fileID: 2100000, guid: 6db7147c600e67d428d11aae3ce1023e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: "dem\u0131r"
-    second: {fileID: 2100000, guid: c96dc51de08b93041896d5b3c63e58e3, type: 2}
+    second: {fileID: 2100000, guid: 9b1caa0c50b2aca488985450bf47ed88, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: fabric
-    second: {fileID: 2100000, guid: c87ee5c0f6e2ce74dacd40ba3d5d3fb1, type: 2}
+    second: {fileID: 2100000, guid: 4c46acf4c45f4fe438338670e0e69425, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: fabric.001
-    second: {fileID: 2100000, guid: c50383cd0996c284d9a5680b29b9e0dd, type: 2}
+    second: {fileID: 2100000, guid: 128a3a57b228c41469f1eb64da261914, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -71,8 +71,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

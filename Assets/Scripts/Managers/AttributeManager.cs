@@ -1,106 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using JetBrains.Annotations;
 
-public class AttributeManager : MonoBehaviour
-{
-    public TMP_Text text1;
-    public TMP_Text text2;
-    public TMP_Text text3;
-    public TMP_Text text4;
-    public TMP_Text text5;
+/* Keep track of equipment. Has functions for adding and removing items. */
 
-    public int text1Value = 0;
-    public int text2Value = 0;
-    public int text3Value = 0;
-    public int text4Value = 0;
-    public int text5Value = 0;
-    
-    public void ButtonLeft1()
-    {
-        text1Value--;
-        if(text1Value < 0)
-        {
-            text1Value = 0;
-        }
-        text1.text = text1Value.ToString();
+public class AttributeManager : MonoBehaviour {
 
-    }
+	#region Singleton
 
-    public void ButtonRight1()
-    {
-        Debug.Log("ButtonRight1");
-        text1Value++;
-        text1.text = text1Value.ToString();
-    }
+	public static AttributeManager instance;
 
-    public void ButtonLeft2()
-    {
-        text2Value--;
-        if (text2Value < 0)
-        {
-            text2Value = 0;
-        }
-        text2.text = text2Value.ToString();
+	void Awake ()
+	{
+		instance = this;
+	}
 
-    }
+	#endregion
 
-    public void ButtonRight2()
-    {
-        text2Value++;
-        text2.text = text2Value.ToString();
-    }   
+	Attributes attributes;	// Reference to our stock
+	void Start ()
+	{
+		attributes = Attributes.instance;		// Get a reference to our stock
 
-    public void ButtonLeft3()
-    {
-        text3Value--;
-        if (text3Value < 0)
-        {
-            text3Value = 0;
-        }
-        text3.text = text3Value.ToString();
-    }
+		attributes.stats.Add(STR, 0);
+        attributes.stats.Add(DEX, 0);
+        attributes.stats.Add(CON, 0);
+        attributes.stats.Add(INT, 0);
+		attributes.stats.Add(WIS, 0);
+        attributes.stats.Add(CON, 0);
+	}
 
-    public void ButtonRight3()
-    {
-        text3Value++;
-        text3.text = text3Value.ToString();
-    }
-
-    public void ButtonLeft4()
-    {
-        text4Value--;
-        if (text4Value < 0)
-        {
-            text4Value = 0;
-        }
-        text4.text = text4Value.ToString();
-    }
-
-    public void ButtonRight4()
-    {
-        text4Value++;
-        text4.text = text4Value.ToString();
-    }
-
-    public void ButtonLeft5()
-    {
-        text5Value--;
-        if(text5Value < 0)
-        {
-            text5Value = 0;
-        }
-        text5.text = text5Value.ToString();
-    }
-    public void ButtonRight5()
-    {
-        text5Value++;
-        text5.text = text5Value.ToString();
-    }
-
-
-
+	public void Gather (string gatheredMaterial, int gatheredAmount)
+	{
+		stock.materials.Add(gatheredMaterial, gatheredAmount);
+	}
+	
+	public void Spend (string givenMaterial, int givenAmount)
+	{
+		stock.materials.Add(gatheredMaterial, (-1)*givenAmount);
+	}
 
 }
