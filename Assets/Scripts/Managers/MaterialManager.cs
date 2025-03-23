@@ -33,13 +33,13 @@ public class MaterialManager : MonoBehaviour {
 
 	public void Gather (string gatheredMaterial, int gatheredAmount)
 	{
-		stock.materials.Add(gatheredMaterial, gatheredAmount);
+		//stock.materials.Add(gatheredMaterial, gatheredAmount);
 	}
 
 	// Unequip an item with a particular index
 	public void Spend (string givenMaterial, int givenAmount)
 	{
-		stock.materials.Add(gatheredMaterial, (-1)*givenAmount);
+		//stock.materials.Add(gatheredMaterial, (-1)*givenAmount);
 	}
 
 }

@@ -40,8 +40,12 @@ public class Stock : MonoBehaviour {
 		// }
 
 		// While math.clamp is used for AddCount in Material class, we don't need to check whether old count + gathered amount exceed the max value or not
-		materials[name].AddCount(amount);
-		mat.Add(new Material(name, amount));
+		
+		
+		
+		
+		//materials[name].AddCount(amount);
+		//mat.Add(new Material(name, amount));
 
 		else
 		{

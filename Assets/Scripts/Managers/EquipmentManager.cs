@@ -61,7 +61,7 @@ public class EquipmentManager : MonoBehaviour {
 		// Insert the item into the slot
 		currentEquipment[slotIndex] = newItem;
         AttachToMesh(newItem, slotIndex);
-		attributes.EquipItem(newItem);
+		//attributes.EquipItem(newItem);
 	}
 
 	// Unequip an item with a particular index
@@ -91,7 +91,7 @@ public class EquipmentManager : MonoBehaviour {
 				onEquipmentChanged.Invoke(null, oldItem);
 			}
 		}
-		attributes.UnequipItem(oldItem);
+		//attributes.UnequipItem(oldItem);
         return oldItem;
 	}
 
