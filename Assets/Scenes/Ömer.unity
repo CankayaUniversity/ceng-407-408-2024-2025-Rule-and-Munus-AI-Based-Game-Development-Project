@@ -3622,8 +3622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 806424259}
-  playerClass: Archer
-  enemyClass: Archer
+  enemyClass: Warrior
   enemyDEX: 0
   arrowCount: 10
 --- !u!114 &1648765681
