@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    public string enemyClass; // Düþman sýnýfý (Warrior, Mage, Archer)
-    public string playerClass; // Oyuncunun sýnýfý
+    public string enemyClass; 
+    public string playerClass; 
     public float health = 100f;
     public float attackPower = 10f;
     public float defense = 5f;
@@ -13,14 +13,14 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] public float levelThreshold = 5f;
     [SerializeField] private bool canUpgrade = false;
 
-    // Geliþim miktarlarý
+   
     public float attackUpgradeAmount = 5f;
     public float defenseUpgradeAmount = 2f;
     public float manaUpgradeAmount = 10f;
     public float agilityUpgradeAmount = 1f;
 
-    [SerializeField] public float playerLevel = 1f; // Oyuncu seviyesi
-    private float lastUpgradeLevel = 0f; // En son yükseltme yapýlan seviye
+    [SerializeField] public float playerLevel = 1f; 
+    private float lastUpgradeLevel = 0f; 
 
     public float upgradeChanceForArcher = 0.7f;
     public float upgradeChanceForMage = 0.5f;
@@ -28,12 +28,12 @@ public class EnemyStats : MonoBehaviour
 
     void Start()
     {
-        AssignInitialStats(); // Baþlangýç istatistiklerini belirle
+        AssignInitialStats(); 
     }
 
     void Update()
     {
-        CheckPlayerLevelAndUpgrade(); // Oyuncu seviyesini sürekli kontrol et
+        CheckPlayerLevelAndUpgrade(); 
     }
 
     private void AssignInitialStats()
@@ -96,7 +96,7 @@ public class EnemyStats : MonoBehaviour
                     DefenseUpgrade();
                     break;
             }
-            lastUpgradeLevel = playerLevel; // Son yükseltme seviyesini kaydet
+            lastUpgradeLevel = playerLevel; 
             Debug.Log($"Düþman {enemyClass} yükseltildi! Yeni seviye: {playerLevel}");
         }
         else
