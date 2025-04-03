@@ -24,12 +24,12 @@ public static class ItemGenerator
     //     { StatType.LUCK, new int[13] {16, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 20, 20}}
     // };
     public static Dictionary<Rarity, int[]> rarityModifiers = new Dictionary<Rarity, int[]>() {
-        { Rarity.Common, new int[8] {1, 1, 1, 2, 2, 3, 4, 5}},
-        { Rarity.Advenced, new int[11] {1, 2, 2, 3, 3, 4, 4, 5, 6, 7, 8}},
-        { Rarity.Uncommon, new int[15] {2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10, 11}},
-        { Rarity.Rare, new int[18] {3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 8, 9, 10, 11, 12, 13}},
-        { Rarity.Epic, new int[25] {5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 8 ,8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 12, 12, 13, 14}},
-        { Rarity.Legendary, new int[24] {8, 8, 8, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 14, 14, 15}}
+        { Rarity.Common, new int[8] {0, 0, 0, 0, 1, 1, 1, 2}},
+        { Rarity.Advenced, new int[7] {1, 1, 1, 2, 2, 3, 4}},
+        { Rarity.Uncommon, new int[10] {2, 2, 2, 3, 3, 4, 4, 5, 6, 7}},
+        { Rarity.Rare, new int[14] {3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 8, 9, 10}},
+        { Rarity.Epic, new int[25] {5, 5, 6, 6, 6, 6, 7, 7, 7, 8 ,8, 8, 8, 9, 9, 9, 10, 11, 11, 12, 12, 13}},
+        { Rarity.Legendary, new int[24] {8, 8, 8, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 14, 14, 15, 15, 15}}
     };
 
     public static void Generate(string type, Dice dice)
@@ -67,7 +67,7 @@ public static class ItemGenerator
         {
             // Common
             case 1:
-                defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Common);
+                Craft(EquipmentSlot.Weapon, Rarity.Common, &defaultEquipment);
                 value = rarityModifiers[Rarity.Common][Random.Range(0, rarityModifiers[Rarity.Common].Length)];
                 modifier = new StatModifier(value, StatModType.Flat, 1, defaultEquipment);
                 keyValuePairs.Add(StatType.STR, modifier);
@@ -257,7 +257,7 @@ public static class ItemGenerator
     // {
 
     // }
-    public static Equipment Craft(EquipmentSlot slot, Rarity rarity)
+    public static Equipment Craft(EquipmentSlot slot, Rarity rarity, Equipment& equipment)
     {
         Equipment defaultEquipment;
         int value = 0;
@@ -296,7 +296,6 @@ public static class ItemGenerator
         {
             value = (int)(value*0.75);
         }
-        defaultEquipment = new Equipment(slot, rarity, 0, value);
-        return defaultEquipment;
+        equipment = new Equipment(slot, rarity, 0, value);
     }
 }
