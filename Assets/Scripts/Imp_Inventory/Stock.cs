@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +17,10 @@ public class Stock : MonoBehaviour {
 
 	// Current list of items in inventory
 	public Dictionary<string, Material> materials = new Dictionary<string, Material>();
-
+	public void ExpandStock(Material material)
+	{
+		materials.Add(material.name, material);
+	}
 	public bool Add(string name, int amount)
     {
         if (!materials.ContainsKey(name))
@@ -52,8 +54,6 @@ public class Stock : MonoBehaviour {
 			Debug.Log("Exceed the max amount of: " + name);
 			return false;
 		}
-        
-        return true;
     }
 	public bool Add(Material gatheredMaterial)
     {

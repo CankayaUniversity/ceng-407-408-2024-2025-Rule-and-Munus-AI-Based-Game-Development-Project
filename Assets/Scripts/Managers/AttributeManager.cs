@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-/* Keep track of equipment. Has functions for adding and removing items. */
+using UnityEngine.Rendering;
 
 public class AttributeManager : MonoBehaviour {
 
 	#region Singleton
 
 	public static AttributeManager instance;
+	public static EquipmentManager equipmentManager;
 
 	void Awake ()
 	{
@@ -29,8 +27,15 @@ public class AttributeManager : MonoBehaviour {
 		//attributes.stats.Add(WIS, 0);
   //      attributes.stats.Add(CON, 0);
 	}
+	void Update()
+	{
+		if (equipmentManager.flag)
+		{
+			// Stat.CalculateValue();
+		}
+	}
 
-	public void Gather (string gatheredMaterial, int gatheredAmount)
+	public void UpdateStat (string gatheredMaterial, int gatheredAmount)
 	{
 		//stock.materials.Add(gatheredMaterial, gatheredAmount);
 	}

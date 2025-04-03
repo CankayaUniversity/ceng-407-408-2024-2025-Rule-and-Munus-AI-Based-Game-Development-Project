@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Types;
 
 /* Keep track of equipment. Has functions for adding and removing items. */
 
 public class EquipmentManager : MonoBehaviour {
 
 	#region Singleton
-
+	public bool flag = false;
     public enum MeshBlendShape {Torso, Arms, Legs };
     public Equipment[] defaultEquipment;
 
@@ -31,11 +30,10 @@ public class EquipmentManager : MonoBehaviour {
    
 
 	Inventory inventory;	// Reference to our inventory
-	Attributes attributes;
+	AttributeManager attributeManager;
 	void Start ()
 	{
 		inventory = Inventory.instance;		// Get a reference to our inventory
-		attributes = Attributes.instance;
 		// Initialize currentEquipment based on number of equipment slots
 		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new Equipment[numSlots];
@@ -60,8 +58,9 @@ public class EquipmentManager : MonoBehaviour {
 
 		// Insert the item into the slot
 		currentEquipment[slotIndex] = newItem;
+		flag = true;
+
         AttachToMesh(newItem, slotIndex);
-		//attributes.EquipItem(newItem);
 	}
 
 	// Unequip an item with a particular index
@@ -91,7 +90,6 @@ public class EquipmentManager : MonoBehaviour {
 				onEquipmentChanged.Invoke(null, oldItem);
 			}
 		}
-		//attributes.UnequipItem(oldItem);
         return oldItem;
 	}
 

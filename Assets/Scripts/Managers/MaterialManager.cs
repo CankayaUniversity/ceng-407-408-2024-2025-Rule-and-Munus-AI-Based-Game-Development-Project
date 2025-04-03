@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-/* Keep track of equipment. Has functions for adding and removing items. */
 
 public class MaterialManager : MonoBehaviour {
 
@@ -25,21 +21,21 @@ public class MaterialManager : MonoBehaviour {
 	{
 		stock = Stock.instance;		// Get a reference to our stock
 
-		stock.materials.Add("Wood", new Material("Wood", 0));
-        stock.materials.Add("Stone", new Material("Stone", 0));
-        stock.materials.Add("Iron", new Material("Iron", 0));
-        stock.materials.Add("Cloth", new Material("Cloth", 0));
+		stock.Add(new Material("Wood", 0));
+        stock.Add(new Material("Stone", 0));
+        stock.Add(new Material("Iron", 0));
+        stock.Add(new Material("Cloth", 0));
 	}
 
 	public void Gather (string gatheredMaterial, int gatheredAmount)
 	{
-		//stock.materials.Add(gatheredMaterial, gatheredAmount);
+		stock.Add(gatheredMaterial, gatheredAmount);
 	}
 
 	// Unequip an item with a particular index
 	public void Spend (string givenMaterial, int givenAmount)
 	{
-		//stock.materials.Add(gatheredMaterial, (-1)*givenAmount);
+		stock.Add(givenMaterial, (-1)*givenAmount);
 	}
 
 }
