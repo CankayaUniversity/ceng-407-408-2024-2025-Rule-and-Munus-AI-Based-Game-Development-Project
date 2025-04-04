@@ -17,31 +17,31 @@ public class Dice
         value = _1d6[Random.Range( 0, _1d6.Count - 1)];
         return value;
     }
-    public int RollaDice(Stat LUCK)
+    public int RollaDice(Stat luck)
     {
         List<int> temp_posb = _1d6;
-        if(LUCK.value > 3 && LUCK.value < 5)
+        if(luck.value > 3 && luck.value < 5)
         {
             temp_posb.Add(5);
             temp_posb.Add(4);
             temp_posb.Add(4);
             temp_posb.Add(3);
         }
-        else if(LUCK.value >= 5 && LUCK.value < 10)
+        else if(luck.value >= 5 && luck.value < 10)
         {
             temp_posb.Add(6);
             temp_posb.Add(5);
             temp_posb.Add(4);
             temp_posb.Add(3);
         }
-        else if(LUCK.value >= 10 && LUCK.value < 15)
+        else if(luck.value >= 10 && luck.value < 15)
         {
             temp_posb.Add(6);
             temp_posb.Add(5);
             temp_posb.Add(4);
             temp_posb.Add(4);
         }
-        else if(LUCK.value >= 15)
+        else if(luck.value >= 15)
         {
             temp_posb.Add(6);
             temp_posb.Add(6);

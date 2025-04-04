@@ -11,7 +11,7 @@ public static class ItemGenerator
 
     public static void Generate(EquipmentSlot type, Stat luck)
     {
-        int fate = (int)luck.baseValue;
+        int fate = (int)luck.value;
         Rarity rarity = Craft(type, fate); 
         Dictionary<StatType, StatModifier> statTypeModifier= new Dictionary<StatType, StatModifier>();
         switch(type)
@@ -33,7 +33,7 @@ public static class ItemGenerator
             //     break;
             default:
                 Debug.Log("Unrecognized Equipment type!");  
-                Debug.Log($"Type: {type} Fate: {luck.baseValue}");  
+                Debug.Log($"Type: {type} Fate: {luck.value}");  
                 statTypeModifier.Add(StatType.Default, new StatModifier(0.0f, StatModType.Flat, 0, generated));
                 break;
         }
