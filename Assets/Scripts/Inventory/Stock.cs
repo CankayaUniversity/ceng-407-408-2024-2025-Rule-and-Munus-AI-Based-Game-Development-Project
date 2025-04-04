@@ -1,29 +1,36 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Types;
 
 public class Stock : MonoBehaviour {
 
 	#region Singleton
 
 	public static Stock instance;
+	public Dictionary<MaterialType, Material> materials = new Dictionary<MaterialType, Material>();
 
 	void Awake()
 	{
     	instance = this;
+		Material[] prefabs = Material.FindObjectsByType<Material>(FindObjectsSortMode.None);
+		for(int i = 0; i < prefabs.Length; ++i)
+		{
+			materials.Add(prefabs[i].type, prefabs[i]);
+		}
 	}
 
 	#endregion
 
 
 	// Current list of items in inventory
-	public Dictionary<string, Material> materials = new Dictionary<string, Material>();
+	
 	public void ExpandStock(Material material)
 	{
-		materials.Add(material.name, material);
+		materials.Add(material.type, material);
 	}
-	public bool Add(string name, int amount)
+	public bool Add(MaterialType type, int amount)
     {
-        if (!materials.ContainsKey(name))
+        if (!materials.ContainsKey(type))
         {
             Debug.Log("Invalid material type!");
             return false;
@@ -49,29 +56,26 @@ public class Stock : MonoBehaviour {
 		//materials[name].AddCount(amount);
 		//mat.Add(new Material(name, amount));
 
-		else
-		{
-			Debug.Log("Exceed the max amount of: " + name);
-			return false;
-		}
+		// else
+		// {
+		// 	Debug.Log("Exceed the max amount of: " + name);
+		// 	return false;
+		// }
+		materials[type].AddCount(amount);
+		return true;
     }
 	public bool Add(Material gatheredMaterial)
     {
-        if (!materials.ContainsKey(gatheredMaterial.name))
+        if (!materials.ContainsKey(gatheredMaterial.type))
         {
             Debug.Log("Invalid material type!");
             return false;
         }
 
-		materials[gatheredMaterial.Name].AddCount(gatheredMaterial.Count);
+		materials[gatheredMaterial.type].AddCount(gatheredMaterial.Count);
         
 		
         return true;
-    }
-	public void Add(Material gatheredMaterial, int temp)
-    {
-		// Special case for adding new Material
-		materials.Add(gatheredMaterial.name, gatheredMaterial);
     }
 
 }

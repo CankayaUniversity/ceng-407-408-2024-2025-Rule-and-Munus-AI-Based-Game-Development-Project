@@ -11,7 +11,8 @@ namespace Types
             Shield, 
             Feet, 
             Armor, 
-            Accessoire
+            Accessoire,
+            Default,
         }
         public enum Rarity
         {
@@ -32,5 +33,14 @@ namespace Types
             CON,
             CHA,
             LUCK,
+            Default,
+        }
+        public enum MaterialType
+        {
+            Wood,
+            Stone,
+            Iron,
+            Cloth,
+            Default,
         }
 }

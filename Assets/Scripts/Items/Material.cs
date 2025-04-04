@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System;
 using System.Collections.Generic;
+using Types;
 
 /* The base item class. All items should derive from this. */
 
@@ -9,18 +10,24 @@ using System.Collections.Generic;
 public class Material : ScriptableObject 
 {
 
+    public MaterialType type {get { return type; }}
     public string Name = "Default";
     public int Count = 0;
     public int Limit = 100;
     public Material(string name, int count)
     {
         Name = name;
+        Name = type.ToString();
         Count = Math.Clamp(count, 0, 100);
     }
 
     public void AddCount(int amount)
     {
-        Count = (int)Math.Clamp(Count + amount, 0, Limit);
+        Count = Math.Clamp(Count + amount, 0, Limit);
     }
-
+    public Material(MaterialType type, int count)
+    {
+        Name = type.ToString();
+        Count = Math.Clamp(count, 0, 100);
+    }
 }

@@ -34,6 +34,7 @@ public class EquipmentManager : MonoBehaviour {
 	void Start ()
 	{
 		inventory = Inventory.instance;		// Get a reference to our inventory
+		attributeManager = AttributeManager.instance; // Get a reference to our attributes
 		// Initialize currentEquipment based on number of equipment slots
 		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new Equipment[numSlots];
@@ -59,7 +60,7 @@ public class EquipmentManager : MonoBehaviour {
 		// Insert the item into the slot
 		currentEquipment[slotIndex] = newItem;
 		flag = true;
-
+		attributeManager.UpdateStats(newItem, true);
         AttachToMesh(newItem, slotIndex);
 	}
 
@@ -90,6 +91,7 @@ public class EquipmentManager : MonoBehaviour {
 				onEquipmentChanged.Invoke(null, oldItem);
 			}
 		}
+		attributeManager.UpdateStats(oldItem, false);
         return oldItem;
 	}
 

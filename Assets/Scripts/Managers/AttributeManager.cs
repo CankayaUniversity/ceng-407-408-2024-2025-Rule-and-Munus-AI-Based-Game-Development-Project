@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Types;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,7 +8,6 @@ public class AttributeManager : MonoBehaviour {
 	#region Singleton
 
 	public static AttributeManager instance;
-	public static EquipmentManager equipmentManager;
 
 	void Awake ()
 	{
@@ -15,34 +16,53 @@ public class AttributeManager : MonoBehaviour {
 
 	#endregion
 
-	Attributes attributes;	// Reference to our stock
+	Attributes attributes;
 	void Start ()
 	{
-		attributes = Attributes.instance;		// Get a reference to our stock
-
-		//attributes.stats.Add(STR, 0);
-  //      attributes.stats.Add(DEX, 0);
-  //      attributes.stats.Add(CON, 0);
-  //      attributes.stats.Add(INT, 0);
-		//attributes.stats.Add(WIS, 0);
-  //      attributes.stats.Add(CON, 0);
+		attributes = Attributes.instance;
 	}
-	void Update()
+	// void Update()
+	// {
+	// 	if (equipmentManager.flag)
+	// 	{
+	// 		// Stat.CalculateValue();
+	// 	}
+	// }
+
+	public void UpdateStats(Equipment equipment, bool isEquiped)
 	{
-		if (equipmentManager.flag)
+		Dictionary<StatType, StatModifier> modifiers = equipment.statModifiers;
+		if(isEquiped)
 		{
-			// Stat.CalculateValue();
+			if(modifiers.ContainsKey(StatType.STR))
+			{
+				attributes.Add(StatType.STR, modifiers[StatType.STR]);
+			}
+			if(modifiers.ContainsKey(StatType.DEX))
+			{
+				attributes.Add(StatType.DEX, modifiers[StatType.DEX]);
+			}
+			if(modifiers.ContainsKey(StatType.INT))
+			{
+				attributes.Add(StatType.INT, modifiers[StatType.INT]);
+			}
+			if(modifiers.ContainsKey(StatType.WIS))
+			{
+				attributes.Add(StatType.WIS, modifiers[StatType.WIS]);
+			}
+			if(modifiers.ContainsKey(StatType.CON))
+			{
+				attributes.Add(StatType.CON, modifiers[StatType.CON]);
+			}
+			if(modifiers.ContainsKey(StatType.CHA))
+			{
+				attributes.Add(StatType.CHA, modifiers[StatType.CHA]);
+			}
+			if(modifiers.ContainsKey(StatType.LUCK))
+			{
+				attributes.Add(StatType.LUCK, modifiers[StatType.LUCK]);
+			}
 		}
-	}
-
-	public void UpdateStat (string gatheredMaterial, int gatheredAmount)
-	{
-		//stock.materials.Add(gatheredMaterial, gatheredAmount);
-	}
-	
-	public void Spend (string givenMaterial, int givenAmount)
-	{
-		//stock.materials.Add(gatheredMaterial, (-1)*givenAmount);
 	}
 
 }

@@ -1,10 +1,12 @@
 using UnityEngine;
+using Types;
 
 public class MaterialManager : MonoBehaviour {
 
 	#region Singleton
 
 	public static MaterialManager instance;
+	public static Material[] materials;
 	// public SkinnedMeshRenderer targetMesh;
 
     // SkinnedMeshRenderer[] currentMeshes;
@@ -12,6 +14,7 @@ public class MaterialManager : MonoBehaviour {
 	void Awake ()
 	{
 		instance = this;
+		materials = Material.FindObjectsByType<Material>(FindObjectsSortMode.None); 
 	}
 
 	#endregion
@@ -20,22 +23,24 @@ public class MaterialManager : MonoBehaviour {
 	void Start ()
 	{
 		stock = Stock.instance;		// Get a reference to our stock
+		
+		// If prefabs can be automaticly added through FindObjectsByType
+		// no need for below code parts
 
-		stock.Add(new Material("Wood", 0));
-        stock.Add(new Material("Stone", 0));
-        stock.Add(new Material("Iron", 0));
-        stock.Add(new Material("Cloth", 0));
+		// stock.Add(new Material(MaterialType.Wood, 0));
+        // stock.Add(new Material(MaterialType.Stone, 0));
+        // stock.Add(new Material(MaterialType.Iron, 0));
+        // stock.Add(new Material(MaterialType.Cloth, 0));
 	}
 
-	public void Gather (string gatheredMaterial, int gatheredAmount)
+	public void Gather (MaterialType gatheredType, int gatheredAmount)
 	{
-		stock.Add(gatheredMaterial, gatheredAmount);
+		stock.Add(gatheredType, gatheredAmount);
 	}
 
-	// Unequip an item with a particular index
-	public void Spend (string givenMaterial, int givenAmount)
+	public void Spend (MaterialType givenType, int givenAmount)
 	{
-		stock.Add(givenMaterial, (-1)*givenAmount);
+		stock.Add(givenType, (-1)*givenAmount);
 	}
 
 }

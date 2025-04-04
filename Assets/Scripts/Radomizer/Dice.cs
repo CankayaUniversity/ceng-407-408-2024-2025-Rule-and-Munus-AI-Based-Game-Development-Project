@@ -1,28 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Odds;
 
 public class Dice
 {
-    public int value;
-    private List<int> possibilities;
+    public int value = 1;
+    private List<int> _1d6 = odds._1d6;
 
     public Dice()
     {
         value = 1;
-        possibilities = new List<int>();
-        for(int i = 1; i < 7; ++i)
-        {
-            possibilities.Add(i);
-        }
+        _1d6 = odds._1d6;
     }
     public int RollaDice()
     {
-        value = possibilities[Random.Range( 0, possibilities.Count - 1)];
+        value = _1d6[Random.Range( 0, _1d6.Count - 1)];
         return value;
     }
     public int RollaDice(Stat LUCK)
     {
-        List<int> temp_posb = possibilities;
+        List<int> temp_posb = _1d6;
         if(LUCK.value > 3 && LUCK.value < 5)
         {
             temp_posb.Add(5);
@@ -51,7 +48,7 @@ public class Dice
             temp_posb.Add(5);
             temp_posb.Add(5);
         }
-        value = temp_posb[Random.Range( 0, possibilities.Count - 1)];
+        value = temp_posb[Random.Range( 0, _1d6.Count - 1)];
         return value;
     }
 }

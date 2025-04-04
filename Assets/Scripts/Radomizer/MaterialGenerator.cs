@@ -1,16 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Types;
 
-public class MaterialGenerator : MonoBehaviour
+public static class MaterialGenerator
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static Stock stock = Stock.instance;
+    public static List<Material> ifNeeded;
+    public static Material[] materials = Material.FindObjectsByType<Material>(FindObjectsSortMode.None); 
+    public static void Generate(MaterialType type, Stat luck)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        int amount = Random.Range(1, 20) + (int)(luck.baseValue * 0.75);
+        int fate = Random.Range(0, materials.Length);
+        stock.Add(type, amount);
     }
 }

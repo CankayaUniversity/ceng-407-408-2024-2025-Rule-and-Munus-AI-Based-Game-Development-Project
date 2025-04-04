@@ -1,5 +1,9 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Unity.Mathematics;
+using Types;
+using Stats;
+using System.Linq;
 
 public class Attributes : MonoBehaviour 
 {
@@ -10,16 +14,7 @@ public class Attributes : MonoBehaviour
     public int CurrentHealth = 0;
     public int MaxStamina = 100;
     public int CurrentStamina = 0;
-    // public Dictionary<string, int> stats = new Dictionary<string, int> ();
-    public Stat attack = new Stat(1);
-    public Stat defence = new Stat(1);
-    public Stat STR = new Stat(1);
-    public Stat DEX = new Stat(1);
-    public Stat INT = new Stat(1);
-    public Stat WIS = new Stat(1);
-    public Stat CON = new Stat(1);
-    public Stat CHA = new Stat(1);
-    public Stat LUCK = new Stat(1);
+    public Dictionary<StatType, Stat> stats = _stats.stats;
     public int Limit = 100;
 
     #region Singleton
@@ -38,43 +33,13 @@ public class Attributes : MonoBehaviour
 	// 	stats.Add(name, value);
     //     Debug.Log($"{name} Stat Added {value}!");
     // }
-    public void Add(string name, StatModifier modifier)
+    public void Add(StatType type, StatModifier modifier)
     {
-		switch(name)
-        {
-            case "STR":
-                STR.AddModifier(modifier);
-                Debug.Log($"{name} Stat Added {modifier.value}!");
-                break;
-            case "DEX":
-                DEX.AddModifier(modifier);
-                Debug.Log($"{name} Stat Added {modifier.value}!");
-                break;
-            case "INT":
-                INT.AddModifier(modifier);
-                Debug.Log($"{name} Stat Added {modifier.value}!");
-                break;
-            case "WIS":
-                WIS.AddModifier(modifier);
-                Debug.Log($"{name} Stat Added {modifier.value}!");
-                break;
-            case "CON":
-                CON.AddModifier(modifier);
-                Debug.Log($"{name} Stat Added {modifier.value}!");
-                break;
-            case "CHA":
-                CHA.AddModifier(modifier);
-                Debug.Log($"{name} Stat Added {modifier.value}!");
-                break;
-            case "LUCK":
-                LUCK.AddModifier(modifier);
-                Debug.Log($"{name} Stat Added {modifier.value}!");
-                break;
-            default:
-                Debug.Log($"Unrecognized stat modifier!");
-                Debug.Log($"Name {name} Value: {modifier.value}!");
-                break;
-        }
+        stats[type].AddModifier(modifier);
+    }
+    public void Remove(StatType type, StatModifier modifier)
+    {
+        stats[type].RemoveModifier(modifier);
     }
     // public bool UpdateStats(string stat, int value)
     // {
@@ -102,7 +67,11 @@ public class Attributes : MonoBehaviour
 
     public void ShowStats()
     {
-        Debug.Log($"{Name} - STR: {STR.value}, DEX: {DEX.value}, CON: {CON.value}, INT: {INT.value}, WIS: {WIS.value}, CHA: {CHA.value}");
+        Debug.Log($"{Name}");
+        for(int i = 0; i < stats.Count; ++i)
+        {
+        Debug.Log($"{stats.ElementAt(i).Key}: {stats.ElementAt(i).Value.baseValue}");
+        }
     }
 
 	
