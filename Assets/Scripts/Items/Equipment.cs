@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Types;
 using Stats;
@@ -15,23 +16,22 @@ public class Equipment : Item {
 	public int damageModifier;      // Increase/decrease in damage
     public StatModifier attack;
     public StatModifier defence;
-	public Dictionary<StatType, StatModifier> statModifiers = _stats.statModifiers;
+	public Dictionary<StatType, StatModifier> statModifiers;
 	public SkinnedMeshRenderer mesh;
     public EquipmentManager.MeshBlendShape[] coveredMeshRegions;
 
 	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier)
 	{
-		this.equipSlot = equipmentSlot;
-		this.rarirty = rarity;
-		this.armorModifier = armorModifier;
-		this.damageModifier = damageModifier;
+		this.InitEquipment(equipmentSlot, rarity, armorModifier, damageModifier);
 	}
 	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier, Dictionary<StatType, StatModifier> modifiers): this(equipmentSlot, rarity, armorModifier, damageModifier)
 	{
 		AdjustStatModifiers(modifiers);
 	}
-	public void Init(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier)
+	public void InitEquipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier)
 	{
+		this.InitItem();
+		statModifiers = _stats.statModifiers;
 		this.equipSlot = equipmentSlot;
 		this.rarirty = rarity;
 		this.armorModifier = armorModifier;
@@ -39,6 +39,17 @@ public class Equipment : Item {
 	}
 	public void AdjustStatModifiers(Dictionary<StatType, StatModifier> modifiers)
 	{
+		Debug.Log($"Type of Equipment: {equipSlot}");
+		for(int i = 0; i < modifiers.Count; ++i)
+        {
+			Debug.Log("Upcoming Modifiers");
+        	Debug.Log($"{modifiers.ElementAt(i).Key}: {modifiers.ElementAt(i).Value.value}");
+        }
+		// for(int i = 0; i < statModifiers.Count; ++i)
+        // {
+		// 	Debug.Log("Current Modifiers");
+        // 	Debug.Log($"{statModifiers.ElementAt(i).Key}: {statModifiers.ElementAt(i).Value.value}");
+        // }
 		if(modifiers.ContainsKey(StatType.STR))
 		{
 			statModifiers[StatType.STR] = modifiers[StatType.STR];
@@ -67,6 +78,12 @@ public class Equipment : Item {
 		{
 			statModifiers[StatType.LUCK] = modifiers[StatType.LUCK];
 		}
+		// Debug.Log("Current Modifiers");
+		// for(int i = 0; i < statModifiers.Count; ++i)
+        // {
+        // 	Debug.Log($"{statModifiers.ElementAt(i).Key}: {statModifiers.ElementAt(i).Value.value}");
+        // }
+
 	}
 
 	// When pressed in inventory

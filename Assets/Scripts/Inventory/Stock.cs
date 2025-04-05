@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Types;
+using System.Linq;
 
 public class Stock : MonoBehaviour {
 
@@ -15,18 +16,22 @@ public class Stock : MonoBehaviour {
 		Material[] prefabs = Material.FindObjectsByType<Material>(FindObjectsSortMode.None);
 		for(int i = 0; i < prefabs.Length; ++i)
 		{
+			Debug.Log($"Prefabs: {prefabs[i].name}");
 			materials.Add(prefabs[i].type, prefabs[i]);
 		}
 	}
 
 	#endregion
-
-
-	// Current list of items in inventory
-	
 	public void ExpandStock(Material material)
 	{
 		materials.Add(material.type, material);
+	}
+	public void Show()
+	{
+        for(int i = 0; i < materials.Count; ++i)
+        {
+        Debug.Log($"{materials.ElementAt(i).Key}: {materials.ElementAt(i).Value.type.ToString()}");
+        }
 	}
 	public bool Add(MaterialType type, int amount)
     {

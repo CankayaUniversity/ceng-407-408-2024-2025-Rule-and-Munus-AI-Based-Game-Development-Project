@@ -16,17 +16,25 @@ public class Material : ScriptableObject
     public int Limit = 100;
     public Material(string name, int count)
     {
+        this.Init(name, count);
+    }
+    public void Init(string name, int count)
+    {
         Name = name;
         Name = type.ToString();
         Count = Math.Clamp(count, 0, 100);
     }
-
     public void AddCount(int amount)
     {
         Count = Math.Clamp(Count + amount, 0, Limit);
     }
     public Material(MaterialType type, int count)
     {
+        this.Init(type, count);
+    }
+    public void Init(MaterialType type, int count)
+    {
+        Name = name;
         Name = type.ToString();
         Count = Math.Clamp(count, 0, 100);
     }

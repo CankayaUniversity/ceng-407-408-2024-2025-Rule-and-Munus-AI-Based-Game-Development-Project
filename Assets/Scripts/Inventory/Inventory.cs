@@ -29,9 +29,38 @@ public class Inventory : MonoBehaviour {
 
 	// Current list of items in inventory
 	public List<Item> items = new List<Item>();
-
+	public List<Equipment> equipments = new List<Equipment>();
 	// Add a new item. If there is enough room we
 	// return true. Else we return false.
+	public void ShowItems()
+	{
+		Debug.Log("Stored Items");
+		for(int i = 0; i < equipments.Count; ++i)
+        {
+        	Debug.Log($"Name of item: {equipments[i].name.ToString()}, Type of item: {equipments[i].equipSlot.ToString()}");
+        }
+	}
+	public bool Add (Equipment item)
+	{
+		// Don't do anything if it's a default item
+		if (!item.isDefaultItem)
+		{
+			// Check if out of space
+			if (equipments.Count >= space)
+			{
+				Debug.Log("Not enough room.");
+				return false;
+			}
+
+			equipments.Add(item);	// Add item to list
+
+			// Trigger callback
+			if (onItemChangedCallback != null)
+				onItemChangedCallback.Invoke();
+		}
+
+		return true;
+	}
 	public bool Add (Item item)
 	{
 		// Don't do anything if it's a default item

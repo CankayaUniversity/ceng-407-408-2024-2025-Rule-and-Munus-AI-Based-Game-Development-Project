@@ -13,13 +13,17 @@ public class Item : ScriptableObject
 	//public Sprite icon = null;				// Item icon
 	//public bool isDefaultItem = false;      // Is the item default wear?
 
-    public string id;
-    new public string name;
-    public string description;
+    public string id = "Null";
+    new public string name = "New Item";
+    public string description = "Empty Description";
     public Sprite icon;
-    public bool isDefaultItem;
-    public string tag;
+    public bool isDefaultItem = false;
+    public string tag = "Default Item";
 	public Item()
+	{
+		this.InitItem();
+	}
+	public void InitItem()
 	{
 		this.id = "Null";
 		this.name = "New Item";
@@ -29,6 +33,10 @@ public class Item : ScriptableObject
 		this.tag = "Item";
 	}
 	public Item(string id, string name, string description, Sprite icon, bool isDefault, string tag)
+	{
+		this.InitItem(id, name, description, icon, isDefault, tag);
+	}
+	public void InitItem(string id, string name, string description, Sprite icon, bool isDefault, string tag)
 	{
 		this.id = id;
 		this.name = name;

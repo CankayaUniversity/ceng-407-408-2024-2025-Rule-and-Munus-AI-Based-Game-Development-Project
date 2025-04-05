@@ -617,9 +617,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultEquipment: []
   defaultMaterial: []
+  gameObject: {fileID: 0}
   luck:
     baseValue: 1
-  attributes: {fileID: 0}
 --- !u!114 &453548099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3414,6 +3414,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3e6d78ca299e3d499940a2ba8f15ba2, type: 2}
   - {fileID: 11400000, guid: c3e6d78ca299e3d499940a2ba8f15ba2, type: 2}
   - {fileID: 11400000, guid: c3e6d78ca299e3d499940a2ba8f15ba2, type: 2}
+  equipments: []
 --- !u!4 &1920523639
 Transform:
   m_ObjectHideFlags: 0
@@ -3483,9 +3484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultEquipment: []
   defaultMaterial: []
+  gameObject: {fileID: 0}
   luck:
     baseValue: 1
-  attributes: {fileID: 1725706850}
 --- !u!114 &1920523644
 MonoBehaviour:
   m_ObjectHideFlags: 0
