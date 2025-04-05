@@ -4,12 +4,12 @@ namespace Types
 {   
         public enum EquipmentSlot 
         { 
-            Head, 
-            Chest, 
-            Legs, 
+            // Head, 
+            // Chest, 
+            // Legs, 
             Weapon, 
-            Shield, 
-            Feet, 
+            // Shield, 
+            // Feet, 
             Armor, 
             Accessoire,
             Default,

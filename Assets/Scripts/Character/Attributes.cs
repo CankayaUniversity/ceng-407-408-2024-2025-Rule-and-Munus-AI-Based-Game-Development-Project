@@ -23,6 +23,8 @@ public class Attributes : MonoBehaviour
 
 	void Awake()
 	{
+        Debug.Log("Attributes created");
+        ShowStats();
 		instance = this;
 	}
 

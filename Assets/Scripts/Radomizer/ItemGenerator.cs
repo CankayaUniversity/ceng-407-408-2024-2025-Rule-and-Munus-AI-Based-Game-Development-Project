@@ -149,17 +149,25 @@ public static class ItemGenerator
         switch(slot)
         {
             case EquipmentSlot.Weapon:
-                generated = new Equipment(slot, rarity, 0, value);
+                // generated = new Equipment(slot, rarity, 0, value);
+                generated = ScriptableObject.CreateInstance<Equipment>();
+                generated.Init(slot, rarity, 0, value);
                 break;
             case EquipmentSlot.Armor:
-                generated = new Equipment(slot, rarity, value, 0);
+                // generated = new Equipment(slot, rarity, value, 0);
+                generated = ScriptableObject.CreateInstance<Equipment>();
+                generated.Init(slot, rarity, value, 0);
                 break;
             case EquipmentSlot.Accessoire:
-                generated = new Equipment(slot, rarity, value, value);
+                //generated = new Equipment(slot, rarity, value, value);
+                generated = ScriptableObject.CreateInstance<Equipment>();
+                generated.Init(slot, rarity, value, value);
                 break;
             default:
                 Debug.Log($"Uncrognized Equipment Slot: {slot} Default Equipment crafted with value 0");
-                generated = new Equipment(EquipmentSlot.Default, Rarity.Default, 0, 0);
+                // generated = new Equipment(EquipmentSlot.Default, Rarity.Default, 0, 0);
+                generated = ScriptableObject.CreateInstance<Equipment>();
+                generated.Init(EquipmentSlot.Default, Rarity.Default, 0, 0);
                 break;
         }
 

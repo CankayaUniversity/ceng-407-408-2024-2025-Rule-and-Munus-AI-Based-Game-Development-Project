@@ -8,7 +8,7 @@ using Stats;
 
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Equipment")]
 public class Equipment : Item {
-	public EquipmentSlot equipSlot; // Slot to store equipment in
+	public Types.EquipmentSlot equipSlot; // Slot to store equipment in
 	// public Player player; //Character of the player
 	public Rarity rarirty;
 	public int armorModifier;		// Increase/decrease in armor
@@ -29,6 +29,13 @@ public class Equipment : Item {
 	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier, Dictionary<StatType, StatModifier> modifiers): this(equipmentSlot, rarity, armorModifier, damageModifier)
 	{
 		AdjustStatModifiers(modifiers);
+	}
+	public void Init(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier)
+	{
+		this.equipSlot = equipmentSlot;
+		this.rarirty = rarity;
+		this.armorModifier = armorModifier;
+		this.damageModifier = damageModifier;
 	}
 	public void AdjustStatModifiers(Dictionary<StatType, StatModifier> modifiers)
 	{
