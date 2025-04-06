@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using Types;
+using Materials;
 using System.Linq;
 
 public class Stock : MonoBehaviour {
@@ -8,34 +10,31 @@ public class Stock : MonoBehaviour {
 	#region Singleton
 
 	public static Stock instance;
-	public Dictionary<MaterialType, Material> materials = new Dictionary<MaterialType, Material>();
-
+	public Dictionary<MaterialType, Material> typeMaterial;
+	public List<Text> texts;
 	void Awake()
 	{
     	instance = this;
-		Material[] prefabs = Material.FindObjectsByType<Material>(FindObjectsSortMode.None);
-		for(int i = 0; i < prefabs.Length; ++i)
-		{
-			Debug.Log($"Prefabs: {prefabs[i].name}");
-			materials.Add(prefabs[i].type, prefabs[i]);
-		}
+		typeMaterial = materials.typeMaterial;
+		Debug.Log($"Stock Created");
+
 	}
 
 	#endregion
 	public void ExpandStock(Material material)
 	{
-		materials.Add(material.type, material);
+		typeMaterial.Add(material.type, material);
 	}
 	public void Show()
 	{
-        for(int i = 0; i < materials.Count; ++i)
+        for(int i = 0; i < typeMaterial.Count; ++i)
         {
-        Debug.Log($"{materials.ElementAt(i).Key}: {materials.ElementAt(i).Value.type.ToString()}");
+        	Debug.Log($"{typeMaterial.ElementAt(i).Key}: {typeMaterial.ElementAt(i).Value.Count}");
         }
 	}
 	public bool Add(MaterialType type, int amount)
     {
-        if (!materials.ContainsKey(type))
+        if (!typeMaterial.ContainsKey(type))
         {
             Debug.Log("Invalid material type!");
             return false;
@@ -66,18 +65,18 @@ public class Stock : MonoBehaviour {
 		// 	Debug.Log("Exceed the max amount of: " + name);
 		// 	return false;
 		// }
-		materials[type].AddCount(amount);
+		typeMaterial[type].AddCount(amount);
 		return true;
     }
 	public bool Add(Material gatheredMaterial)
     {
-        if (!materials.ContainsKey(gatheredMaterial.type))
+        if (!typeMaterial.ContainsKey(gatheredMaterial.type))
         {
             Debug.Log("Invalid material type!");
             return false;
         }
 
-		materials[gatheredMaterial.type].AddCount(gatheredMaterial.Count);
+		typeMaterial[gatheredMaterial.type].AddCount(gatheredMaterial.Count);
         
 		
         return true;

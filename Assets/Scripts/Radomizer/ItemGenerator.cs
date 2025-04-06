@@ -39,7 +39,7 @@ public static class ItemGenerator
         }
         generated.AdjustStatModifiers(statTypeModifier);
         inventory.Add(generated);
-        inventory.ShowItems();
+        // inventory.ShowItems();
     }
     public static Dictionary<StatType, StatModifier> PrimaryWeapon(Rarity rarity)
     {

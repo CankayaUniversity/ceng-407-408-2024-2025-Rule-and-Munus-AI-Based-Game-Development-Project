@@ -5,25 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/00 - Bootstrapper/Bootstrapper.unity
     guid: 8332054eadbb5d340bb2e73805a39b47
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/01 - Hub/Scenes/Hub_Environment.unity
     guid: e5ba1b9d2eb07984bb9e4a87f74a4288
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/01 - Hub/Scenes/Hub_Gameplay.unity
     guid: bac2fafadf3cf654f940aa54fcf1ff3a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/01 - Hub/Scenes/Hub_Light.unity
     guid: 821b340e4e9ade44e9991a1367161a8a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/02 - Promenade/Scenes/Promenade_Environment.unity
     guid: 18a9bacc5e7f16a46835dbe6e23f0e95
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/02 - Promenade/Scenes/Promenade_NavMesh.unity
     guid: 27dd6cf0dca58d646bd312b9c7db48c2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/02 - Promenade/Scenes/Promenade_Gameplay.unity
     guid: bcab501c0adad4d4dad385ae10cd224e
   m_configObjects:

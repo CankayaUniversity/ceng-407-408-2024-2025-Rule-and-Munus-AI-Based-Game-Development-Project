@@ -11,7 +11,7 @@ public static class MaterialGenerator
     {
         int amount = Random.Range(1, 20) + (int)(luck.value * 0.75);
         stock.Add(type, amount);
-        stock.Show();
+        // stock.Show();
     }
     public static void Generate(MaterialType type, int amount)
     {

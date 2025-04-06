@@ -1,16 +1,15 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Types;
 
-/* The base item class. All items should derive from this. */
-
-[CreateAssetMenu(fileName = "New Material", menuName = "Inventory/Material")]
-public class Material : ScriptableObject 
+// [CreateAssetMenu(fileName = "New Material", menuName = "Inventory/Material")]
+[Serializable]
+public class Material 
 {
 
-    public MaterialType type {get { return type; }}
+    public MaterialType type;
     public string Name = "Default";
     public int Count = 0;
     public int Limit = 100;
@@ -21,7 +20,7 @@ public class Material : ScriptableObject
     public void Init(string name, int count)
     {
         Name = name;
-        Name = type.ToString();
+        // type = MaterialType.Default;
         Count = Math.Clamp(count, 0, 100);
     }
     public void AddCount(int amount)
@@ -34,8 +33,12 @@ public class Material : ScriptableObject
     }
     public void Init(MaterialType type, int count)
     {
-        Name = name;
         Name = type.ToString();
         Count = Math.Clamp(count, 0, 100);
+    }
+    public Material InitMaterial(MaterialType type, int count)
+    {
+        this.Init(type, count);
+        return this;
     }
 }
