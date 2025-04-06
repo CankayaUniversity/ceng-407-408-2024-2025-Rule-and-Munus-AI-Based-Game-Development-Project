@@ -4,6 +4,9 @@ using UnityEngine;
 using Types;
 using Materials;
 using System.Linq;
+using TMPro;
+using System.Dynamic;
+using System;
 
 public class Stock : MonoBehaviour {
 
@@ -11,19 +14,58 @@ public class Stock : MonoBehaviour {
 
 	public static Stock instance;
 	public Dictionary<MaterialType, Material> typeMaterial;
-	public List<Text> texts;
+	public List<TextMeshProUGUI> texts;
+	public List<GameObject> textList;
+	public bool isUpdated = false;
+	public TextMeshProUGUI temp;
 	void Awake()
 	{
     	instance = this;
 		typeMaterial = materials.typeMaterial;
+		texts = new List<TextMeshProUGUI>();
+		textList = new List<GameObject>(){
+			GameObject.Find("Text (TMP) (4)"), 
+			GameObject.Find("Text (TMP) (5)"),
+			GameObject.Find("Text (TMP) (6)"),
+			GameObject.Find("Text (TMP) (7)")
+			};
+		for(int i = 0; i < typeMaterial.Count; ++i)
+		{
+			temp.text = typeMaterial.ElementAt(i).Value.Count.ToString();
+			texts.Add(temp);
+			Debug.Log($"Awake: {texts[i].text}");
+			textList[i].GetComponent<TextMeshProUGUI>().text = temp.text;
+		}
 		Debug.Log($"Stock Created");
-
+	}
+    public void Update()
+    {
+        if(this.isUpdated)
+		{
+			UpdateText();
+			isUpdated = false;
+		}
+    }
+    public void UpdateText()
+	{
+		for(int i = 0; i < texts.Count; ++i)
+		{
+			texts[i].text = typeMaterial.ElementAt(i).ToString();
+			Debug.Log(texts[i].text);
+		}
+		// foreach (Material material in typeMaterial.Values)
+		// {
+		// 	Debug.Log(material.type.ToString());
+		// 	temp.text = typeMaterial[material.type].Count.ToString();
+		// }
+		// texts.Add(temp);
 	}
 
 	#endregion
 	public void ExpandStock(Material material)
 	{
 		typeMaterial.Add(material.type, material);
+		isUpdated = true;
 	}
 	public void Show()
 	{
@@ -66,6 +108,7 @@ public class Stock : MonoBehaviour {
 		// 	return false;
 		// }
 		typeMaterial[type].AddCount(amount);
+		isUpdated = true;
 		return true;
     }
 	public bool Add(Material gatheredMaterial)
@@ -77,8 +120,7 @@ public class Stock : MonoBehaviour {
         }
 
 		typeMaterial[gatheredMaterial.type].AddCount(gatheredMaterial.Count);
-        
-		
+        isUpdated = true;
         return true;
     }
 

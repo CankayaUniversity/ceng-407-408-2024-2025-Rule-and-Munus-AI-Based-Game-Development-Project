@@ -13,6 +13,7 @@ public class Material
     public string Name = "Default";
     public int Count = 0;
     public int Limit = 100;
+    public bool isUpdated = false;
     public Material(string name, int count)
     {
         this.Init(name, count);

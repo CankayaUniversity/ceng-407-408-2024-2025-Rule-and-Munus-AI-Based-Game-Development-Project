@@ -38,7 +38,7 @@ public class MaterialManager : MonoBehaviour {
             { MaterialType.Stone, stoneText },
             { MaterialType.Iron, ironText }
         };
-
+		
         UpdateMaterialTexts();
 	}
 
