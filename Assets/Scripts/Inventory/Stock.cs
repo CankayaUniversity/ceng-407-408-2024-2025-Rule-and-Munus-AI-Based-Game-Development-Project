@@ -24,10 +24,10 @@ public class Stock : MonoBehaviour {
 		typeMaterial = materials.typeMaterial;
 		texts = new List<TextMeshProUGUI>();
 		textList = new List<GameObject>(){
-			GameObject.Find("Text (TMP) (4)"), 
-			GameObject.Find("Text (TMP) (5)"),
-			GameObject.Find("Text (TMP) (6)"),
-			GameObject.Find("Text (TMP) (7)")
+			GameObject.Find("Wood_Count"), 
+			GameObject.Find("Stone_Count"),
+			GameObject.Find("Iron_Count"),
+			GameObject.Find("Cloth_Count")
 			};
 		for(int i = 0; i < typeMaterial.Count; ++i)
 		{
@@ -45,6 +45,7 @@ public class Stock : MonoBehaviour {
 			UpdateText();
 			isUpdated = false;
 		}
+		UpdateText();
     }
     public void UpdateText()
 	{
