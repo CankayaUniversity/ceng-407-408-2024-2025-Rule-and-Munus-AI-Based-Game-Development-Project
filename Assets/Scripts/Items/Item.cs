@@ -28,7 +28,7 @@ public class Item : ScriptableObject
 		this.id = "Null";
 		this.name = "New Item";
 		this.description = "Null";
-		this.icon = null;;
+		this.icon = null;
 		this.isDefaultItem = false;
 		this.tag = "Item";
 	}
@@ -36,6 +36,11 @@ public class Item : ScriptableObject
 	{
 		this.InitItem(id, name, description, icon, isDefault, tag);
 	}
+	public void SetIcon(Sprite icon)
+	{
+		this.icon = icon;
+	}
+
 	public void InitItem(string id, string name, string description, Sprite icon, bool isDefault, string tag)
 	{
 		this.id = id;

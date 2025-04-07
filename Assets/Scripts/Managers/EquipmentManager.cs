@@ -27,14 +27,13 @@ public class EquipmentManager : MonoBehaviour {
 	// Callback for when an item is equipped/unequipped
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 	public OnEquipmentChanged onEquipmentChanged;
-   
-
 	Inventory inventory;	// Reference to our inventory
 	AttributeManager attributeManager;
 	void Start ()
 	{
 		inventory = Inventory.instance;		// Get a reference to our inventory
-		attributeManager = AttributeManager.instance; // Get a reference to our attributes
+		// attributeManager = AttributeManager.instance; // Get a reference to our attributes
+		attributeManager = GameObject.Find("GameManager").GetComponent<AttributeManager>();
 		// Initialize currentEquipment based on number of equipment slots
 		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new Equipment[numSlots];

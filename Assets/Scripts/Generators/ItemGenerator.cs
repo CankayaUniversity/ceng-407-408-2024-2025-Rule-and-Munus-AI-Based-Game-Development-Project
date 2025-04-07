@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Types;
 using Odds;
+using Icons;
+// using Microsoft.Unity.VisualStudio.Editor;
 public static class ItemGenerator
 {
     public static GameObject gameObject =  GameObject.Find("GameManager");
@@ -9,6 +12,9 @@ public static class ItemGenerator
     public static Equipment generated;
     public static Dictionary<Rarity, int[]> rarityValues = odds.rarityValues;
     public static Dictionary<Rarity, int[]> rarityModifiers = odds.rarityModifiers;
+    public static Dictionary<EquipmentSlot, Sprite> slotSprite = icons.slotSprite;
+    public static Dictionary<EquipmentSlot, Image> slotImage = icons.slotImage;
+    public static Dictionary<EquipmentSlot, SkinnedMeshRenderer> slotMesh = icons.slotMesh;
     public static void Generate(EquipmentSlot type, Stat luck)
     {
         int fate = (int)luck.value;
@@ -152,23 +158,23 @@ public static class ItemGenerator
             case EquipmentSlot.Weapon:
                 // generated = new Equipment(slot, rarity, 0, value);
                 generated = ScriptableObject.CreateInstance<Equipment>();
-                generated.InitEquipment(slot, rarity, 0, value);
+                generated.InitEquipment(slot, rarity, 0, value, slotMesh[slot], slotSprite[slot]);
                 break;
             case EquipmentSlot.Armor:
                 // generated = new Equipment(slot, rarity, value, 0);
                 generated = ScriptableObject.CreateInstance<Equipment>();
-                generated.InitEquipment(slot, rarity, value, 0);
+                generated.InitEquipment(slot, rarity, value, 0, slotMesh[slot], slotSprite[slot]);
                 break;
             case EquipmentSlot.Accessoire:
                 //generated = new Equipment(slot, rarity, value, value);
                 generated = ScriptableObject.CreateInstance<Equipment>();
-                generated.InitEquipment(slot, rarity, value, value);
+                generated.InitEquipment(slot, rarity, value, value, slotMesh[slot], slotSprite[slot]);
                 break;
             default:
                 Debug.Log($"Uncrognized Equipment Slot: {slot} Default Equipment crafted with value 0");
                 // generated = new Equipment(EquipmentSlot.Default, Rarity.Default, 0, 0);
                 generated = ScriptableObject.CreateInstance<Equipment>();
-                generated.InitEquipment(EquipmentSlot.Default, Rarity.Default, 0, 0);
+                generated.InitEquipment(EquipmentSlot.Default, Rarity.Default, 0, 0, slotMesh[slot], slotSprite[slot]);
                 break;
         }
 

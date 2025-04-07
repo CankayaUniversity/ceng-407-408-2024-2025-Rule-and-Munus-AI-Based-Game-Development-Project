@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Types;
 using Stats;
+using UnityEngine.XR;
 
 /* An Item that can be equipped. */
 
@@ -19,18 +20,19 @@ public class Equipment : Item {
 	public Dictionary<StatType, StatModifier> statModifiers;
 	public SkinnedMeshRenderer mesh;
     public EquipmentManager.MeshBlendShape[] coveredMeshRegions;
-
-	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier)
+	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon)
 	{
-		this.InitEquipment(equipmentSlot, rarity, armorModifier, damageModifier);
+		this.InitEquipment(equipmentSlot, rarity, armorModifier, damageModifier, mesh, icon);
 	}
-	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier, Dictionary<StatType, StatModifier> modifiers): this(equipmentSlot, rarity, armorModifier, damageModifier)
+	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon, Dictionary<StatType, StatModifier> modifiers): this(equipmentSlot, rarity, armorModifier, damageModifier, mesh, icon)
 	{
 		AdjustStatModifiers(modifiers);
 	}
-	public void InitEquipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier)
+	public void InitEquipment(EquipmentSlot equipmentSlot, Rarity rarity, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon)
 	{
 		this.InitItem();
+		this.SetIcon(icon);
+		this.mesh = mesh;
 		statModifiers = _stats.statModifiers;
 		this.equipSlot = equipmentSlot;
 		this.rarirty = rarity;

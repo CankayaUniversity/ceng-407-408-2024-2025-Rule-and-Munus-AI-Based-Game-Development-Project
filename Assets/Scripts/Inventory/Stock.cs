@@ -14,53 +14,42 @@ public class Stock : MonoBehaviour {
 
 	public static Stock instance;
 	public Dictionary<MaterialType, Material> typeMaterial;
-	public List<TextMeshProUGUI> texts;
 	public List<GameObject> textList;
 	public bool isUpdated = false;
-	public TextMeshProUGUI temp;
 	void Awake()
 	{
     	instance = this;
 		typeMaterial = materials.typeMaterial;
-		texts = new List<TextMeshProUGUI>();
 		textList = new List<GameObject>(){
 			GameObject.Find("Wood_Count"), 
 			GameObject.Find("Stone_Count"),
 			GameObject.Find("Iron_Count"),
 			GameObject.Find("Cloth_Count")
-			};
+		};
+		Debug.Log($"Awake of Stock");
 		for(int i = 0; i < typeMaterial.Count; ++i)
 		{
-			temp.text = typeMaterial.ElementAt(i).Value.Count.ToString();
-			texts.Add(temp);
-			Debug.Log($"Awake: {texts[i].text}");
-			textList[i].GetComponent<TextMeshProUGUI>().text = temp.text;
+			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
+			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
 		}
 		Debug.Log($"Stock Created");
 	}
-    public void Update()
-    {
-        if(isUpdated)
-		{
-			UpdateText();
-			isUpdated = false;
-		}
-		// UpdateText();
-    }
+    // public void Update()
+    // {
+    //     if(isUpdated)
+	// 	{
+	// 		UpdateText();
+	// 		isUpdated = false;
+	// 	}
+	// 	// UpdateText();
+    // }
     public void UpdateText()
 	{
-		for(int i = 0; i < texts.Count; ++i)
+		for(int i = 0; i < textList.Count; ++i)
 		{
-			texts[i].text = typeMaterial.ElementAt(i).ToString();
 			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
-			Debug.Log(texts[i].text);
+			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
 		}
-		// foreach (Material material in typeMaterial.Values)
-		// {
-		// 	Debug.Log(material.type.ToString());
-		// 	temp.text = typeMaterial[material.type].Count.ToString();
-		// }
-		// texts.Add(temp);
 	}
 
 	#endregion
@@ -68,6 +57,7 @@ public class Stock : MonoBehaviour {
 	{
 		typeMaterial.Add(material.type, material);
 		isUpdated = true;
+		UpdateText();
 	}
 	public void Show()
 	{
@@ -83,34 +73,9 @@ public class Stock : MonoBehaviour {
             Debug.Log("Invalid material type!");
             return false;
         }
-
-		// if (materials[name].Count + amount < MaxMaterialAmount)
-		// {
-		// 	materials[name].AddCount(amount);
-		// 	mat.Add(new Material(name, amount));
-		// }
-		// // If old amount + gathered amount exceed the max amount and updated amount does not exceed max amount.
-		// else if (materials[name].Count + amount > MaxMaterialAmount && materials[name].Count + amount - MaxMaterialAmount < MaxMaterialAmount)
-		// {
-		// 	materials[name].AddCount(materials[name].Count + amount - MaxMaterialAmount);
-		// 	mat.Add(new Material(name, amount));
-		// }
-
-		// While math.clamp is used for AddCount in Material class, we don't need to check whether old count + gathered amount exceed the max value or not
-		
-		
-		
-		
-		//materials[name].AddCount(amount);
-		//mat.Add(new Material(name, amount));
-
-		// else
-		// {
-		// 	Debug.Log("Exceed the max amount of: " + name);
-		// 	return false;
-		// }
 		typeMaterial[type].AddCount(amount);
 		isUpdated = true;
+		UpdateText();
 		return true;
     }
 	public bool Add(Material gatheredMaterial)
@@ -123,6 +88,7 @@ public class Stock : MonoBehaviour {
 
 		typeMaterial[gatheredMaterial.type].AddCount(gatheredMaterial.Count);
         isUpdated = true;
+		UpdateText();
         return true;
     }
 
