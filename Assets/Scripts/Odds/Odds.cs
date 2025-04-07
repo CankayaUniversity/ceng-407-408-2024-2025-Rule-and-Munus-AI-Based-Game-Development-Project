@@ -13,7 +13,7 @@ namespace Odds
         { Rarity.Epic, new int[16] {10, 11, 12, 13, 14, 15, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20}},
         { Rarity.Legendary, new int[13] {16, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 20, 20}}
         };
-        public static readonly Dictionary<Rarity, int[]> rarityModifiers = new Dictionary<Rarity, int[]>() {
+        public static readonly Dictionary<Rarity, int[]> rarityModifiers = new Dictionary<Rarity, int[]>() { 
         { Rarity.Common, new int[8] {0, 0, 0, 0, 1, 1, 1, 2}},
         { Rarity.Advenced, new int[7] {1, 1, 1, 2, 2, 3, 4}},
         { Rarity.Uncommon, new int[10] {2, 2, 2, 3, 3, 4, 4, 5, 6, 7}},

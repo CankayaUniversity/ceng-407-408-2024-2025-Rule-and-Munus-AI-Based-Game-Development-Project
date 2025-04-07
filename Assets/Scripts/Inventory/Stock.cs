@@ -40,18 +40,19 @@ public class Stock : MonoBehaviour {
 	}
     public void Update()
     {
-        if(this.isUpdated)
+        if(isUpdated)
 		{
 			UpdateText();
 			isUpdated = false;
 		}
-		UpdateText();
+		// UpdateText();
     }
     public void UpdateText()
 	{
 		for(int i = 0; i < texts.Count; ++i)
 		{
 			texts[i].text = typeMaterial.ElementAt(i).ToString();
+			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
 			Debug.Log(texts[i].text);
 		}
 		// foreach (Material material in typeMaterial.Values)
