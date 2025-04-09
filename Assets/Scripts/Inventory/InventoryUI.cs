@@ -36,9 +36,10 @@ public class InventoryUI : MonoBehaviour {
 		// Loop through all the slots
 		for (int i = 0; i < slots.Length; i++)
 		{
-			if (i < inventory.items.Count)	// If there is an item to add
+			if (i < inventory.equipments.Count)	// If there is an item to add
 			{
-				slots[i].AddItem(inventory.items[i]);	// Add it
+				slots[i].AddItem(inventory.equipments[i]);	// Add it
+				Debug.Log($"Inventory has: {inventory.equipments[i].equipSlot.ToString()}");
 			} else
 			{
 				// Otherwise clear the slot

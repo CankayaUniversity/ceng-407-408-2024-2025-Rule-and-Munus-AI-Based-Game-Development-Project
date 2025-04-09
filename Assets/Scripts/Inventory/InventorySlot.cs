@@ -9,8 +9,17 @@ public class InventorySlot : MonoBehaviour {
 	public Button removeButton;	// Reference to the remove button
 
 	Item item;  // Current item in the slot
+	Equipment equipment;
 
 	// Add item to the slot
+	public void AddItem (Equipment equipment)
+	{
+		this.equipment = equipment;
+
+		icon.sprite = equipment.icon;
+		icon.enabled = true;
+		removeButton.interactable = true;
+	}
 	public void AddItem (Item newItem)
 	{
 		item = newItem;
@@ -31,11 +40,10 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	// Called when the remove button is pressed
-	public void OnRemoveButton ()
+	public virtual void OnRemoveButton ()
 	{
 		Inventory.instance.Remove(item);
 	}
-
 	// Called when the item is pressed
 	public void UseItem ()
 	{

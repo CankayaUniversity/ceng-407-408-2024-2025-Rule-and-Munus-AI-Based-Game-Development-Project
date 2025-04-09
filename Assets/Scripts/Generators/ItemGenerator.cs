@@ -25,18 +25,25 @@ public static class ItemGenerator
             case EquipmentSlot.Weapon:
                 statTypeModifier = PrimaryWeapon(rarity);
                 break;
-            case EquipmentSlot.Armor:
-                statTypeModifier = Armor(rarity);
+            case EquipmentSlot.Secondary:
+                generated = SecondaryWeapon(dice.value);       
+                break;
+                //head + torso + legs + feet)
+            case EquipmentSlot.Head:
+                statTypeModifier = HeadArmor(rarity);
+                break;
+            case EquipmentSlot.Body:
+                statTypeModifier = BodyArmor(rarity);
+                break;
+            case EquipmentSlot.Legs:
+                statTypeModifier = LegArmor(rarity);
+                break;
+            case EquipmentSlot.Feet:
+                statTypeModifier = FeetArmor(rarity);
                 break;
             case EquipmentSlot.Accessoire:
                 statTypeModifier = Accessoire(rarity);
                 break;
-            // case EquipmentSlot.Shield:
-            //     generated = SecondaryWeapon(dice.value);       
-            //     break;
-            // case "Scroll":
-            //     generated = Scroll(dice.value);       
-            //     break;
             default:
                 Debug.Log("Unrecognized Equipment type!");  
                 Debug.Log($"Type: {type} Fate: {luck.value}");  
@@ -58,71 +65,51 @@ public static class ItemGenerator
 
         return keyValuePairs;
     }
-    // public static Equipment SecondaryWeapon(int fate)
-    // {
-    //     Equipment defaultEquipment;
-    //     Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
-    //     StatModifier modifier;
-    //     int value;
-    //     switch(fate)
-    //     {
-    //         // Common
-    //         case 1:
-    //             defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Common);
-    //             value = rarityModifiers[Rarity.Common][Random.Range(0, rarityModifiers[Rarity.Common].Length)];
-    //             modifier = new StatModifier(value, StatModType.Flat, 1, defaultEquipment);
-    //             keyValuePairs.Add(StatType.STR, modifier);
-    //             defaultEquipment.AdjustStatModifiers(keyValuePairs);
-    //             break;
-    //         // Advenced
-    //         case 2:
-    //             defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Advenced);
-    //             value = rarityModifiers[Rarity.Common][Random.Range(0, rarityModifiers[Rarity.Common].Length)];
-    //             modifier = new StatModifier(value, StatModType.Flat, 1, defaultEquipment);
-    //             keyValuePairs.Add(StatType.STR, modifier);
-    //             defaultEquipment.AdjustStatModifiers(keyValuePairs);
-    //             break;
-    //         // Uncommon
-    //         case 3:
-    //             defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Uncommon);
-    //             value = rarityModifiers[Rarity.Common][Random.Range(0, rarityModifiers[Rarity.Common].Length)];
-    //             modifier = new StatModifier(value, StatModType.Flat, 1, defaultEquipment);
-    //             keyValuePairs.Add(StatType.STR, modifier);
-    //             defaultEquipment.AdjustStatModifiers(keyValuePairs);
-    //             break;
-    //         // Rare
-    //         case 4:
-    //             defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Rare);
-    //             value = rarityModifiers[Rarity.Common][Random.Range(0, rarityModifiers[Rarity.Common].Length)];
-    //             modifier = new StatModifier(value, StatModType.Flat, 1, defaultEquipment);
-    //             keyValuePairs.Add(StatType.STR, modifier);
-    //             defaultEquipment.AdjustStatModifiers(keyValuePairs);
-    //             break;
-    //         // Epic
-    //         case 5:
-    //             defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Epic);
-    //             value = rarityModifiers[Rarity.Common][Random.Range(0, rarityModifiers[Rarity.Common].Length)];
-    //             modifier = new StatModifier(value, StatModType.Flat, 1, defaultEquipment);
-    //             keyValuePairs.Add(StatType.STR, modifier);
-    //             defaultEquipment.AdjustStatModifiers(keyValuePairs);
-    //             break;
-    //         // Legendary
-    //         case 6:
-    //             defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Legendary);
-    //             value = rarityModifiers[Rarity.Common][Random.Range(0, rarityModifiers[Rarity.Common].Length)];
-    //             modifier = new StatModifier(value, StatModType.Flat, 1, defaultEquipment);
-    //             keyValuePairs.Add(StatType.STR, modifier);
-    //             defaultEquipment.AdjustStatModifiers(keyValuePairs);
-    //             break;
-    //         default:
-    //             Debug.Log($"Uncrognized fate value: {fate}");
-    //             defaultEquipment = Craft(EquipmentSlot.Weapon, Rarity.Default);
-    //             keyValuePairs.Add(StatType.STR, new StatModifier(0, StatModType.Flat, 1, defaultEquipment));
-    //             break;
-    //     }
-    //     return defaultEquipment;
-    // }
-    public static Dictionary<StatType, StatModifier> Armor(Rarity rarity)
+    public static Dictionary<StatType, StatModifier> SecondaryWeapon(Rarity rarity)
+    {
+        StatModifier modifier;
+        Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
+        int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
+
+        modifier = new StatModifier(value, StatModType.Flat, 1, generated);
+        keyValuePairs.Add(StatType.STR, modifier);
+
+        return keyValuePairs;
+    }
+    public static Dictionary<StatType, StatModifier> HeadArmor(Rarity rarity)
+    {
+        StatModifier modifier;
+        Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
+        int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
+
+        modifier = new StatModifier(value, StatModType.Flat, 1, generated);
+        keyValuePairs.Add(StatType.CON, modifier);
+
+        return keyValuePairs;
+    }
+    public static Dictionary<StatType, StatModifier> BodyArmor(Rarity rarity)
+    {
+        StatModifier modifier;
+        Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
+        int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
+
+        modifier = new StatModifier(value, StatModType.Flat, 1, generated);
+        keyValuePairs.Add(StatType.CON, modifier);
+
+        return keyValuePairs;
+    }
+    public static Dictionary<StatType, StatModifier> LegArmor(Rarity rarity)
+    {
+        StatModifier modifier;
+        Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
+        int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
+
+        modifier = new StatModifier(value, StatModType.Flat, 1, generated);
+        keyValuePairs.Add(StatType.CON, modifier);
+
+        return keyValuePairs;
+    }
+    public static Dictionary<StatType, StatModifier> FeetArmor(Rarity rarity)
     {
         StatModifier modifier;
         Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
@@ -160,7 +147,7 @@ public static class ItemGenerator
                 generated = ScriptableObject.CreateInstance<Equipment>();
                 generated.InitEquipment(slot, rarity, 0, value, slotMesh[slot], slotSprite[slot]);
                 break;
-            case EquipmentSlot.Armor:
+            case EquipmentSlot.Head:
                 // generated = new Equipment(slot, rarity, value, 0);
                 generated = ScriptableObject.CreateInstance<Equipment>();
                 generated.InitEquipment(slot, rarity, value, 0, slotMesh[slot], slotSprite[slot]);
@@ -244,7 +231,7 @@ public static class ItemGenerator
                 Debug.Log($"Uncrognized rarity: {rarity} Value setted to 0");
                 return 0;
         }
-        if(slot == EquipmentSlot.Armor)
+        if(slot == EquipmentSlot.Head)
         {
             value = (int)(value*0.75);
         }

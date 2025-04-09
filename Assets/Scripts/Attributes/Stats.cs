@@ -13,7 +13,8 @@ namespace Stats
 		{ StatType.CON, new StatModifier(0, StatModType.Flat)},
 		{ StatType.CHA, new StatModifier(0, StatModType.Flat)},
 		{ StatType.LUCK, new StatModifier(0, StatModType.Flat)},
-	    };
+	    { StatType.Default, new StatModifier(0, StatModType.Flat)},
+        };
         public static Dictionary<StatType, Stat> stats = new Dictionary<StatType, Stat>() {
         { StatType.STR, new Stat(1)},
         { StatType.DEX, new Stat(1)},
