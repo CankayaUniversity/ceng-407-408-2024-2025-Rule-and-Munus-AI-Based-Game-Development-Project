@@ -70,7 +70,7 @@ public static class ItemGenerator
         StatModifier modifier;
         Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
         int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
-
+        value = (int)(value * 0.60);
         modifier = new StatModifier(value, StatModType.Flat, 1, generated);
         keyValuePairs.Add(StatType.STR, modifier);
 
@@ -81,7 +81,7 @@ public static class ItemGenerator
         StatModifier modifier;
         Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
         int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
-
+        value = (int)(value * 0.60);
         modifier = new StatModifier(value, StatModType.Flat, 1, generated);
         keyValuePairs.Add(StatType.CON, modifier);
 
@@ -92,7 +92,7 @@ public static class ItemGenerator
         StatModifier modifier;
         Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
         int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
-
+        value = (int)(value * 0.75);
         modifier = new StatModifier(value, StatModType.Flat, 1, generated);
         keyValuePairs.Add(StatType.CON, modifier);
 
@@ -103,7 +103,7 @@ public static class ItemGenerator
         StatModifier modifier;
         Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
         int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
-
+        value = (int)(value * 0.75);
         modifier = new StatModifier(value, StatModType.Flat, 1, generated);
         keyValuePairs.Add(StatType.CON, modifier);
 
@@ -114,7 +114,7 @@ public static class ItemGenerator
         StatModifier modifier;
         Dictionary<StatType, StatModifier> keyValuePairs= new Dictionary<StatType, StatModifier>();
         int value = rarityModifiers[rarity][Random.Range(0, rarityModifiers[rarity].Length)];
-
+        value = (int)(value * 0.50);
         modifier = new StatModifier(value, StatModType.Flat, 1, generated);
         keyValuePairs.Add(StatType.CON, modifier);
 
@@ -143,23 +143,19 @@ public static class ItemGenerator
         switch(slot)
         {
             case EquipmentSlot.Weapon:
-                // generated = new Equipment(slot, rarity, 0, value);
                 generated = ScriptableObject.CreateInstance<Equipment>();
                 generated.InitEquipment(slot, rarity, 0, value, slotMesh[slot], slotSprite[slot]);
                 break;
             case EquipmentSlot.Head:
-                // generated = new Equipment(slot, rarity, value, 0);
                 generated = ScriptableObject.CreateInstance<Equipment>();
                 generated.InitEquipment(slot, rarity, value, 0, slotMesh[slot], slotSprite[slot]);
                 break;
             case EquipmentSlot.Accessoire:
-                //generated = new Equipment(slot, rarity, value, value);
                 generated = ScriptableObject.CreateInstance<Equipment>();
                 generated.InitEquipment(slot, rarity, value, value, slotMesh[slot], slotSprite[slot]);
                 break;
             default:
                 Debug.Log($"Uncrognized Equipment Slot: {slot} Default Equipment crafted with value 0");
-                // generated = new Equipment(EquipmentSlot.Default, Rarity.Default, 0, 0);
                 generated = ScriptableObject.CreateInstance<Equipment>();
                 generated.InitEquipment(EquipmentSlot.Default, Rarity.Default, 0, 0, slotMesh[slot], slotSprite[slot]);
                 break;
@@ -230,6 +226,23 @@ public static class ItemGenerator
             default:
                 Debug.Log($"Uncrognized rarity: {rarity} Value setted to 0");
                 return 0;
+        }
+        switch(slot)
+        {
+            case EquipmentSlot.Secondary:
+                break;
+            case EquipmentSlot.Head:
+                break;
+            case EquipmentSlot.Body:
+                break;
+            case EquipmentSlot.Legs:
+                break;
+            case EquipmentSlot.Feet:
+                break;
+            case EquipmentSlot.Accessoire:
+                break;
+            default:
+                break;
         }
         if(slot == EquipmentSlot.Head)
         {
