@@ -37,6 +37,17 @@ public class Stat
         statModifiers.Add(mod);
         statModifiers.Sort();
     }
+    public virtual void IncreaseBase()
+    {
+        flag = true;
+        baseValue += 1;
+    }
+    public void DecreaseBase()
+    {
+        flag = true;
+        if(baseValue>0) { baseValue -= 1; }
+        else { baseValue = 0; }
+    }
     protected virtual int CompareOrder(StatModifier first, StatModifier second)
     {
         if(first.order < second.order)

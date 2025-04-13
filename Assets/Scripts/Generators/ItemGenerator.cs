@@ -7,7 +7,7 @@ using Icons;
 // using Microsoft.Unity.VisualStudio.Editor;
 public static class ItemGenerator
 {
-    public static GameObject gameObject =  GameObject.Find("GameManager");
+    public static GameObject gameObject =  GameObject.Find("Player");
     public static Inventory inventory = gameObject.GetComponent<Inventory>();
     public static Equipment generated;
     public static Dictionary<Rarity, int[]> rarityValues = odds.rarityValues;
@@ -26,7 +26,7 @@ public static class ItemGenerator
                 statTypeModifier = PrimaryWeapon(rarity);
                 break;
             case EquipmentSlot.Secondary:
-                generated = SecondaryWeapon(dice.value);       
+                statTypeModifier = SecondaryWeapon(rarity);       
                 break;
                 //head + torso + legs + feet)
             case EquipmentSlot.Head:

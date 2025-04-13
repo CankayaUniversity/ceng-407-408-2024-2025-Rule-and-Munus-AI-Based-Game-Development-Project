@@ -26,13 +26,12 @@ public class Stock : MonoBehaviour {
 			GameObject.Find("Iron_Count"),
 			GameObject.Find("Cloth_Count")
 		};
-		Debug.Log($"Awake of Stock");
 		for(int i = 0; i < typeMaterial.Count; ++i)
 		{
 			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
 			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
 		}
-		Debug.Log($"Stock Created");
+		Debug.Log($"Stock Created!");
 	}
     // public void Update()
     // {

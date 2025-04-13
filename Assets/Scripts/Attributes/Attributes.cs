@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using TMPro;
 using Types;
 using Stats;
 using System.Linq;
+using System;
 
 public class Attributes : MonoBehaviour 
 {
@@ -16,6 +18,8 @@ public class Attributes : MonoBehaviour
     public int CurrentStamina = 0;
     public Dictionary<StatType, Stat> stats = _stats.stats;
     public int Limit = 100;
+    public List<GameObject> textList;
+
 
     #region Singleton
 
@@ -24,36 +28,80 @@ public class Attributes : MonoBehaviour
 	void Awake()
 	{
         instance = this;
-        Debug.Log("Attributes created");
+        textList = new List<GameObject>(){
+			GameObject.Find("STR_Value"), 
+			GameObject.Find("DEX_Value"),
+			GameObject.Find("INT_Value"),
+			GameObject.Find("WIS_Value"),
+            GameObject.Find("CON_Value"),
+            GameObject.Find("CHA_Value"),
+            GameObject.Find("LUCK_Value"),
+		};
+		for(int i = 0; i < stats.Count - 1 ; ++i)
+		{
+			textList[i].GetComponent<TextMeshProUGUI>().text = stats.ElementAt(i).Value.value.ToString();
+			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
+		}
+		Debug.Log($"Stats Bounded");
         // ShowStats();
 	}
 
 	#endregion
-
-    // public void Add(string name, int value)
-    // {
-	// 	stats.Add(name, value);
-    //     Debug.Log($"{name} Stat Added {value}!");
-    // }
     public void Add(StatType type, StatModifier modifier)
     {
         stats[type].AddModifier(modifier);
+        UpdateText();
+        // ShowStats();
     }
     public void Remove(StatType type, StatModifier modifier)
     {
         stats[type].RemoveModifier(modifier);
+        UpdateText();
+        // ShowStats();
     }
-    // public bool UpdateStats(string stat, int value)
-    // {
-    //     if (stats.ContainsKey(stat))
-    //     {
-    //         Debug.Log("Unrecognized Stat Type!" + stat);
-    //         return false;
-    //     }
-    //     stats[stat] = math.clamp(value, 0, Limit);
-    //     Debug.Log($"{stat} Stat Adjusted {value}!");
-    //     return true;
-    // }
+    public void IncreaseBase(string type)
+    {
+        stats[Converter(type)].IncreaseBase();
+        UpdateText();
+        // ShowStats();
+    }
+    public void DecreaseBase(string type)
+    {
+        stats[Converter(type)].DecreaseBase();
+        UpdateText();
+        // ShowStats();
+    }
+    protected StatType Converter(string type)
+    {
+        switch(type)
+        {
+            case "STR":
+                return StatType.STR;
+            case "DEX":
+                return StatType.DEX;
+            case "INT":
+                return StatType.INT;
+            case "WIS":
+                return StatType.WIS;
+            case "CON":
+                return StatType.CON;
+            case "CHA":
+                return StatType.CHA;
+            case "LUCK":
+                return StatType.LUCK;
+            default:
+                Debug.Log("Unrecognized Stat Type");
+                return StatType.Default;
+        }
+    } 
+    public void UpdateText()
+    {
+        for(int i = 0; i < textList.Count; ++i)
+		{
+			textList[i].GetComponent<TextMeshProUGUI>().text = stats.ElementAt(i).Value.value.ToString();
+			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
+		}
+    }
 
     public void UpdateHealth(int value)
     {
@@ -72,7 +120,7 @@ public class Attributes : MonoBehaviour
         Debug.Log($"{Name}");
         for(int i = 0; i < stats.Count; ++i)
         {
-        Debug.Log($"{stats.ElementAt(i).Key}: {stats.ElementAt(i).Value.baseValue}");
+        Debug.Log($"{stats.ElementAt(i).Key}: {stats.ElementAt(i).Value.value}");
         }
     }
 

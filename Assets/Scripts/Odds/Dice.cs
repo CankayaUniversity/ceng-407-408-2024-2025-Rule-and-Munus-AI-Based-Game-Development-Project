@@ -2,22 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Odds;
 
-public class Dice
+public static class Dice
 {
-    public int value = 1;
-    private List<int> _1d6 = odds._1d6;
-
-    public Dice()
-    {
-        value = 1;
-        _1d6 = odds._1d6;
-    }
-    public int RollaDice()
+    public static int value = 1;
+    private static List<int> _1d6 = odds._1d6;
+    public static int RollaDice()
     {
         value = _1d6[Random.Range( 0, _1d6.Count - 1)];
         return value;
     }
-    public int RollaDice(Stat luck)
+    public static int RollaDice(Stat luck)
     {
         List<int> temp_posb = _1d6;
         if(luck.value > 3 && luck.value < 5)

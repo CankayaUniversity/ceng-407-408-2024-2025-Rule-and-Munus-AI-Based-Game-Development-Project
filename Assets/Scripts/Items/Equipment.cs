@@ -10,7 +10,7 @@ using UnityEngine.XR;
 
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Equipment")]
 public class Equipment : Item {
-	public Types.EquipmentSlot equipSlot; // Slot to store equipment in
+	public EquipmentSlot equipSlot; // Slot to store equipment in
 	// public Player player; //Character of the player
 	public Rarity rarirty;
 	public int armorModifier;		// Increase/decrease in armor

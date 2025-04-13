@@ -23,23 +23,12 @@ public class MaterialManager : MonoBehaviour {
 	#endregion
 
 	Stock stock;	// Reference to our stock
-	// [Header("UI Elements")]
-    // public TextMeshProUGUI woodText;
-    // public TextMeshProUGUI stoneText;
-    // public TextMeshProUGUI ironText;
+
 
     // private Dictionary<MaterialType, TextMeshProUGUI> materialTexts;
 	void Start ()
 	{
 		stock = gameObject.GetComponent<Stock>();		// Get a reference to our stock
-		// materialTexts = new Dictionary<MaterialType, TextMeshProUGUI>
-        // {
-        //     { MaterialType.Wood, woodText },
-        //     { MaterialType.Stone, stoneText },
-        //     { MaterialType.Iron, ironText }
-        // };
-		
-        // UpdateMaterialTexts();
 	}
 
 	public void Gather (MaterialType gatheredType, int gatheredAmount)

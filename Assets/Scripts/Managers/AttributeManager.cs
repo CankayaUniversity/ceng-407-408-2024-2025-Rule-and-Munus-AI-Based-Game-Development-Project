@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Types;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -33,35 +34,28 @@ public class AttributeManager : MonoBehaviour {
 	public void UpdateStats(Equipment equipment, bool isEquiped)
 	{
 		Dictionary<StatType, StatModifier> modifiers = equipment.statModifiers;
+		var statList = attributes.stats.Keys;
+		StatType stat;
 		if(isEquiped)
 		{
-			if(modifiers.ContainsKey(StatType.STR))
+			for(int i = 0; i < modifiers.Count; ++i)
 			{
-				attributes.Add(StatType.STR, modifiers[StatType.STR]);
+				stat = statList.ElementAt(i);
+				if(modifiers.ContainsKey(stat))
+				{
+					attributes.Add(stat, modifiers[stat]);
+				}
 			}
-			if(modifiers.ContainsKey(StatType.DEX))
+		}
+		else
+		{
+			for(int i = 0; i < modifiers.Count; ++i)
 			{
-				attributes.Add(StatType.DEX, modifiers[StatType.DEX]);
-			}
-			if(modifiers.ContainsKey(StatType.INT))
-			{
-				attributes.Add(StatType.INT, modifiers[StatType.INT]);
-			}
-			if(modifiers.ContainsKey(StatType.WIS))
-			{
-				attributes.Add(StatType.WIS, modifiers[StatType.WIS]);
-			}
-			if(modifiers.ContainsKey(StatType.CON))
-			{
-				attributes.Add(StatType.CON, modifiers[StatType.CON]);
-			}
-			if(modifiers.ContainsKey(StatType.CHA))
-			{
-				attributes.Add(StatType.CHA, modifiers[StatType.CHA]);
-			}
-			if(modifiers.ContainsKey(StatType.LUCK))
-			{
-				attributes.Add(StatType.LUCK, modifiers[StatType.LUCK]);
+				stat = statList.ElementAt(i);
+				if(modifiers.ContainsKey(stat))
+				{
+					attributes.Remove(stat, modifiers[stat]);
+				}
 			}
 		}
 	}
