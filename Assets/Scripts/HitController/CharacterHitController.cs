@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterHitController : MonoBehaviour
 {
-    public HealthController healthController;
+    public CharacterHealthController characterhealthController;
     public ActionIndexController actionIndexController;
     public void OnTriggerEnter(Collider other) {
         if(other.tag == "Enemy") 
