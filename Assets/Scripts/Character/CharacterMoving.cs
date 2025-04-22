@@ -22,7 +22,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
     private Vector3 targetPosition;
     private Vector3 startingPosition;
     private IAnimatorController animatorController;
-    private CharacterState currentState = CharacterState.Idle;
+    public CharacterState currentState = CharacterState.Idle;
     
     public event Action OnAttackComplete;
     public event Action OnDefenceComplete;

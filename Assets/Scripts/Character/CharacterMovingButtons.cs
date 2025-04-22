@@ -53,7 +53,7 @@ public class CharacterMovingButtons : MonoBehaviour
         
         // Set up defence button listeners
         SetupButtonGroup(defenceButtons, (index) => {
-            defenceIndex = index;
+            defenceIndex = index + 1;
             isSelectedDefence = true;
             Debug.Log($"Defence button {index} selected");
         });
@@ -119,13 +119,13 @@ public class CharacterMovingButtons : MonoBehaviour
     {
         switch (defenceIndex)
         {
-            case 0:
+            case 1:
                 characterMoving.Defence1();
                 break;
-            case 1:
+            case 2:
                 characterMoving.Defence2();
                 break;
-            case 2:
+            case 3:
                 characterMoving.Defence3();
                 break;
         }
