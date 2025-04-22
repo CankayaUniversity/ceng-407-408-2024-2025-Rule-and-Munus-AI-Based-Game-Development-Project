@@ -1,98 +1,72 @@
-using System;
+
 using UnityEngine;
-
-public class AnimatorController
+public interface IAnimatorController
 {
-    private Animator animator;
+    void SetIdle(bool value);
+    void SetRunning(bool value);
+    void SetBackwarding(bool value);
+    void SetAttacking0(bool value);
+    void SetAttacking1();
+    void SetAttacking2();
+    void SetAttacking3();
+    void StepForward();
+    void StepBackward();
+    void SetDefence1(bool value);
+    void SetDefence2(bool value);
+    void SetDefence3(bool value);
+    bool IsIdle();
+}
+  
 
-    public bool isTurn;
+public class AnimatorController : IAnimatorController
+{
+    private readonly Animator animator;
+    private readonly int idleHash;
+    private readonly int runningHash;
+    private readonly int backwardingHash;
+    private readonly int attackingHash;
+    private readonly int attacking1Hash;
+    private readonly int attacking2Hash;
+    private readonly int attacking3Hash;
+    private readonly int stepForwardHash;
+    private readonly int stepBackwardHash;
+    private readonly int defenceHash;
+    private readonly int defence2Hash;
+    private readonly int defence3Hash;
 
     public AnimatorController(Animator animator)
     {
         this.animator = animator;
-        isTurn = false;
+        
+        idleHash = Animator.StringToHash("isIdle");
+        runningHash = Animator.StringToHash("isRunning");
+        backwardingHash = Animator.StringToHash("isBackwarding");
+        attackingHash = Animator.StringToHash("isAttacking");
+        attacking1Hash = Animator.StringToHash("isAttacking1");
+        attacking2Hash = Animator.StringToHash("isAttacking2");
+        attacking3Hash = Animator.StringToHash("isAttacking3");
+        stepForwardHash = Animator.StringToHash("isStepForward");
+        stepBackwardHash = Animator.StringToHash("isStepBackward");
+        defenceHash = Animator.StringToHash("isDefence");
+        defence2Hash = Animator.StringToHash("isDefence2");
+        defence3Hash = Animator.StringToHash("isDefence3");
     }
 
-    public void SetIdle(bool isIdle)
-    {
-        animator.SetBool("isIdle", isIdle);
-        isTurn = false;
-    }
-
-    public void SetRunning(bool isRunning)
-    {
-        animator.SetBool("isRunning", isRunning);
-        isTurn = false;
-    }
-
-    public void SetAttacking0(bool isAttacking)
-    {
-        animator.SetBool("isAttacking", isAttacking);
-        isTurn = false;
-
-    }
-
-    public void SetAttacking1(bool isAttacking)
-    {
-        //animator.SetBool("isAttacking2", isAttacking);
-        animator.SetTrigger("isAttacking1");
-        isTurn = false;
-    }
-    public void SetAttacking2(bool isAttacking)
-    {
-        //animator.SetBool("isAttacking1", isAttacking);
-        animator.SetTrigger("isAttacking2");
-        isTurn = false;
-    }
-
-    public void SetAttacking3(bool isAttacking)
-    {
-        //animator.SetBool("isAttacking3", isAttacking);
-        animator.SetTrigger("isAttacking3");
-        isTurn = false;
-    }
-
-    public void SetBackwarding(bool isBackwarding)
-    {
-        animator.SetBool("isBackwarding", isBackwarding);
-        isTurn = false;
-
-    }
-
-    public void StepForward(bool isStepForward)
-    {
-        animator.SetBool("isStepForward", isStepForward);
-        isTurn = false;
-    }
-
-    public void StepBackward(bool isStepBackward)
-    {
-        animator.SetBool("isStepBackward", isStepBackward);
-        isTurn = false;
-    }
-
-    public void SetDefence1(bool isDefence)
-    {
-        animator.SetBool("isDefence", isDefence);
-        isTurn = false;
-    }
-
-    public void SetDefence2(bool isDefence)
-    {
-        animator.SetBool("isDefence2", isDefence);
-        isTurn = false;
-    }
-
-    public void SetDefence3(bool isDefence)
-    {
-        animator.SetBool("isDefence3", isDefence);
-        isTurn = false;
-    }
-
-    public bool IsIdle()
-    {
-        isTurn = true;
-        return animator.GetCurrentAnimatorStateInfo(0).IsName("Idle");
-    }
-
+    public void SetIdle(bool value) => animator.SetBool(idleHash, value);
+    public void SetRunning(bool value) => animator.SetBool(runningHash, value);
+    public void SetBackwarding(bool value) => animator.SetBool(backwardingHash, value);
+    public void SetAttacking0(bool value) => animator.SetBool(attackingHash, value);
+    
+    public void SetAttacking1() => animator.SetTrigger(attacking1Hash);
+    public void SetAttacking2() => animator.SetTrigger(attacking2Hash);
+    public void SetAttacking3() => animator.SetTrigger(attacking3Hash);
+    
+    public void StepForward() => animator.SetTrigger(stepForwardHash);
+    public void StepBackward() => animator.SetTrigger(stepBackwardHash);
+    
+    public void SetDefence1(bool value) => animator.SetBool(defenceHash, value);
+    public void SetDefence2(bool value) => animator.SetBool(defence2Hash, value);
+    public void SetDefence3(bool value) => animator.SetBool(defence3Hash, value);
+    
+    public bool IsIdle() => animator.GetCurrentAnimatorStateInfo(0).IsName("Idle");
 }

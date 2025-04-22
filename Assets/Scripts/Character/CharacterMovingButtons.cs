@@ -1,87 +1,96 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-//using Unity.AppUI.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterMovingButtons : MonoBehaviour
 {
-
     [SerializeField] private CharacterMoving characterMoving;
-    public bool isTurn;
-    public bool isSelectedAttack;
-    public bool isSelectedDefence;
-    public List<Button> attackButtons;
-    public List<Button> defenceButtons;
+    [SerializeField] private List<Button> attackButtons;
+    [SerializeField] private List<Button> defenceButtons;
+    
     private int attackIndex;
     private int defenceIndex;
-
+    private bool isSelectedAttack;
+    private bool isSelectedDefence;
+    
+    public bool isTurn => isSelectedAttack && isSelectedDefence;
 
     void Start()
     {
-        isTurn = true;
-        isSelectedAttack = false;
-        isSelectedDefence = false;
+        if (characterMoving == null)
+        {
+            Debug.LogError("CharacterMoving reference not set in CharacterMovingButtons!");
+            return;
+        }
+        
+        ResetButtonIndex();
+        SetupButtonListeners();
+        
+        // Register for character events
+        characterMoving.OnAttackComplete += OnAttackComplete;
+        characterMoving.OnDefenceComplete += OnDefenceComplete;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if(isSelectedAttack && isSelectedDefence)
+        // Clean up event subscriptions
+        if (characterMoving != null)
         {
-            isTurn= true;
-        }
-        else
-        {
-            isTurn = false;
+            characterMoving.OnAttackComplete -= OnAttackComplete;
+            characterMoving.OnDefenceComplete -= OnDefenceComplete;
         }
     }
 
-    public void ButtonAttackIndex()
+    private void SetupButtonListeners()
     {
-        for (int i = 0; i < attackButtons.Count; i++)
+        // Set up attack button listeners
+        SetupButtonGroup(attackButtons, (index) => {
+            attackIndex = index;
+            isSelectedAttack = true;
+            Debug.Log($"Attack button {index} selected");
+        });
+        
+        // Set up defence button listeners
+        SetupButtonGroup(defenceButtons, (index) => {
+            defenceIndex = index;
+            isSelectedDefence = true;
+            Debug.Log($"Defence button {index} selected");
+        });
+    }
+    
+    private void SetupButtonGroup(List<Button> buttons, System.Action<int> onClick)
+    {
+        for (int i = 0; i < buttons.Count; i++)
         {
             int index = i;
-            attackButtons[i].onClick.RemoveAllListeners(); 
-            attackButtons[i].onClick.AddListener(() =>
-            {
-                attackIndex = index; 
-                OnButtonClicked(index); 
-            });
+            buttons[i].onClick.RemoveAllListeners();
+            buttons[i].onClick.AddListener(() => onClick(index));
         }
     }
 
-    public void ButtonDefenceIndex()
+    private void OnAttackComplete()
     {
-        for(int i=0; i < defenceButtons.Count; i++)
-        {
-            int index = i;
-            defenceButtons[i].onClick.RemoveAllListeners();
-            defenceButtons[i].onClick.AddListener(() =>
-            {
-                defenceIndex = index; 
-                OnButtonClicked(index); 
-            });
-        }
+        // Handle attack completion logic
+        Debug.Log("Attack action completed");
+    }
+    
+    private void OnDefenceComplete()
+    {
+        // Handle defence completion logic
+        Debug.Log("Defence completed");
     }
 
     public void TurnButton()
     {
-        if (isTurn == true)
-        {
-            AttackAnimCase();
-            StartCoroutine(WaitAndExecute());
-            
-        }
-    }
-    IEnumerator WaitAndExecute()
-    {
-        yield return new WaitForSeconds(4f); 
-        DefenceAnimCase();
-        Debug.Log("4 saniye sonra çalýþtý!");
+        if (!isTurn) return;
+        
+        ExecuteAttack();
+        StartCoroutine(ExecuteDefenceAfterDelay(4f));
+        ResetButtonIndex();
     }
 
-    public void AttackAnimCase()
+    private void ExecuteAttack()
     {
         switch (attackIndex)
         {
@@ -97,10 +106,16 @@ public class CharacterMovingButtons : MonoBehaviour
             case 3:
                 characterMoving.Attack3();
                 break;
+            case 4:
+                characterMoving.ForwardStep();
+                break;
+            case 5:
+                characterMoving.BackwardStep();
+                break;
         }
     }
 
-    public void DefenceAnimCase()
+    private void ExecuteDefence()
     {
         switch (defenceIndex)
         {
@@ -113,86 +128,42 @@ public class CharacterMovingButtons : MonoBehaviour
             case 2:
                 characterMoving.Defence3();
                 break;
-            
         }
     }
 
-    public void OnButtonClicked(int index)
+    private IEnumerator ExecuteDefenceAfterDelay(float delay)
     {
-        Debug.Log("Týklanan butonun indexi: " + index);
+        yield return new WaitForSeconds(delay);
+        ExecuteDefence();
+        Debug.Log("Defence executed after delay");
     }
 
-    public void isSelectedAttack_()
+    public void ResetButtonIndex()
     {
-        isSelectedAttack = !isSelectedAttack; 
+        isSelectedAttack = false;
+        isSelectedDefence = false;
     }
 
-    public void isSelectedDefence_()
+    public void ToggleAttackSelection()
+    {
+        isSelectedAttack = !isSelectedAttack;
+    }
+
+    public void ToggleDefenceSelection()
     {
         isSelectedDefence = !isSelectedDefence;
     }
 
-    public void AttackButton0()
+    // Updated step button handlers - now they properly set the attack selection
+    public void OnForwardStepButtonClicked()
     {
-        isSelectedAttack_();
-        ButtonAttackIndex();
-       
-
-    }
-
-    public void AttackButton1()
-    {
-        isSelectedAttack_();
-        ButtonAttackIndex();
-        
-    }
-
-    public void AttackButton2()
-    {
-        isSelectedAttack_();
-        ButtonAttackIndex();
-       
-    }
-
-    public void AttackButton3()
-    {
-        isSelectedAttack_();
-        ButtonAttackIndex();
-        
-    }
-    public void DefenceButton1()
-    {
-        isSelectedDefence_();
-        ButtonDefenceIndex();
-        
-    }
-
-    public void DefenceButton2()
-    {
-        isSelectedDefence_();
-        ButtonDefenceIndex();
-        
-    }
-
-    public void DefenceButton3()
-    {
-        isSelectedDefence_();
-        ButtonDefenceIndex();
-        
-    }
-
-    public void forwardStepButton()
-    {
-        isSelectedAttack_();
+        isSelectedAttack = true; // Mark attack as selected since step counts as an attack
         characterMoving.ForwardStep();
-        
-    }
-
-    public void backwardStepButton()
-    {
-        isSelectedAttack_();
-        characterMoving.BackwardStep();
-        
     }
     
+    public void OnBackwardStepButtonClicked()
+    {
+        isSelectedAttack = true; // Mark attack as selected since step counts as an attack
+        characterMoving.BackwardStep();
+    }
 }
