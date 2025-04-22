@@ -1,13 +1,17 @@
 using UnityEngine;
-
+using UnityEngine.UI;
+using System.Collections.Generic;
 public class CharacterHealthController : MonoBehaviour
 {
     public int currentHealth;
     public readonly int maxHealth = 100;
     public readonly int minHealth = 0;
+    public Slider healthBar; // Reference to the health bar slider in the UI
+    
 
     private void Awake() {
         currentHealth = maxHealth;
+        HealthBar(currentHealth);
     }
 
 
@@ -15,6 +19,7 @@ public class CharacterHealthController : MonoBehaviour
     {
         currentHealth += value;
         MaxHealthController();
+        HealthBar(currentHealth);
 
     }
 
@@ -22,6 +27,7 @@ public class CharacterHealthController : MonoBehaviour
     {
         currentHealth -= value;
         MinHealthController();
+        HealthBar(currentHealth);
 
     }
 
@@ -39,5 +45,10 @@ public class CharacterHealthController : MonoBehaviour
         {
             currentHealth = minHealth;
         }
+    }
+
+    private void HealthBar(int value)
+    {
+        healthBar.value = value;
     }
 }
