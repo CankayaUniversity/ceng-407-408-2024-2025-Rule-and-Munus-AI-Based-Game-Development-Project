@@ -28,10 +28,13 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
     public event Action OnDefenceComplete;
     public event Action OnMoveComplete;
     public event Action OnStepComplete;
+
+    public CharacterHealthController characterHealthController;
+    public EnemyHealthController enemyHealthController;
     
     public bool isTurn { get; set; }
 
-    // Dependency injection through Unity inspector
+    
     private void Awake()
     {
         if (targetObject == null)
@@ -134,7 +137,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
 
     private IEnumerator CompleteAttackSequence()
     {
-        // Wait for attack animation to complete
+        
         while (currentState != CharacterState.Attacking)
         {
             yield return null;
@@ -143,7 +146,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
         yield return new WaitForSeconds(attackDuration);
         MoveBack(startingPosition);
         
-        // Wait for return to complete
+        
         while (currentState != CharacterState.Idle)
         {
             yield return null;
@@ -229,7 +232,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
         if (currentState != CharacterState.Idle)
             return;
             
-        // Treating forward step as an attack action
+        
         currentState = CharacterState.Attacking;
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
@@ -242,7 +245,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
         if (currentState != CharacterState.Idle)
             return;
             
-        // Treating backward step as an attack action
+        
         currentState = CharacterState.Attacking;
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
@@ -265,20 +268,30 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
     {
         yield return new WaitForSeconds(duration);
         resetAction(false);
-        currentState = CharacterState.Idle;
+        if(characterHealthController.isDead || enemyHealthController.isDead)
+        {
+            animatorController.SetDie();
+            currentState = CharacterState.Dead;
+            yield break;
+        }
+        else{
+            currentState = CharacterState.Idle;
+
+        }
+        
         onComplete?.Invoke();
     }
     
-    // Updated to treat steps as attacking actions
+
     private IEnumerator ResetAttackingStep( float duration)
     {
         yield return new WaitForSeconds(duration);
        
         currentState = CharacterState.Idle;
-        OnAttackComplete?.Invoke(); // Notify that an attack action is complete
+        OnAttackComplete?.Invoke(); 
     }
     
     #endregion
 }
 
-// Updated CharacterMovingButtons to handle steps as attack actions
+

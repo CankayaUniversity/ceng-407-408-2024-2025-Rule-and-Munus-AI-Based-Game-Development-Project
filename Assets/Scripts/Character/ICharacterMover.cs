@@ -21,6 +21,8 @@ public enum CharacterState
     Attacking,
     Defending,
     Stepping,
+
+    Dead,
     ReturningToStart
 }
 

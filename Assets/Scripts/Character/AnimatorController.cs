@@ -14,6 +14,7 @@ public interface IAnimatorController
     void SetDefence1(bool value);
     void SetDefence2(bool value);
     void SetDefence3(bool value);
+    void SetDie();
     bool IsIdle();
 }
   
@@ -34,6 +35,8 @@ public class AnimatorController : IAnimatorController
     private readonly int defence2Hash;
     private readonly int defence3Hash;
 
+    private readonly int dieHash;
+
     public AnimatorController(Animator animator)
     {
         this.animator = animator;
@@ -50,6 +53,7 @@ public class AnimatorController : IAnimatorController
         defenceHash = Animator.StringToHash("isDefence");
         defence2Hash = Animator.StringToHash("isDefence2");
         defence3Hash = Animator.StringToHash("isDefence3");
+        dieHash = Animator.StringToHash("isDead");
     }
 
     public void SetIdle(bool value) => animator.SetBool(idleHash, value);
@@ -67,6 +71,8 @@ public class AnimatorController : IAnimatorController
     public void SetDefence1(bool value) => animator.SetBool(defenceHash, value);
     public void SetDefence2(bool value) => animator.SetBool(defence2Hash, value);
     public void SetDefence3(bool value) => animator.SetBool(defence3Hash, value);
+
+    public void SetDie() => animator.SetTrigger(dieHash);
     
     public bool IsIdle() => animator.GetCurrentAnimatorStateInfo(0).IsName("Idle");
 }
