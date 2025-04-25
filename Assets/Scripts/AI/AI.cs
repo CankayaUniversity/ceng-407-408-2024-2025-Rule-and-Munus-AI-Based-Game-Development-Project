@@ -3,6 +3,7 @@ using UnityEngine;
 using BehaviorTree;
 using System.Collections;
 using System.Collections.Generic;
+using Types;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -15,24 +16,25 @@ public class EnemyAI : MonoBehaviour
     private float distanceToPlayer;
     private EnemyStats enemyStats;
     private float arenaRadius = 10f;
+    private Equipment Equipment;
 
-
-    private string[] bodyParts = { "kafa", "göğüs", "ayak" };
+    private string[] bodyParts = { "head", "body", "leg" };
     private string playerDefenseZone;
     private string enemyDefenseZone;
 
+    CharacterMovingButtons characterMovingButtons;
 
 
+    Equipment headEquipment = new Equipment(EquipmentSlot.Head, Rarity.Common, 5, 3, null, null);
+    Equipment bodyEquipment = new Equipment(EquipmentSlot.Body, Rarity.Common, 5, 3, null, null);
+    Equipment legEquipment = new Equipment(EquipmentSlot.Legs, Rarity.Common, 5, 3, null, null);
+    CharacterHealthController characterHealthController;
 
-    // Playerın gelişim varsayımlarıdır********
-    public int kafaXP = 50;
-    public int gogusXP = 30;
-    public int ayakXP = 20;
-
-
+    int score = 0;
 
     void Start()
     {
+        
         enemyStats = GetComponent<EnemyStats>();
         if (enemyStats == null)
         {
@@ -368,23 +370,47 @@ public class EnemyAI : MonoBehaviour
 
     private void EnemySelectDefense()
     {
-        string[] bodyParts = { "kafa", "göğüs", "ayak" };
+        string[] bodyParts = { "head", "body", "leg" };
         enemyDefenseZone = bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
         Debug.Log($"Düşman {enemyDefenseZone} bölgesini savunuyor!");
     }
 
-
+    
     private void PlayerSelectDefense()
     {
-        string[] bodyParts = { "kafa", "göğüs", "ayak" };
-        playerDefenseZone = bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
+        
+        
+
+        
+        if (characterMovingButtons.defenceIndex == 1)
+        {
+            playerDefenseZone = "head";  
+        }
+        else if (characterMovingButtons.defenceIndex == 2)
+        {
+            playerDefenseZone = "body";  
+        }
+        else if (characterMovingButtons.defenceIndex == 3)
+        {
+            playerDefenseZone = "leg";  
+        }
+        else
+        {
+            playerDefenseZone = "unknown";  
+            Debug.LogError("Geçersiz savunma indeksi!");
+            return;
+        }
+
         Debug.Log($"Oyuncu {playerDefenseZone} bölgesini savunuyor!");
+
+        
     }
 
+    
 
     private void PlayerAttack()
     {
-        string[] bodyParts = { "kafa", "göğüs", "ayak" };
+        string[] bodyParts = { "head", "body", "leg" };
         string target = bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
 
         if (target == enemyDefenseZone)
@@ -444,6 +470,7 @@ public class EnemyAI : MonoBehaviour
             {
                 Debug.Log($"Düşman {target} bölgesine ok attı ve vurdu!");
                 arrowCount--;
+                characterHealthController.currentHealth = -score / 10;
             }
         }
     }
@@ -462,6 +489,7 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.Log($"Düşman {target} bölgesine büyü yaptı ve vurdu!");
             mana--;
+            characterHealthController.currentHealth = -score / 10;
         }
     }
 
@@ -477,35 +505,79 @@ public class EnemyAI : MonoBehaviour
         else
         {
             Debug.Log($"Düşman {target} bölgesine KILIÇ İLE saldırdı ve vurdu!");
+            characterHealthController.currentHealth =- score / 10;
         }
     }
     //              SALDIRI KISMI*
 
 
 
+    public int CalculateEquipmentScore(Equipment equipment)
+    {
+        score = 0;
 
-    // Playerın varsayılan ilerlemesine karşılık AI ın seçtiği bölgeler
+        // Slot'a göre temel puan
+        Dictionary<EquipmentSlot, int> slotBaseScores = new Dictionary<EquipmentSlot, int>()
+    {
+        { EquipmentSlot.Head, 10 },
+        { EquipmentSlot.Body, 15 },
+        { EquipmentSlot.Legs, 20 },
+        { EquipmentSlot.Weapon, 25 },
+        { EquipmentSlot.Secondary, 20 },
+        { EquipmentSlot.Feet, 10 },
+        { EquipmentSlot.Accessoire, 15 },
+        { EquipmentSlot.Default, 0 }
+    };
+
+        // Rarity'e göre çarpan
+        Dictionary<Rarity, float> rarityMultipliers = new Dictionary<Rarity, float>()
+    {
+        { Rarity.Common, 1f },
+        { Rarity.Uncommon, 1.2f },
+        { Rarity.Advenced, 1.4f },
+        { Rarity.Rare, 1.6f },
+        { Rarity.Epic, 2f },
+        { Rarity.Legendary, 3f },
+        { Rarity.Default, 1f }
+    };
+
+        if (slotBaseScores.ContainsKey(equipment.equipSlot) && rarityMultipliers.ContainsKey(equipment.rarirty))
+        {
+            score = Mathf.RoundToInt(slotBaseScores[equipment.equipSlot] * rarityMultipliers[equipment.rarirty]);
+        }
+
+        return score;
+    }
+
+
     private string ChooseTarget()
     {
         
-        int totalXP = kafaXP + gogusXP + ayakXP;
+        int headScore = CalculateEquipmentScore(headEquipment);
+        
+        int bodyScore = CalculateEquipmentScore(bodyEquipment);
+        
+        int legScore = CalculateEquipmentScore(legEquipment);
+
+        int totalScore = headScore + bodyScore + legScore;
 
         
-        if (totalXP == 0)
+        if (totalScore == 0)
         {
             return bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
         }
 
-        
-        double kafaChance = (double)kafaXP / totalXP;
-        double gogusChance = (double)gogusXP / totalXP;
-        double ayakChance = (double)ayakXP / totalXP;
+        float headChance = (float)headScore / totalScore;
+        float bodyChance = (float)bodyScore / totalScore;
+        float legChance = (float)legScore / totalScore;
 
-        
-        double randomValue = UnityEngine.Random.Range(0f, 1f);
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
 
-        if (randomValue < kafaChance) return "kafa";
-        else if (randomValue < kafaChance + gogusChance) return "göğüs";
-        else return "ayak";
+        if (randomValue < headChance)
+            return "head";
+        else if (randomValue < headChance + bodyChance)
+            return "body";
+        else
+            return "leg";
     }
 }

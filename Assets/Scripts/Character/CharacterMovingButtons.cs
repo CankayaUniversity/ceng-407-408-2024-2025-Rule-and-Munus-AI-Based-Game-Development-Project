@@ -9,8 +9,8 @@ public class CharacterMovingButtons : MonoBehaviour
     [SerializeField] private List<Button> attackButtons;
     [SerializeField] private List<Button> defenceButtons;
     
-    private int attackIndex;
-    private int defenceIndex;
+    public int attackIndex;  //AI used
+    public int defenceIndex; //AI used
     private bool isSelectedAttack;
     private bool isSelectedDefence;
     
