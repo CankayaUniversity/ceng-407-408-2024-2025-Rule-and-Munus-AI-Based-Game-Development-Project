@@ -7,16 +7,17 @@ using Types;
 
 public class EnemyAI : MonoBehaviour
 {
+
     public Transform playerTransform;
     public string enemyClass;
     public int enemyDEX;
     public int arrowCount = 10;
     public int mana = 10;
     private Node root;
-    private float distanceToPlayer;
-    private EnemyStats enemyStats;
+    public float distanceToPlayer;
+    
     private float arenaRadius = 10f;
-    private Equipment Equipment;
+    
 
     private string[] bodyParts = { "head", "body", "leg" };
     private string playerDefenseZone;
@@ -24,23 +25,45 @@ public class EnemyAI : MonoBehaviour
 
     CharacterMovingButtons characterMovingButtons;
 
-
-    Equipment headEquipment = new Equipment(EquipmentSlot.Head, Rarity.Common, 5, 3, null, null);
-    Equipment bodyEquipment = new Equipment(EquipmentSlot.Body, Rarity.Common, 5, 3, null, null);
-    Equipment legEquipment = new Equipment(EquipmentSlot.Legs, Rarity.Common, 5, 3, null, null);
+    private Equipment headEquipment;
+    private Equipment bodyEquipment;
+    private Equipment legEquipment;
+    // Equipment headEquipment = new Equipment(EquipmentSlot.Head, Rarity.Common, 5, 3, null, null);
+    // Equipment bodyEquipment = new Equipment(EquipmentSlot.Body, Rarity.Common, 5, 3, null, null);
+    // Equipment legEquipment = new Equipment(EquipmentSlot.Legs, Rarity.Common, 5, 3, null, null);
     CharacterHealthController characterHealthController;
+
+
+    private IAnimatorController animatorController;
 
     int score = 0;
 
     void Start()
     {
-        
-        enemyStats = GetComponent<EnemyStats>();
-        if (enemyStats == null)
+        animatorController = new AnimatorController(GetComponent<Animator>());
+        if (characterHealthController == null)
         {
-            Debug.LogError("EnemyStats bileşeni eksik!");
-            return;
+            characterHealthController = FindObjectOfType<CharacterHealthController>();
+
+            if (characterHealthController == null)
+            {
+                Debug.LogError("Sahnede CharacterHealthController bulunamadı!");
+            }
         }
+        headEquipment = ScriptableObject.CreateInstance<Equipment>();
+        headEquipment.equipSlot = EquipmentSlot.Head;
+        headEquipment.rarirty = Rarity.Common;
+        // İstersen burada başka değerler de atarsın, mesela attackPower, defensePower gibi.
+
+        bodyEquipment = ScriptableObject.CreateInstance<Equipment>();
+        bodyEquipment.equipSlot = EquipmentSlot.Body;
+        bodyEquipment.rarirty = Rarity.Common;
+
+        legEquipment = ScriptableObject.CreateInstance<Equipment>();
+        legEquipment.equipSlot = EquipmentSlot.Legs;
+        legEquipment.rarirty = Rarity.Common;
+
+       
 
         root = CreateBehaviorTree();
         StartCoroutine(EnemyTurn());
@@ -85,7 +108,7 @@ public class EnemyAI : MonoBehaviour
     {
         // Kılıç Saldırısı - Oyuncuya çok yakınsa
         new Sequence(new List<Node> {
-            new ConditionNode(() => distanceToPlayer <= 1),
+            new ConditionNode(() => distanceToPlayer <= 10),
             new Selector(new List<Node> {
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.7f), 
@@ -100,21 +123,21 @@ public class EnemyAI : MonoBehaviour
                     new ActionNode(() => UseRangedAttack())  
                 }),
                 
-                new ActionNode(() => MoveAwayFromPlayer())
+                new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 
             })
         }),
 
         
         new Sequence(new List<Node> {
-            new ConditionNode(() => distanceToPlayer > 1f ),  
+            new ConditionNode(() => distanceToPlayer > 10f ),  
             new ConditionNode(() => UnityEngine.Random.value <= 0.6f),  
-            new ActionNode(() => MoveTowardsPlayer()) 
+            new ActionNode(() => StartCoroutine(MoveTowardsPlayer())) 
         }),
 
        
         new Sequence(new List<Node> {
-            new ConditionNode(() => distanceToPlayer > 1f && arrowCount > 0 && UnityEngine.Random.value <= 0.3f), 
+            new ConditionNode(() => distanceToPlayer > 10f && arrowCount > 0 && UnityEngine.Random.value <= 0.3f), 
             new ActionNode(() => UseRangedAttack())  
         }),
 
@@ -126,7 +149,7 @@ public class EnemyAI : MonoBehaviour
 
        
          
-         new ActionNode(() => MoveAwayFromPlayer()) 
+         new ActionNode(() => StartCoroutine(MoveAwayFromPlayer())) 
         
     });
     }
@@ -135,13 +158,13 @@ public class EnemyAI : MonoBehaviour
         return new Selector(new List<Node>
     {   //*YAKIN MESAFE İŞLEMLERİ
         new Sequence(new List<Node> {
-            new ConditionNode(() => distanceToPlayer <= 1),
+            new ConditionNode(() => distanceToPlayer <=10),
             new Selector(new List<Node> {
 
                 //*OK MEVCUT
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
-                    new ActionNode(() =>  MoveAwayFromPlayer())
+                    new ActionNode(() =>  StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
@@ -164,7 +187,7 @@ public class EnemyAI : MonoBehaviour
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
-                    new ActionNode(() =>  MoveAwayFromPlayer())
+                    new ActionNode(() =>  StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
@@ -181,7 +204,7 @@ public class EnemyAI : MonoBehaviour
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.4f && arrowCount == 0 && mana == 0),
-                    new ActionNode(() => MoveAwayFromPlayer())
+                    new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 })
                 //OK MEVCUT DEĞİL,MANA MEVCUT DEĞİL*
             })
@@ -206,7 +229,7 @@ public class EnemyAI : MonoBehaviour
         }),
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount > 0 && mana > 0),
-            new ActionNode(() => MoveAwayFromPlayer())
+            new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
         }),
        //OK VAR,MANA VAR*
 
@@ -215,7 +238,7 @@ public class EnemyAI : MonoBehaviour
         //*OK VAR,MANA YOK
        new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount > 0 && mana == 0),
-            new ActionNode(() => MoveAwayFromPlayer())
+            new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
         }),
        //OK VAR,MANA YOK*
 
@@ -230,7 +253,7 @@ public class EnemyAI : MonoBehaviour
         }),
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount == 0 && mana > 0),
-            new ActionNode(() => MoveAwayFromPlayer())
+            new ActionNode(() =>StartCoroutine(MoveAwayFromPlayer()))
         }),
         //OK MEVCUT DEĞİL,MANA VAR*
 
@@ -241,12 +264,12 @@ public class EnemyAI : MonoBehaviour
         
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.8f ),
-            new ActionNode(() => MoveTowardsPlayer()) 
+            new ActionNode(() => StartCoroutine(MoveTowardsPlayer())) 
         }),
        
         new Sequence(new List<Node> {
             
-            new ActionNode(() => MoveAwayFromPlayer()) 
+            new ActionNode(() => StartCoroutine(MoveAwayFromPlayer())) 
         })
 
 
@@ -263,13 +286,13 @@ public class EnemyAI : MonoBehaviour
     {   
         //*YAKIN MESAFE İŞLEMLERİ
         new Sequence(new List<Node> {
-            new ConditionNode(() => distanceToPlayer <= 1),
+            new ConditionNode(() => distanceToPlayer <= 10),
             new Selector(new List<Node> {
 
                 //*MANA MEVCUT
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && mana > 0),
-                    new ActionNode(() => MoveAwayFromPlayer())
+                    new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && mana > 0),
@@ -292,7 +315,7 @@ public class EnemyAI : MonoBehaviour
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && mana == 0 && arrowCount > 0),
-                    new ActionNode(() => MoveAwayFromPlayer())
+                    new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && mana == 0 && arrowCount > 0),
@@ -307,7 +330,7 @@ public class EnemyAI : MonoBehaviour
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.4f && mana == 0 && arrowCount == 0),
-                    new ActionNode(() => MoveAwayFromPlayer())
+                    new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 })
                 //MANA MEVCUT DEĞİL, OK MEVCUT DEĞİL*
             })
@@ -328,7 +351,7 @@ public class EnemyAI : MonoBehaviour
         }),
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && mana > 0 && arrowCount > 0),
-            new ActionNode(() => MoveAwayFromPlayer())
+            new ActionNode(() =>StartCoroutine(MoveAwayFromPlayer()))
         }),
         //MANA VAR, OK VAR*
 
@@ -336,7 +359,7 @@ public class EnemyAI : MonoBehaviour
         //*MANA VAR, OK YOK
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && mana > 0 && arrowCount == 0),
-            new ActionNode(() => MoveAwayFromPlayer())
+            new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
         }),
         //MANA VAR, OK YOK*
 
@@ -348,7 +371,7 @@ public class EnemyAI : MonoBehaviour
         }),
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && mana == 0 && arrowCount > 0),
-            new ActionNode(() => MoveAwayFromPlayer())
+            new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
         }),
         //MANA MEVCUT DEĞİL, OK VAR*
 
@@ -356,10 +379,10 @@ public class EnemyAI : MonoBehaviour
         //*MANA YOK, OK YOK
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.8f ),
-            new ActionNode(() => MoveTowardsPlayer())
+            new ActionNode(() => StartCoroutine(MoveTowardsPlayer()))
         }),
         new Sequence(new List<Node> {
-            new ActionNode(() => MoveAwayFromPlayer())
+            new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
         })
         //*MANA YOK, OK YOK*
 
@@ -375,38 +398,39 @@ public class EnemyAI : MonoBehaviour
         Debug.Log($"Düşman {enemyDefenseZone} bölgesini savunuyor!");
     }
 
-    
+
     private void PlayerSelectDefense()
     {
-        
-        
+        // Eğer playerDefenseZone veya characterMovingButtons geçerli değilse (null veya başka bir kontrol) işlem yapma
+        if (characterMovingButtons == null || characterMovingButtons.defenceIndex < 1 || characterMovingButtons.defenceIndex > 3)
+        {
+            Debug.LogError("Savunma bölgesi seçilmedi veya geçersiz savunma indeksi!");
+            return;
+        }
 
-        
         if (characterMovingButtons.defenceIndex == 1)
         {
-            playerDefenseZone = "head";  
+            playerDefenseZone = "head";
         }
         else if (characterMovingButtons.defenceIndex == 2)
         {
-            playerDefenseZone = "body";  
+            playerDefenseZone = "body";
         }
         else if (characterMovingButtons.defenceIndex == 3)
         {
-            playerDefenseZone = "leg";  
+            playerDefenseZone = "leg";
         }
         else
         {
-            playerDefenseZone = "unknown";  
+            playerDefenseZone = "unknown";
             Debug.LogError("Geçersiz savunma indeksi!");
             return;
         }
 
         Debug.Log($"Oyuncu {playerDefenseZone} bölgesini savunuyor!");
-
-        
     }
 
-    
+
 
     private void PlayerAttack()
     {
@@ -423,30 +447,66 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    
+
 
 
 
     //            HAREKET İŞLEMLERİ
-    private void MoveTowardsPlayer()
+    private IEnumerator MoveTowardsPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, 1f);
-        Debug.Log("Düşman oyuncuya yaklaşıyor!");
+        // Düşman oyuncuya yaklaşırken, koşma animasyonunu başlat
+        animatorController.SetRunning(true);
+        animatorController.SetIdle(false);
+
+        
+        Vector3 direction = (playerTransform.position - transform.position).normalized;  
+
+        
+        transform.position = transform.position + direction * 1f;
+
+       
+        
+
+        
+        yield return new WaitForSeconds(0.1f);
+
+        
+        animatorController.SetRunning(false);
+        animatorController.SetIdle(true);
+
+        Debug.Log("Düşman oyuncuya yaklaştı");
     }
 
-    private void MoveAwayFromPlayer()
-    {
-        Vector3 direction = (transform.position - playerTransform.position).normalized;
-        Vector3 newPosition = transform.position + direction * 1f;
 
-        // Eğer yeni pozisyon arena dışına çıkıyorsa, maksimum sınırda kal
+
+
+    private IEnumerator MoveAwayFromPlayer()
+    {
+        // Düşman oyuncudan uzaklaşırken, geri hareket animasyonunu başlat
+        animatorController.SetBackwarding(true);
+        animatorController.SetIdle(false);
+
+        // Düşman, oyuncudan uzaklaşırken
+        Vector3 direction = (transform.position - playerTransform.position).normalized;
+        Vector3 newPosition = transform.position + direction * 3f; // 3 birim uzaklaşmak
+
+        
         if (newPosition.magnitude > arenaRadius)
         {
-            newPosition = newPosition.normalized * arenaRadius;
+            newPosition = newPosition.normalized * arenaRadius; 
         }
+
+        // Yeni pozisyona git
         transform.position = newPosition;
 
-        Debug.Log("Düşman oyuncudan uzaklaşıyor!");
+        // Kısa bir gecikme ekleyerek animasyonun düzgün görünmesini sağla
+        yield return new WaitForSeconds(0.1f);
+
+        // Animasyonu durdur ve idle animasyonuna geç
+        animatorController.SetBackwarding(false);
+        animatorController.SetIdle(true);
+
+        Debug.Log("Düşman oyuncudan uzaklaşıyor ve idle animasyonuna geçiyor!");
     }
     //            HAREKET İŞLEMLERİ
 
@@ -470,7 +530,8 @@ public class EnemyAI : MonoBehaviour
             {
                 Debug.Log($"Düşman {target} bölgesine ok attı ve vurdu!");
                 arrowCount--;
-                characterHealthController.currentHealth = -score / 10;
+                characterHealthController.currentHealth = characterHealthController.currentHealth - (score / 10);
+                
             }
         }
     }
@@ -489,7 +550,8 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.Log($"Düşman {target} bölgesine büyü yaptı ve vurdu!");
             mana--;
-            characterHealthController.currentHealth = -score / 10;
+            characterHealthController.currentHealth = characterHealthController.currentHealth - (score / 10);
+            
         }
     }
 
@@ -505,7 +567,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             Debug.Log($"Düşman {target} bölgesine KILIÇ İLE saldırdı ve vurdu!");
-            characterHealthController.currentHealth =- score / 10;
+            characterHealthController.currentHealth = characterHealthController.currentHealth - (score / 2);
         }
     }
     //              SALDIRI KISMI*
