@@ -482,13 +482,13 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator MoveAwayFromPlayer()
     {
-        // Düşman oyuncudan uzaklaşırken, geri hareket animasyonunu başlat
+        
         animatorController.SetBackwarding(true);
         animatorController.SetIdle(false);
 
-        // Düşman, oyuncudan uzaklaşırken
+        
         Vector3 direction = (transform.position - playerTransform.position).normalized;
-        Vector3 newPosition = transform.position + direction * 3f; // 3 birim uzaklaşmak
+        Vector3 newPosition = transform.position + direction * 1f; 
 
         
         if (newPosition.magnitude > arenaRadius)
@@ -496,11 +496,11 @@ public class EnemyAI : MonoBehaviour
             newPosition = newPosition.normalized * arenaRadius; 
         }
 
-        // Yeni pozisyona git
+        
         transform.position = newPosition;
 
         // Kısa bir gecikme ekleyerek animasyonun düzgün görünmesini sağla
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         // Animasyonu durdur ve idle animasyonuna geç
         animatorController.SetBackwarding(false);
