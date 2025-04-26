@@ -6,6 +6,9 @@ public interface ICharacterCombat
     void Attack1();
     void Attack2();
     void Attack3();
+    void ArrowAttack1();
+    void ArrowAttack2();
+    void ArrowAttack3();
     void Defence1();
     void Defence2();
     void Defence3();

@@ -2,11 +2,18 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
+public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterCombat
 {
     [Header("References")]
     [SerializeField] private GameObject targetObject;
+    [SerializeField] private GameObject TargetHead;
+    [SerializeField] private GameObject TargetBody;
+    [SerializeField] private GameObject TargetLeg;
+    [SerializeField] private GameObject shootPoint;
     
+    [Header("Arrow Settings")]
+    [SerializeField] private Rigidbody arrowPrefab;
+    [SerializeField] private float launchSpeed = 20f;
     [Header("Movement Settings")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float attackDistance = 13.2f;
@@ -190,6 +197,92 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover, ICharacterCombat
         animatorController.SetAttacking3();
         StartCoroutine(ResetState(attackDuration, OnAttackComplete));
     }
+
+    public void ArrowAttack1()
+    {
+        if (currentState != CharacterState.Idle)
+            return;
+            
+        currentState = CharacterState.Attacking;
+        Transform target = TargetHead.transform;
+        if (target == null) return;
+        CreateArrow(target.position);
+
+
+        targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
+        LookAt(targetPosition);
+        //animatorController.SetArrowAttack1();
+        StartCoroutine(ResetState(attackDuration, OnAttackComplete));
+    }
+    public void ArrowAttack2()
+    {
+        if (currentState != CharacterState.Idle)
+            return;
+            
+        currentState = CharacterState.Attacking;
+        Transform target = TargetBody.transform;
+        if (target == null) return;
+        CreateArrow(target.position);
+
+
+        targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
+        LookAt(targetPosition);
+        //animatorController.SetArrowAttack2();
+        StartCoroutine(ResetState(attackDuration, OnAttackComplete));
+    }
+    public void ArrowAttack3()
+    {
+        if (currentState != CharacterState.Idle)
+            return;
+            
+        currentState = CharacterState.Attacking;
+        Transform target = TargetLeg.transform;
+        if (target == null) return;
+        CreateArrow(target.position);
+
+
+        targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
+        LookAt(targetPosition);
+        //animatorController.SetArrowAttack3();
+        StartCoroutine(ResetState(attackDuration, OnAttackComplete));
+    }
+
+    private void CreateArrow(Vector3 targetPosition)
+    {
+        Rigidbody arrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.identity);
+        Vector3 launchVelocity = CalculateLaunchVelocity(shootPoint.transform.position, targetPosition, launchSpeed);
+        arrow.linearVelocity = launchVelocity;
+    }
+
+    private Vector3 CalculateLaunchVelocity(Vector3 start, Vector3 target, float speed)
+    {
+        Vector3 toTarget = target - start;
+        Vector3 toTargetXZ = new Vector3(toTarget.x, 0, toTarget.z);
+
+        float y = toTarget.y;
+        float xz = toTargetXZ.magnitude;
+
+        float gravity = Mathf.Abs(Physics.gravity.y);
+
+        // Burada bazı hedeflere ulaşmanın mümkün olup olmadığını kontrol ediyoruz
+        float underTheSqrt = speed * speed * speed * speed - gravity * (gravity * xz * xz + 2 * y * speed * speed);
+        if (underTheSqrt < 0)
+        {
+            Debug.LogWarning("Hedef çok uzak veya çok yüksek!");
+            return toTarget.normalized * speed;
+        }
+
+        float sqrt = Mathf.Sqrt(underTheSqrt);
+
+        float angleHigh = Mathf.Atan((speed * speed + sqrt) / (gravity * xz));
+
+        Vector3 launchDir = toTargetXZ.normalized;
+        Vector3 launchVelocity = launchDir * speed * Mathf.Cos(angleHigh) + Vector3.up * speed * Mathf.Sin(angleHigh);
+
+        return launchVelocity;
+    }
+
+
 
     public void Defence1()
     {

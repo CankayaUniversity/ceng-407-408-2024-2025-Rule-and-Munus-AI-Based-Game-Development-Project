@@ -8,12 +8,15 @@ public class CharacterMovingButtons : MonoBehaviour
     [SerializeField] private CharacterMoving characterMoving;
     [SerializeField] private List<Button> attackButtons;
     [SerializeField] private List<Button> defenceButtons;
-    
-    public int attackIndex;  //AI used
-    public int defenceIndex; //AI used
+    [SerializeField] private List<Button> ArrowButtons;
+
+    public int attackIndex;
+    public int defenceIndex;
+    public int arrowIndex;
+
     private bool isSelectedAttack;
     private bool isSelectedDefence;
-    
+
     public bool isTurn => isSelectedAttack && isSelectedDefence;
 
     void Start()
@@ -23,18 +26,16 @@ public class CharacterMovingButtons : MonoBehaviour
             Debug.LogError("CharacterMoving reference not set in CharacterMovingButtons!");
             return;
         }
-        
+
         ResetButtonIndex();
         SetupButtonListeners();
-        
-        // Register for character events
+
         characterMoving.OnAttackComplete += OnAttackComplete;
         characterMoving.OnDefenceComplete += OnDefenceComplete;
     }
 
     private void OnDestroy()
     {
-        // Clean up event subscriptions
         if (characterMoving != null)
         {
             characterMoving.OnAttackComplete -= OnAttackComplete;
@@ -44,21 +45,25 @@ public class CharacterMovingButtons : MonoBehaviour
 
     private void SetupButtonListeners()
     {
-        // Set up attack button listeners
         SetupButtonGroup(attackButtons, (index) => {
             attackIndex = index;
             isSelectedAttack = true;
             Debug.Log($"Attack button {index} selected");
         });
-        
-        // Set up defence button listeners
+
         SetupButtonGroup(defenceButtons, (index) => {
             defenceIndex = index + 1;
             isSelectedDefence = true;
             Debug.Log($"Defence button {index} selected");
         });
+
+        SetupButtonGroup(ArrowButtons, (index) => {
+            arrowIndex = index + 1;
+            isSelectedAttack = true;
+            Debug.Log($"Arrow attack button {index} selected");
+        });
     }
-    
+
     private void SetupButtonGroup(List<Button> buttons, System.Action<int> onClick)
     {
         for (int i = 0; i < buttons.Count; i++)
@@ -71,23 +76,28 @@ public class CharacterMovingButtons : MonoBehaviour
 
     private void OnAttackComplete()
     {
-        // Handle attack completion logic
         Debug.Log("Attack action completed");
     }
-    
+
     private void OnDefenceComplete()
     {
-        // Handle defence completion logic
-        Debug.Log("Defence completed");
+        Debug.Log("Defence action completed");
     }
 
     public void TurnButton()
     {
         if (!isTurn) return;
-        
-        ExecuteAttack();
+
+        if (ArrowButtons != null && arrowIndex > 0)
+        {
+            ExecuteArrow();
+        }
+        else
+        {
+            ExecuteAttack();
+        }
+
         StartCoroutine(ExecuteDefenceAfterDelay(4f));
-        ResetButtonIndex();
     }
 
     private void ExecuteAttack()
@@ -112,11 +122,39 @@ public class CharacterMovingButtons : MonoBehaviour
             case 5:
                 characterMoving.BackwardStep();
                 break;
+            default:
+                Debug.LogWarning("Invalid attack index!");
+                break;
+        }
+    }
+
+    private void ExecuteArrow()
+    {
+        switch (arrowIndex)
+        {
+            case 1:
+                characterMoving.ArrowAttack1();
+                break;
+            case 2:
+                characterMoving.ArrowAttack2();
+                break;
+            case 3:
+                characterMoving.ArrowAttack3();
+                break;
+            default:
+                Debug.LogWarning("Invalid arrow index!");
+                break;
         }
     }
 
     private void ExecuteDefence()
     {
+        if (defenceIndex < 1 || defenceIndex > 3)
+        {
+            Debug.LogWarning("Invalid defence index, skipping defence execution.");
+            return;
+        }
+
         switch (defenceIndex)
         {
             case 1:
@@ -136,12 +174,17 @@ public class CharacterMovingButtons : MonoBehaviour
         yield return new WaitForSeconds(delay);
         ExecuteDefence();
         Debug.Log("Defence executed after delay");
+
+        ResetButtonIndex(); // Savunmadan sonra reset yapýyoruz
     }
 
     public void ResetButtonIndex()
     {
         isSelectedAttack = false;
         isSelectedDefence = false;
+        attackIndex = -1;
+        arrowIndex = -1;
+        defenceIndex = -1;
     }
 
     public void ToggleAttackSelection()
@@ -154,16 +197,15 @@ public class CharacterMovingButtons : MonoBehaviour
         isSelectedDefence = !isSelectedDefence;
     }
 
-    // Updated step button handlers - now they properly set the attack selection
     public void OnForwardStepButtonClicked()
     {
-        isSelectedAttack = true; // Mark attack as selected since step counts as an attack
+        isSelectedAttack = true;
         characterMoving.ForwardStep();
     }
-    
+
     public void OnBackwardStepButtonClicked()
     {
-        isSelectedAttack = true; // Mark attack as selected since step counts as an attack
+        isSelectedAttack = true;
         characterMoving.BackwardStep();
     }
 }
