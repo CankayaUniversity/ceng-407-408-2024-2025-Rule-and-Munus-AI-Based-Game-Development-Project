@@ -6,10 +6,9 @@ public class EnemyStats : MonoBehaviour
 {
     public List<Equipment> enemyEquipments = new List<Equipment>();
 
-    private int progressLevel = 0;            
-            
-    private float upgradeCheckTimer = 0f;      
-    private const float upgradeCheckInterval = 10f; 
+    private int progressLevel = 0;
+    private float upgradeCheckTimer = 0f;
+    private const float upgradeCheckInterval = 10f;
 
     private void Start()
     {
@@ -32,50 +31,64 @@ public class EnemyStats : MonoBehaviour
 
     private void GenerateEnemyEquipment()
     {
-        EquipmentSlot[] slots = new EquipmentSlot[]
-        {
+        // Baþlangýç zýrhlarý (Bludgeoning tipinde)
+        Equipment head = new Equipment(
             EquipmentSlot.Head,
+            Rarity.Common,
+            DamageType.Bludgeoning,
+            armorModifier: 2,
+            damageModifier: 0,
+            mesh: null,
+            icon: null
+        );
+
+        Equipment body = new Equipment(
             EquipmentSlot.Body,
+            Rarity.Common,
+            DamageType.Bludgeoning,
+            armorModifier: 5,
+            damageModifier: 0,
+            mesh: null,
+            icon: null
+        );
+
+        Equipment legs = new Equipment(
             EquipmentSlot.Legs,
-            EquipmentSlot.Weapon,
-            EquipmentSlot.Secondary,
-            EquipmentSlot.Feet,
-            EquipmentSlot.Accessoire
-        };
+            Rarity.Common,
+            DamageType.Bludgeoning,
+            armorModifier: 1,
+            damageModifier: 0,
+            mesh: null,
+            icon: null
+        );
 
-        foreach (EquipmentSlot slot in slots)
+        enemyEquipments.Add(head);
+        enemyEquipments.Add(body);
+        enemyEquipments.Add(legs);
+
+        // Baþlangýç silahlarý (her hasar tipi için 1 adet Common silah)
+        foreach (DamageType type in System.Enum.GetValues(typeof(DamageType)))
         {
-            Equipment newEquipment = ScriptableObject.CreateInstance<Equipment>();
-            newEquipment.equipSlot = slot;
-            newEquipment.rarirty = GetInitialRarity();
+            if (type == DamageType.Default)
+                continue;
 
-            enemyEquipments.Add(newEquipment);
+            Equipment weapon = new Equipment(
+                EquipmentSlot.Weapon,
+                Rarity.Common,
+                type,
+                armorModifier: 0,
+                damageModifier: 5, // baþlangýç hasarý düþük
+                mesh: null,
+                icon: null
+            );
+
+            enemyEquipments.Add(weapon);
         }
-
-        Debug.Log("Enemy's initial equipment has been generated!");
-    }
-
-    private Rarity GetInitialRarity()
-    {
-        int randomValue = Random.Range(0, 100);
-
-        if (randomValue < 40)
-            return Rarity.Common;     
-        else if (randomValue < 70)
-            return Rarity.Uncommon;   
-        else if (randomValue < 85)
-            return Rarity.Advenced;    
-        else if (randomValue < 95)
-            return Rarity.Rare;        
-        else if (randomValue < 99)
-            return Rarity.Epic;        
-        else
-            return Rarity.Legendary;   
     }
 
     private bool ShouldUpgradeEquipment()
     {
-        return progressLevel >= 1; 
+        return progressLevel >= 1;
     }
 
     private void UpgradeEquipment(int level)
@@ -83,33 +96,54 @@ public class EnemyStats : MonoBehaviour
         foreach (Equipment equipment in enemyEquipments)
         {
             equipment.rarirty = GetUpgradedRarity(equipment.rarirty, level);
+
+            // Ayrýca armorModifier'ý artýr
+            switch (equipment.rarirty)
+            {
+                case Rarity.Rare:
+                    equipment.armorModifier += 5; // +5 zýrh
+                    break;
+                case Rarity.Epic:
+                    equipment.armorModifier += 10; // +10 zýrh
+                    break;
+                case Rarity.Legendary:
+                    equipment.armorModifier += 15; // +15 zýrh
+                    break;
+            }
         }
 
         Debug.Log($"Düþmanýn ekipmanlarý güncellendi! Yeni seviye: {progressLevel}");
-        progressLevel++; 
+        progressLevel++;
     }
 
-    private Rarity GetUpgradedRarity(Rarity current, int level)
+    private Rarity GetUpgradedRarity(Rarity currentRarity, int level)
     {
-        
-        switch (current)
+        switch (currentRarity)
         {
             case Rarity.Common:
-                return (level >= 1) ? Rarity.Uncommon : current;
-            case Rarity.Uncommon:
-                return (level >= 2) ? Rarity.Advenced : current;
-            case Rarity.Advenced:
-                return (level >= 3) ? Rarity.Rare : current;
+                return level >= 2 ? Rarity.Rare : Rarity.Common;
             case Rarity.Rare:
-                return (level >= 4) ? Rarity.Epic : current;
+                return level >= 4 ? Rarity.Epic : Rarity.Rare;
             case Rarity.Epic:
-                return (level >= 5) ? Rarity.Legendary : current;
+                return level >= 6 ? Rarity.Legendary : Rarity.Epic;
             case Rarity.Legendary:
-                return Rarity.Legendary; 
+                return Rarity.Legendary; // Daha üstü yok
             default:
-                return current;
+                return currentRarity;
         }
     }
 
-    
+
+    public Equipment GetEquippedWeapon()
+    {
+        // Weapon slotuna sahip ekipmaný buluyoruz
+        Equipment weapon = enemyEquipments.Find(e => e.equipSlot == EquipmentSlot.Weapon);
+
+        if (weapon == null)
+        {
+            Debug.LogWarning("No weapon found in equipped items.");
+        }
+
+        return weapon;
+    }
 }

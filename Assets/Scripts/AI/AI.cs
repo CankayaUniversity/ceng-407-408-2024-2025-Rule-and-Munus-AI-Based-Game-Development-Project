@@ -7,6 +7,7 @@ using Types;
 
 public class EnemyAI : MonoBehaviour
 {
+    private Player targetPlayer;
 
     public Transform playerTransform;
     public string enemyClass;
@@ -24,22 +25,21 @@ public class EnemyAI : MonoBehaviour
     private string enemyDefenseZone;
 
     CharacterMovingButtons characterMovingButtons;
-
-    private Equipment headEquipment;
-    private Equipment bodyEquipment;
-    private Equipment legEquipment;
-    // Equipment headEquipment = new Equipment(EquipmentSlot.Head, Rarity.Common, 5, 3, null, null);
-    // Equipment bodyEquipment = new Equipment(EquipmentSlot.Body, Rarity.Common, 5, 3, null, null);
-    // Equipment legEquipment = new Equipment(EquipmentSlot.Legs, Rarity.Common, 5, 3, null, null);
     CharacterHealthController characterHealthController;
 
 
     private IAnimatorController animatorController;
 
     int score = 0;
-
+    private EnemyStats enemyStats;
     void Start()
     {
+        enemyStats = FindObjectOfType<EnemyStats>();
+        targetPlayer = FindObjectOfType<Player>();
+        if (targetPlayer != null)
+        {
+            ChooseBestTargetArea();
+        }
         animatorController = new AnimatorController(GetComponent<Animator>());
         if (characterHealthController == null)
         {
@@ -50,19 +50,12 @@ public class EnemyAI : MonoBehaviour
                 Debug.LogError("CharacterHealthController not found in the scene!");
             }
         }
-        headEquipment = ScriptableObject.CreateInstance<Equipment>();
-        headEquipment.equipSlot = EquipmentSlot.Head;
-        headEquipment.rarirty = Rarity.Common;
+        
         // İstersen burada başka değerler de atarsın, mesela attackPower, defensePower gibi.
 
-        bodyEquipment = ScriptableObject.CreateInstance<Equipment>();
-        bodyEquipment.equipSlot = EquipmentSlot.Body;
-        bodyEquipment.rarirty = Rarity.Common;
+        
 
-        legEquipment = ScriptableObject.CreateInstance<Equipment>();
-        legEquipment.equipSlot = EquipmentSlot.Legs;
-        legEquipment.rarirty = Rarity.Common;
-
+        
        
 
         root = CreateBehaviorTree();
@@ -396,6 +389,7 @@ public class EnemyAI : MonoBehaviour
         string[] bodyParts = { "head", "body", "leg" };
         enemyDefenseZone = bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
         Debug.Log($"Enemy is defending the {enemyDefenseZone} zone!");
+        //enemyDefenseZone player tarafından çağrılıcak ve ona göre hasar alıp almaması karar verlicek 
     }
 
 
@@ -519,18 +513,28 @@ public class EnemyAI : MonoBehaviour
     {
         if (arrowCount > 0)
         {
-            string target = ChooseTarget();
+            var (target, score) = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
+            Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz
+            Equipment weapon = enemyStats.GetEquippedWeapon(); // enemyStats üzerinden silahı alıyoruz
 
-            if (target == playerDefenseZone)
+            if (targetedEquipment != null)
             {
-                Debug.Log($"Enemy shot an arrow at the {target} zone but the player defended!");
-                arrowCount--;
+                int finalDamage = CalculateFinalDamage(weapon, targetedEquipment);
+
+                // Hedef savunma bölgesine vuruluyor mu?
+                if (target == playerDefenseZone)
+                {
+                    Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone but the player defended!");
+                }
+                else
+                {
+                    Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
+                    characterHealthController.currentHealth -= finalDamage; // Sonuç olarak hesaplanmış hasar
+                }
             }
             else
             {
-                Debug.Log($"Enemy shot an arrow at the {target} zone and hit!");
-                arrowCount--;
-                characterHealthController.currentHealth -= (score / 10);
+                Debug.Log("Target zone is empty, no armor equipped.");
             }
         }
     }
@@ -538,105 +542,138 @@ public class EnemyAI : MonoBehaviour
 
     private void CastSpell()
     {
-        string target = ChooseTarget();
+        if (mana > 0)
+        {
+            var (target, score) = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
+            Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz
+            Equipment weapon = enemyStats.GetEquippedWeapon(); // enemyStats üzerinden silahı alıyoruz
 
-        if (target == playerDefenseZone)
-        {
-            Debug.Log($"Enemy cast a spell at the {target} zone but the player defended!");
-            mana--;
+            if (targetedEquipment != null)
+            {
+                int finalDamage = CalculateFinalDamage(weapon, targetedEquipment);
+
+                // Hedef savunma bölgesine vuruluyor mu?
+                if (target == playerDefenseZone)
+                {
+                    Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone but the player defended!");
+                }
+                else
+                {
+                    Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
+                    characterHealthController.currentHealth -= finalDamage; // Sonuç olarak hesaplanmış hasar
+                }
+            }
+            else
+            {
+                Debug.Log("Target zone is empty, no armor equipped.");
+            }
         }
-        else
-        {
-            Debug.Log($"Enemy cast a spell at the {target} zone and hit!");
-            mana--;
-            characterHealthController.currentHealth -= (score / 10);
-        }
+        
     }
 
     private void Attack()
     {
-        string target = ChooseTarget();
+        var (target, score) = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
+        Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz
+        Equipment weapon = enemyStats.GetEquippedWeapon(); // enemyStats üzerinden silahı alıyoruz
 
-        if (target == playerDefenseZone)
+        if (targetedEquipment != null)
         {
-            Debug.Log($"Enemy attacked with a SWORD at the {target} zone but the player defended!");
+            int finalDamage = CalculateFinalDamage(weapon, targetedEquipment);
+
+            // Hedef savunma bölgesine vuruluyor mu?
+            if (target == playerDefenseZone)
+            {
+                Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone but the player defended!");
+            }
+            else
+            {
+                Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
+                characterHealthController.currentHealth -= finalDamage; // Sonuç olarak hesaplanmış hasar
+            }
         }
         else
         {
-            Debug.Log($"Enemy attacked with a SWORD at the {target} zone and hit!");
-            characterHealthController.currentHealth -= (score / 2);
+            Debug.Log("Target zone is empty, no armor equipped.");
         }
     }
+
+    // Hedef bölgedeki zırhı almak için
+    private Equipment GetTargetedEquipment(string target)
+    {
+        switch (target.ToLower())
+        {
+            case "head":
+                return targetPlayer.equippedItems.ContainsKey(EquipmentSlot.Head) ? targetPlayer.equippedItems[EquipmentSlot.Head] : null;
+            case "body":
+                return targetPlayer.equippedItems.ContainsKey(EquipmentSlot.Body) ? targetPlayer.equippedItems[EquipmentSlot.Body] : null;
+            case "legs":
+                return targetPlayer.equippedItems.ContainsKey(EquipmentSlot.Legs) ? targetPlayer.equippedItems[EquipmentSlot.Legs] : null;
+            default:
+                return null;
+        }
+    }
+
+    
+
+    // Silah ve zırh türüne göre hasar hesaplama
+    private int CalculateFinalDamage(Equipment weapon, Equipment targetedEquipment)
+    {
+        // Başlangıç hasarı, silahın hasar modifikasyonu - zırhın savunma modifikasyonu
+        int damage = weapon.damageModifier - targetedEquipment.armorModifier;
+
+        // Eğer silah ve zırhın hasar türü uyuyorsa (hasar türü eşleşiyorsa)
+        if (weapon.damageType == targetedEquipment.damageType)
+        {
+            damage = Mathf.CeilToInt(damage * 1.5f); // %50 daha fazla hasar
+            Debug.Log("Damage type matches, applying 1.5x multiplier!");
+        }
+
+        // Eğer hasar negatifse 0 olarak ayarla
+        return Mathf.Max(0, damage);
+    }
+
+
     //              SALDIRI KISMI*
 
 
-
-    public int CalculateEquipmentScore(Equipment equipment)
+    
+    private (string target, int score) ChooseBestTargetArea()
     {
-        score = 0;
+        EquipmentSlot[] targetSlots = { EquipmentSlot.Head, EquipmentSlot.Body, EquipmentSlot.Legs };
+        string selectedTarget = "";
+        int lowestScore = int.MaxValue;
 
-        
-        Dictionary<EquipmentSlot, int> slotBaseScores = new Dictionary<EquipmentSlot, int>()
-    {
-        { EquipmentSlot.Head, 10 },
-        { EquipmentSlot.Body, 15 },
-        { EquipmentSlot.Legs, 20 },
-        { EquipmentSlot.Weapon, 25 },
-        { EquipmentSlot.Secondary, 20 },
-        { EquipmentSlot.Feet, 10 },
-        { EquipmentSlot.Accessoire, 15 },
-        { EquipmentSlot.Default, 0 }
-    };
-
-        
-        Dictionary<Rarity, float> rarityMultipliers = new Dictionary<Rarity, float>()
-    {
-        { Rarity.Common, 1f },
-        { Rarity.Uncommon, 1.2f },
-        { Rarity.Advenced, 1.4f },
-        { Rarity.Rare, 1.6f },
-        { Rarity.Epic, 2f },
-        { Rarity.Legendary, 3f },
-        { Rarity.Default, 1f }
-    };
-
-        if (slotBaseScores.ContainsKey(equipment.equipSlot) && rarityMultipliers.ContainsKey(equipment.rarirty))
+        foreach (var slot in targetSlots)
         {
-            score = Mathf.RoundToInt(slotBaseScores[equipment.equipSlot] * rarityMultipliers[equipment.rarirty]);
+            if (targetPlayer.equippedItems.ContainsKey(slot))
+            {
+                Equipment equipment = targetPlayer.equippedItems[slot];
+                int score = CalculateEquipmentScore(equipment);
+
+                Debug.Log($"Slot: {slot}, Score: {score}");
+
+                if (score < lowestScore)
+                {
+                    lowestScore = score;
+                    selectedTarget = slot.ToString().ToLower(); 
+                }
+            }
+            else
+            {
+                Debug.Log($"Slot: {slot} is EMPTY. Prioritizing this.");
+                lowestScore = 10; // boş koruma = düşük savunma
+                selectedTarget = slot.ToString().ToLower(); 
+                break;
+            }
         }
 
-        return score;
+        return (selectedTarget, lowestScore);
     }
 
 
-    private string ChooseTarget()
+    private int CalculateEquipmentScore(Equipment equipment)
     {
-        
-        int headScore = CalculateEquipmentScore(headEquipment);
-        
-        int bodyScore = CalculateEquipmentScore(bodyEquipment);
-        
-        int legScore = CalculateEquipmentScore(legEquipment);
-
-        int totalScore = headScore + bodyScore + legScore;
-
-        
-        if (totalScore == 0)
-        {
-            return bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
-        }
-
-        float headChance = (float)headScore / totalScore;
-        float bodyChance = (float)bodyScore / totalScore;
-        float legChance = (float)legScore / totalScore;
-
-        float randomValue = UnityEngine.Random.Range(0f, 1f);
-
-        if (randomValue < headChance)
-            return "head";
-        else if (randomValue < headChance + bodyChance)
-            return "body";
-        else
-            return "leg";
+        return equipment.armorModifier - equipment.damageModifier;
     }
 }
