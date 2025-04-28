@@ -73,6 +73,7 @@ crashlytics-build.properties
 # Ignore specific large files
 venv/Lib/site-packages/torch/lib/dnnl.lib
 venv/Lib/site-packages/torch/lib/torch_cpu.dll
+Assets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
 venv/
 venv
 .venv/
