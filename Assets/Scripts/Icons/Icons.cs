@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using Types;
+using Equipments;
 
 namespace Icons
 {   

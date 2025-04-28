@@ -1,3 +1,6 @@
+using JetBrains.Annotations;
+using Unity.AppUI.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace Types
@@ -10,7 +13,30 @@ namespace Types
             Weapon,
             Secondary,
             Feet, 
+            Hand,
             Accessoire,
+            Default,
+        }
+        // public enum EquipmentType
+        // {
+        //     HeadLeatherArmor,
+        //     BodyLeatherArmor,
+        //     LegsLeatherArmor,
+        //     FeetLeatherArmor,
+        //     Bow,
+        //     ShortSword,
+        //     LongSword,
+        //     Hammer,
+        //     Default,
+        // }
+        public enum DamageType
+        {
+            Piercing,
+            Slashing,
+            Bludgeoning,
+            Fire,
+            Cold,
+            Poision,
             Default,
         }
         public enum Rarity
