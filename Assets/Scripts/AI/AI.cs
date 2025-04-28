@@ -47,7 +47,7 @@ public class EnemyAI : MonoBehaviour
 
             if (characterHealthController == null)
             {
-                Debug.LogError("Sahnede CharacterHealthController bulunamadı!");
+                Debug.LogError("CharacterHealthController not found in the scene!");
             }
         }
         headEquipment = ScriptableObject.CreateInstance<Equipment>();
@@ -395,7 +395,7 @@ public class EnemyAI : MonoBehaviour
     {
         string[] bodyParts = { "head", "body", "leg" };
         enemyDefenseZone = bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
-        Debug.Log($"Düşman {enemyDefenseZone} bölgesini savunuyor!");
+        Debug.Log($"Enemy is defending the {enemyDefenseZone} zone!");
     }
 
 
@@ -404,7 +404,7 @@ public class EnemyAI : MonoBehaviour
         // Eğer playerDefenseZone veya characterMovingButtons geçerli değilse (null veya başka bir kontrol) işlem yapma
         if (characterMovingButtons == null || characterMovingButtons.defenceIndex < 1 || characterMovingButtons.defenceIndex > 3)
         {
-            Debug.LogError("Savunma bölgesi seçilmedi veya geçersiz savunma indeksi!");
+            Debug.LogError("Defense zone not selected or invalid defense index!");
             return;
         }
 
@@ -423,11 +423,11 @@ public class EnemyAI : MonoBehaviour
         else
         {
             playerDefenseZone = "unknown";
-            Debug.LogError("Geçersiz savunma indeksi!");
+            Debug.LogError("Invalid defense index!");
             return;
         }
 
-        Debug.Log($"Oyuncu {playerDefenseZone} bölgesini savunuyor!");
+        Debug.Log($"Player is defending the {playerDefenseZone} zone!");
     }
 
 
@@ -439,11 +439,11 @@ public class EnemyAI : MonoBehaviour
 
         if (target == enemyDefenseZone)
         {
-            Debug.Log($"Oyuncu {target} bölgesine saldırdı ama düşman savundu!");
+            Debug.Log($"Player attacked the {target} zone but the enemy defended!");
         }
         else
         {
-            Debug.Log($"Oyuncu {target} bölgesine saldırdı ve isabet ettirdi!");
+            Debug.Log($"Player attacked the {target} zone and hit!");
         }
     }
 
@@ -474,7 +474,7 @@ public class EnemyAI : MonoBehaviour
         animatorController.SetRunning(false);
         animatorController.SetIdle(true);
 
-        Debug.Log("Düşman oyuncuya yaklaştı");
+        Debug.Log("Enemy approached the player");
     }
 
 
@@ -506,7 +506,7 @@ public class EnemyAI : MonoBehaviour
         animatorController.SetBackwarding(false);
         animatorController.SetIdle(true);
 
-        Debug.Log("Düşman oyuncudan uzaklaşıyor ve idle animasyonuna geçiyor!");
+        Debug.Log("Enemy is moving away from the player and switching to idle animation!");
     }
     //            HAREKET İŞLEMLERİ
 
@@ -523,15 +523,14 @@ public class EnemyAI : MonoBehaviour
 
             if (target == playerDefenseZone)
             {
-                Debug.Log($"Düşman {target} bölgesine ok attı ancak oyuncu savundu!");
+                Debug.Log($"Enemy shot an arrow at the {target} zone but the player defended!");
                 arrowCount--;
             }
             else
             {
-                Debug.Log($"Düşman {target} bölgesine ok attı ve vurdu!");
+                Debug.Log($"Enemy shot an arrow at the {target} zone and hit!");
                 arrowCount--;
-                characterHealthController.currentHealth = characterHealthController.currentHealth - (score / 10);
-                
+                characterHealthController.currentHealth -= (score / 10);
             }
         }
     }
@@ -543,18 +542,16 @@ public class EnemyAI : MonoBehaviour
 
         if (target == playerDefenseZone)
         {
-            Debug.Log($"Düşman {target} bölgesine büyü yaptı ancak oyuncu savundu!");
+            Debug.Log($"Enemy cast a spell at the {target} zone but the player defended!");
             mana--;
         }
         else
         {
-            Debug.Log($"Düşman {target} bölgesine büyü yaptı ve vurdu!");
+            Debug.Log($"Enemy cast a spell at the {target} zone and hit!");
             mana--;
-            characterHealthController.currentHealth = characterHealthController.currentHealth - (score / 10);
-            
+            characterHealthController.currentHealth -= (score / 10);
         }
     }
-
 
     private void Attack()
     {
@@ -562,12 +559,12 @@ public class EnemyAI : MonoBehaviour
 
         if (target == playerDefenseZone)
         {
-            Debug.Log($"Düşman {target} bölgesine KILIÇ İLE saldırdı ancak oyuncu savundu!");
+            Debug.Log($"Enemy attacked with a SWORD at the {target} zone but the player defended!");
         }
         else
         {
-            Debug.Log($"Düşman {target} bölgesine KILIÇ İLE saldırdı ve vurdu!");
-            characterHealthController.currentHealth = characterHealthController.currentHealth - (score / 2);
+            Debug.Log($"Enemy attacked with a SWORD at the {target} zone and hit!");
+            characterHealthController.currentHealth -= (score / 2);
         }
     }
     //              SALDIRI KISMI*
@@ -578,7 +575,7 @@ public class EnemyAI : MonoBehaviour
     {
         score = 0;
 
-        // Slot'a göre temel puan
+        
         Dictionary<EquipmentSlot, int> slotBaseScores = new Dictionary<EquipmentSlot, int>()
     {
         { EquipmentSlot.Head, 10 },
@@ -591,7 +588,7 @@ public class EnemyAI : MonoBehaviour
         { EquipmentSlot.Default, 0 }
     };
 
-        // Rarity'e göre çarpan
+        
         Dictionary<Rarity, float> rarityMultipliers = new Dictionary<Rarity, float>()
     {
         { Rarity.Common, 1f },
