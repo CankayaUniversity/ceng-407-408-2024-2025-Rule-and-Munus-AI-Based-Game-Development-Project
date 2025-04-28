@@ -44,15 +44,12 @@ public class CharacterHealthController : MonoBehaviour
 
     private void MinHealthController()
     {
-        if(currentHealth<minHealth)
-        {
-            currentHealth = minHealth;
-        }
-        else if(currentHealth == minHealth)
+        if(currentHealth<=minHealth)
         {
             isDead = true;
             Debug.Log("Character is dead!");
         }
+        
     }
 
     private void HealthBar(int value)

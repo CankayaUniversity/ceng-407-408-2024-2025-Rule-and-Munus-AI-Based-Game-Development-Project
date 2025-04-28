@@ -46,13 +46,10 @@ public class EnemyHealthController : MonoBehaviour
     {
         if(currentHealth<minHealth)
         {
-            currentHealth = minHealth;
-        }
-        else if(currentHealth == minHealth)
-        {
             isDead = true;
             Debug.Log("Character is dead!");
         }
+       
     }
 
     private void HealthBar(int value)
