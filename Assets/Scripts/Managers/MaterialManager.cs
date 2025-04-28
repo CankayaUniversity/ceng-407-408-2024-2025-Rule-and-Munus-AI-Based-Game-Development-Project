@@ -10,9 +10,6 @@ public class MaterialManager : MonoBehaviour {
 	#region Singleton
 	public static new GameObject gameObject;
 	public static MaterialManager instance;
-	// public SkinnedMeshRenderer targetMesh;
-
-    // SkinnedMeshRenderer[] currentMeshes;
 
 	void Awake ()
 	{

@@ -9,7 +9,6 @@ public class EquipmentManager : MonoBehaviour {
 	public bool flag = false;
     public enum MeshBlendShape {Torso, Arms, Legs };
     public Equipment[] defaultEquipment;
-
 	public static EquipmentManager instance;
 	public SkinnedMeshRenderer targetMesh;
 
@@ -33,7 +32,7 @@ public class EquipmentManager : MonoBehaviour {
 	{
 		inventory = Inventory.instance;		// Get a reference to our inventory
 		// attributeManager = AttributeManager.instance; // Get a reference to our attributes
-		attributeManager = GameObject.Find("GameManager").GetComponent<AttributeManager>();
+		attributeManager = GetComponent<AttributeManager>();
 		// Initialize currentEquipment based on number of equipment slots
 		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new Equipment[numSlots];

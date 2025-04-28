@@ -17,17 +17,15 @@ public class LootManager : MonoBehaviour
     }
 
 	#endregion
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameObject = GameObject.Find("Player");
+        // gameObject = GameObject.Find("Player");
         luck = gameObject.GetComponent<Attributes>().stats[StatType.LUCK];
     }
 
     public void GenerateLoot()
     {
-        // luck = attributes.stats[StatType.LUCK];
-        // Debug.Log($"Luck is: {luck.value}");
+        Debug.Log($"Luck is --------->: {luck.value}");
         LootGenerator.RandomEquipment(luck);
         LootGenerator.RandomMaterial(luck);
     }
