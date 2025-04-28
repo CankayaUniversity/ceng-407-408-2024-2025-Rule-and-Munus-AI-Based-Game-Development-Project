@@ -264,7 +264,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
 
         float gravity = Mathf.Abs(Physics.gravity.y);
 
-        // Burada bazı hedeflere ulaşmanın mümkün olup olmadığını kontrol ediyoruz
+       
         float underTheSqrt = speed * speed * speed * speed - gravity * (gravity * xz * xz + 2 * y * speed * speed);
         if (underTheSqrt < 0)
         {

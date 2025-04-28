@@ -175,7 +175,7 @@ public class CharacterMovingButtons : MonoBehaviour
         ExecuteDefence();
         Debug.Log("Defence executed after delay");
 
-        ResetButtonIndex(); // Savunmadan sonra reset yapýyoruz
+        ResetButtonIndex(); 
     }
 
     public void ResetButtonIndex()
