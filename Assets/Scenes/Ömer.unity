@@ -6886,6 +6886,10 @@ MonoBehaviour:
   - {fileID: 727454705}
   - {fileID: 1722382678}
   - {fileID: 2031478040}
+  ChangeArrowButton: {fileID: 0}
+  ChangeSwordButton: {fileID: 0}
+  SwordPanel: {fileID: 0}
+  ArrowPanel: {fileID: 0}
   attackIndex: 0
   defenceIndex: 0
   arrowIndex: 0
@@ -15122,6 +15126,8 @@ GameObject:
   - component: {fileID: 1985197199}
   - component: {fileID: 1985197198}
   - component: {fileID: 1985197197}
+  - component: {fileID: 1985197202}
+  - component: {fileID: 1985197203}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -15170,11 +15176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 661972233}
-  enemyClass: Warrior
-  enemyDEX: 0
   arrowCount: 10
   mana: 10
   distanceToPlayer: 0
+  enemyClass: Warrior
 --- !u!95 &1985197200
 Animator:
   serializedVersion: 7
@@ -15221,6 +15226,43 @@ Transform:
   - {fileID: 49661159}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!114 &1985197202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985197196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1470210d9dd1e464a98cc5b4ff424d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  baseDamage: 0
+  baseArmor: 0
+--- !u!114 &1985197203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985197196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8246e26f241677940befbbd9fda8c4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Lorem
+  _class: Fighter
+  race: Ipsum
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  currentStamina: 0
+  staminaBar: {fileID: 0}
+  isDead: 0
+  Limit: 100
+  textList: []
 --- !u!1 &1992196195
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,9 +62,21 @@ public class EnemyStats : MonoBehaviour
             icon: null
         );
 
+        
+        Equipment feet = new Equipment(
+            EquipmentSlot.Feet,
+            Rarity.Common,
+            DamageType.Bludgeoning,
+            armorModifier: 3,
+            damageModifier: 0,
+            mesh: null,
+            icon: null
+        );
+
         enemyEquipments.Add(head);
         enemyEquipments.Add(body);
         enemyEquipments.Add(legs);
+        enemyEquipments.Add(feet);
 
         // Baþlangýç silahlarý (her hasar tipi için 1 adet Common silah)
         foreach (DamageType type in System.Enum.GetValues(typeof(DamageType)))
@@ -77,7 +89,7 @@ public class EnemyStats : MonoBehaviour
                 Rarity.Common,
                 type,
                 armorModifier: 0,
-                damageModifier: 5, // baþlangýç hasarý düþük
+                damageModifier: 5,
                 mesh: null,
                 icon: null
             );
@@ -97,23 +109,47 @@ public class EnemyStats : MonoBehaviour
         {
             equipment.rarirty = GetUpgradedRarity(equipment.rarirty, level);
 
-            // Ayrýca armorModifier'ý artýr
-            switch (equipment.rarirty)
-            {
-                case Rarity.Rare:
-                    equipment.armorModifier += 5; // +5 zýrh
-                    break;
-                case Rarity.Epic:
-                    equipment.armorModifier += 10; // +10 zýrh
-                    break;
-                case Rarity.Legendary:
-                    equipment.armorModifier += 15; // +15 zýrh
-                    break;
-            }
+            // Upgrade armorModifier ve damageModifier deðerlerini güncelle
+            int newArmorModifier = GetUpgradedArmorModifier(equipment.rarirty);
+            int newDamageModifier = GetUpgradedDamageModifier(equipment.rarirty);
+
+            // Attributes sýnýfýndaki set metodlarý ile deðerleri güncelleniyor
+            equipment.setArmorModifier(newArmorModifier);
+            equipment.setDamageModifier(newDamageModifier);
         }
 
         Debug.Log($"Düþmanýn ekipmanlarý güncellendi! Yeni seviye: {progressLevel}");
         progressLevel++;
+    }
+
+    private int GetUpgradedArmorModifier(Rarity rarity)
+    {
+        switch (rarity)
+        {
+            case Rarity.Rare:
+                return 5; // +5 zýrh
+            case Rarity.Epic:
+                return 10; // +10 zýrh
+            case Rarity.Legendary:
+                return 15; // +15 zýrh
+            default:
+                return 0; // Common zýrh deðiþtirilmez
+        }
+    }
+
+    private int GetUpgradedDamageModifier(Rarity rarity)
+    {
+        switch (rarity)
+        {
+            case Rarity.Rare:
+                return 2; // +2 hasar
+            case Rarity.Epic:
+                return 4; // +4 hasar
+            case Rarity.Legendary:
+                return 6; // +6 hasar
+            default:
+                return 0; // Common hasar deðiþtirilmez
+        }
     }
 
     private Rarity GetUpgradedRarity(Rarity currentRarity, int level)
@@ -132,7 +168,6 @@ public class EnemyStats : MonoBehaviour
                 return currentRarity;
         }
     }
-
 
     public Equipment GetEquippedWeapon()
     {

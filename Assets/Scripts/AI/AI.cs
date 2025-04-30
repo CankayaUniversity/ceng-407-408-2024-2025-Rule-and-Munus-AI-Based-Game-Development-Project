@@ -5,38 +5,63 @@ using System.Collections;
 using System.Collections.Generic;
 using Types;
 
+
 public class EnemyAI : MonoBehaviour
 {
     private Player targetPlayer;
-    private Attributes attributes;
     public Transform playerTransform;
-    public string enemyClass;
-    public int enemyDEX;
+    private CharacterMovingButtons characterMovingButtons;
+    private CharacterHealthController characterHealthController;
+    private Attributes attributes;
+
     public int arrowCount = 10;
     public int mana = 10;
+
+
     private Node root;
+
     public float distanceToPlayer;
-    
     private float arenaRadius = 10f;
     
 
-    private string[] bodyParts = { "head", "body", "leg" };
+    
     private string playerDefenseZone;
     private string enemyDefenseZone;
 
-    CharacterMovingButtons characterMovingButtons;
-    CharacterHealthController characterHealthController;
+    
 
 
     private IAnimatorController animatorController;
 
-    int score = 0;
+    
     private EnemyStats enemyStats;
+
+
+    public string enemyClass;
+    
+
     void Start()
     {
-        enemyStats = FindObjectOfType<EnemyStats>();
-        targetPlayer = FindObjectOfType<Player>();
-        attributes = targetPlayer.GetComponent<Attributes>();
+        enemyClass = "Warrior"; 
+        
+        enemyStats = FindAnyObjectByType<EnemyStats>();
+        targetPlayer = FindAnyObjectByType<Player>();
+
+        if (targetPlayer == null)
+        {
+            Debug.LogError("Player bulunamadı! targetPlayer null.");
+        }
+        attributes = GetComponent<Attributes>();
+        if (attributes != null)
+        {
+            attributes.Name = "Enemy";
+            attributes._class = enemyClass;
+            attributes.race = "";
+            attributes.currentHealth = 100;
+            attributes.currentStamina = 40;
+
+            Debug.Log($"Enemy Initialized: Name={attributes.Name}, Class={attributes._class}");
+        }
         if (targetPlayer != null)
         {
             ChooseBestTargetArea();
@@ -44,7 +69,7 @@ public class EnemyAI : MonoBehaviour
         animatorController = new AnimatorController(GetComponent<Animator>());
         if (characterHealthController == null)
         {
-            characterHealthController = FindObjectOfType<CharacterHealthController>();
+            characterHealthController = FindFirstObjectByType<CharacterHealthController>();
 
             if (characterHealthController == null)
             {
@@ -52,7 +77,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
         
-        // İstersen burada başka değerler de atarsın, mesela attackPower, defensePower gibi.
+       
 
         
 
@@ -74,7 +99,7 @@ public class EnemyAI : MonoBehaviour
             PlayerSelectDefense();
             EnemySelectDefense();
 
-            PlayerAttack();
+            
             root.Evaluate();
             yield return new WaitForSeconds(5f);
         }
@@ -387,10 +412,42 @@ public class EnemyAI : MonoBehaviour
 
     private void EnemySelectDefense()
     {
-        string[] bodyParts = { "head", "body", "leg" };
-        enemyDefenseZone = bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
-        Debug.Log($"Enemy is defending the {enemyDefenseZone} zone!");
-        //enemyDefenseZone player tarafından çağrılıcak ve ona göre hasar alıp almaması karar verlicek 
+        // Düşmanın zırh ekipmanlarını alıyoruz
+        Equipment head = enemyStats.enemyEquipments.Find(e => e.equipSlot == EquipmentSlot.Head);
+        Equipment body = enemyStats.enemyEquipments.Find(e => e.equipSlot == EquipmentSlot.Body);
+        Equipment legs = enemyStats.enemyEquipments.Find(e => e.equipSlot == EquipmentSlot.Legs);
+        Equipment feet = enemyStats.enemyEquipments.Find(e => e.equipSlot == EquipmentSlot.Feet);
+
+        // Zırh ekipmanlarını bir listeye ekliyoruz
+        List<Equipment> armorPieces = new List<Equipment> { head, body, legs, feet };
+
+        // Zırhları armorModifier'a göre sıralıyoruz
+        armorPieces.Sort((a, b) => a.armorModifier.CompareTo(b.armorModifier));
+
+        // En düşük armorModifier'a sahip olan zırhı seçiyoruz
+        Equipment weakestArmor = armorPieces[0];
+
+        // Zırhı seçtikten sonra hangi bölgeyi savunduğunu belirliyoruz
+        switch (weakestArmor.equipSlot)
+        {
+            case EquipmentSlot.Head:
+                enemyDefenseZone = "head";
+                break;
+            case EquipmentSlot.Body:
+                enemyDefenseZone = "body";
+                break;
+            case EquipmentSlot.Legs:
+                enemyDefenseZone = "leg";
+                break;
+            case EquipmentSlot.Feet:
+                enemyDefenseZone = "feet";
+                break;
+            default:
+                enemyDefenseZone = "head"; // Varsayılan olarak başı seçiyoruz
+                break;
+        }
+
+        Debug.Log($"Enemy is defending the {enemyDefenseZone} zone with the weakest armor!");
     }
 
 
@@ -427,24 +484,6 @@ public class EnemyAI : MonoBehaviour
 
 
 
-    private void PlayerAttack()
-    {
-        string[] bodyParts = { "head", "body", "leg" };
-        string target = bodyParts[UnityEngine.Random.Range(0, bodyParts.Length)];
-
-        if (target == enemyDefenseZone)
-        {
-            Debug.Log($"Player attacked the {target} zone but the enemy defended!");
-        }
-        else
-        {
-            Debug.Log($"Player attacked the {target} zone and hit!");
-        }
-    }
-
-
-
-
 
     //            HAREKET İŞLEMLERİ
     private IEnumerator MoveTowardsPlayer()
@@ -478,7 +517,7 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator MoveAwayFromPlayer()
     {
         
-        animatorController.SetBackwarding(true);
+        animatorController.StepBackward();
         animatorController.SetIdle(false);
 
         
@@ -530,7 +569,7 @@ public class EnemyAI : MonoBehaviour
                 else
                 {
                     Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
-                    characterHealthController.currentHealth -= finalDamage; // Sonuç olarak hesaplanmış hasar
+                    attributes.UpdateHealth(characterHealthController.currentHealth - finalDamage);
                 }
             }
             else
@@ -561,7 +600,7 @@ public class EnemyAI : MonoBehaviour
                 else
                 {
                     Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
-                    characterHealthController.currentHealth -= finalDamage; // Sonuç olarak hesaplanmış hasar
+                    attributes.UpdateHealth(characterHealthController.currentHealth - finalDamage);
                 }
             }
             else
@@ -572,9 +611,32 @@ public class EnemyAI : MonoBehaviour
         
     }
 
+    private void PlayAttackAnimation(string target)
+    {
+        switch (target.ToLower())
+        {
+            case "head":
+                animatorController.SetAttacking1();
+                break;
+            case "body":
+                animatorController.SetAttacking2();
+                break;
+            case "legs":
+            case "feet":
+                animatorController.SetAttacking3();
+                break;
+            default:
+                animatorController.SetAttacking1(); // Yedek animasyon
+                break;
+        }
+
+        Debug.Log($"[Animation] Enemy attacks {target} with correct animation.");
+    }
+
     private void Attack()
     {
         var (target, score) = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
+        PlayAttackAnimation(target);
         Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz
         Equipment weapon = enemyStats.GetEquippedWeapon(); // enemyStats üzerinden silahı alıyoruz
 
@@ -590,7 +652,7 @@ public class EnemyAI : MonoBehaviour
             else
             {
                 Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
-                characterHealthController.currentHealth -= finalDamage; // Sonuç olarak hesaplanmış hasar
+                    attributes.UpdateHealth(characterHealthController.currentHealth - finalDamage);
             }
         }
         else
@@ -610,14 +672,16 @@ public class EnemyAI : MonoBehaviour
                 return targetPlayer.equippedItems.ContainsKey(EquipmentSlot.Body) ? targetPlayer.equippedItems[EquipmentSlot.Body] : null;
             case "legs":
                 return targetPlayer.equippedItems.ContainsKey(EquipmentSlot.Legs) ? targetPlayer.equippedItems[EquipmentSlot.Legs] : null;
+            case "feet": // Yeni eklenen ayak bölgesi
+                return targetPlayer.equippedItems.ContainsKey(EquipmentSlot.Feet) ? targetPlayer.equippedItems[EquipmentSlot.Feet] : null;
             default:
                 return null;
         }
     }
 
-    
 
-    // Silah ve zırh türüne göre hasar hesaplama
+
+    
     private int CalculateFinalDamage(Equipment weapon, Equipment targetedEquipment)
     {
         // Başlangıç hasarı, silahın hasar modifikasyonu - zırhın savunma modifikasyonu
@@ -630,7 +694,7 @@ public class EnemyAI : MonoBehaviour
             Debug.Log("Damage type matches, applying 1.5x multiplier!");
         }
 
-        // Eğer hasar negatifse 0 olarak ayarla
+        
         return Mathf.Max(0, damage);
     }
 
@@ -638,10 +702,11 @@ public class EnemyAI : MonoBehaviour
     //              SALDIRI KISMI*
 
 
-    
+
     private (string target, int score) ChooseBestTargetArea()
     {
-        EquipmentSlot[] targetSlots = { EquipmentSlot.Head, EquipmentSlot.Body, EquipmentSlot.Legs };
+        
+        EquipmentSlot[] targetSlots = { EquipmentSlot.Head, EquipmentSlot.Body, EquipmentSlot.Legs, EquipmentSlot.Feet };
         string selectedTarget = "";
         int lowestScore = int.MaxValue;
 
@@ -650,31 +715,25 @@ public class EnemyAI : MonoBehaviour
             if (targetPlayer.equippedItems.ContainsKey(slot))
             {
                 Equipment equipment = targetPlayer.equippedItems[slot];
-                int score = CalculateEquipmentScore(equipment);
+                int score = equipment.armorModifier;  // ArmorModifier'ı direk olarak kullanıyoruz
 
                 Debug.Log($"Slot: {slot}, Score: {score}");
 
                 if (score < lowestScore)
                 {
                     lowestScore = score;
-                    selectedTarget = slot.ToString().ToLower(); 
+                    selectedTarget = slot.ToString().ToLower();
                 }
             }
             else
             {
                 Debug.Log($"Slot: {slot} is EMPTY. Prioritizing this.");
-                lowestScore = 10; // boş koruma = düşük savunma
-                selectedTarget = slot.ToString().ToLower(); 
+                lowestScore = 10; // Boş koruma = düşük savunma, öncelikli hedef
+                selectedTarget = slot.ToString().ToLower();
                 break;
             }
         }
 
         return (selectedTarget, lowestScore);
-    }
-
-
-    private int CalculateEquipmentScore(Equipment equipment)
-    {
-        return equipment.armorModifier - equipment.damageModifier;
     }
 }
