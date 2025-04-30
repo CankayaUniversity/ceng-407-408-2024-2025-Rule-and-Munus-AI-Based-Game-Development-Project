@@ -5,17 +5,20 @@ using TMPro;
 using Types;
 using Stats;
 using System.Linq;
-using System;
+using UnityEngine.UI;
 
 public class Attributes : MonoBehaviour 
 {
     public string Name = "Lorem";
     public string _class = "Fighter";
     public string race = "Ipsum";
-    public int MaxHealth = 100;
-    public int CurrentHealth = 0;
-    public int MaxStamina = 100;
-    public int CurrentStamina = 0;
+    public readonly int maxHealth = 100;
+    public int currentHealth = 0;
+    public Slider healthBar; 
+    public readonly int maxStamina = 80;
+    public int currentStamina = 0;
+    public Slider staminaBar; 
+    public bool isDead = false;
     public Dictionary<StatType, Stat> stats = _stats.stats;
     public int Limit = 100;
     public List<GameObject> textList;
@@ -28,15 +31,9 @@ public class Attributes : MonoBehaviour
 	void Awake()
 	{
         instance = this;
-        textList = new List<GameObject>(){
-			GameObject.Find("STR_Value"), 
-			GameObject.Find("DEX_Value"),
-			GameObject.Find("INT_Value"),
-			GameObject.Find("WIS_Value"),
-            GameObject.Find("CON_Value"),
-            GameObject.Find("CHA_Value"),
-            GameObject.Find("LUCK_Value"),
-		};
+        StaminaBar(currentStamina);
+        HealthBar(currentHealth);
+        isDead = false;
 		for(int i = 0; i < stats.Count - 1 ; ++i)
 		{
 			textList[i].GetComponent<TextMeshProUGUI>().text = stats.ElementAt(i).Value.value.ToString();
@@ -105,14 +102,19 @@ public class Attributes : MonoBehaviour
 
     public void UpdateHealth(int value)
     {
-        this.CurrentHealth = (int)math.clamp(value, 0, MaxHealth);
-        Debug.Log($"{CurrentHealth} Health Adjusted {value}.");
+        this.currentHealth = (int)math.clamp(value, 0, maxHealth);
+        if(this.currentHealth <= 0)
+        {
+            isDead = true;
+            Debug.Log($"{Name} is dead!");
+        }
+        Debug.Log($"{currentHealth} Health Adjusted {value}.");
     }
 
     public void UpdateStamina(int value)
     {
-        this.CurrentStamina = (int)math.clamp(value, 0, MaxStamina);
-        Debug.Log($"{CurrentStamina} Health Adjusted {value}.");
+        this.currentStamina = (int)math.clamp(value, 0, maxStamina);
+        Debug.Log($"{currentStamina} Health Adjusted {value}.");
     }
 
     public void ShowStats()
@@ -124,5 +126,12 @@ public class Attributes : MonoBehaviour
         }
     }
 
-	
+    private void StaminaBar(int value)
+    {
+        staminaBar.value = value;
+    }
+	private void HealthBar(int value)
+    {
+        healthBar.value = value;
+    }
 }

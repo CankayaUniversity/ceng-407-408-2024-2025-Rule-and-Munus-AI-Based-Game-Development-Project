@@ -8,7 +8,7 @@ using Types;
 public class EnemyAI : MonoBehaviour
 {
     private Player targetPlayer;
-
+    private Attributes attributes;
     public Transform playerTransform;
     public string enemyClass;
     public int enemyDEX;
@@ -36,6 +36,7 @@ public class EnemyAI : MonoBehaviour
     {
         enemyStats = FindObjectOfType<EnemyStats>();
         targetPlayer = FindObjectOfType<Player>();
+        attributes = targetPlayer.GetComponent<Attributes>();
         if (targetPlayer != null)
         {
             ChooseBestTargetArea();
