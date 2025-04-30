@@ -9,6 +9,10 @@ public class CharacterMovingButtons : MonoBehaviour
     [SerializeField] private List<Button> attackButtons;
     [SerializeField] private List<Button> defenceButtons;
     [SerializeField] private List<Button> ArrowButtons;
+    [SerializeField] private GameObject ChangeArrowButton;
+    [SerializeField] private GameObject ChangeSwordButton;
+    [SerializeField] private GameObject SwordPanel;
+    [SerializeField] private GameObject ArrowPanel;
 
     public int attackIndex;
     public int defenceIndex;
@@ -34,6 +38,25 @@ public class CharacterMovingButtons : MonoBehaviour
         characterMoving.OnDefenceComplete += OnDefenceComplete;
     }
 
+    public void ChangeWeaponButton()
+    {
+        if(ChangeArrowButton.activeSelf)
+        {
+            Debug.Log("Change Sword");
+            ChangeArrowButton.SetActive(false);
+            ChangeSwordButton.SetActive(true);
+            SwordPanel.SetActive(false);
+            ArrowPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Change Sword");
+            ChangeArrowButton.SetActive(true);
+            ChangeSwordButton.SetActive(false);
+            SwordPanel.SetActive(true);
+            ArrowPanel.SetActive(false);
+        }
+    }
     private void OnDestroy()
     {
         if (characterMoving != null)
