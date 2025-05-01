@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
     public Transform playerTransform;
     private CharacterMovingButtons characterMovingButtons;
     private CharacterHealthController characterHealthController;
+    public EquipmentSlot defencedSlot;
     private Attributes attributes;
 
     public int arrowCount = 10;
@@ -447,6 +448,7 @@ public class EnemyAI : MonoBehaviour
                 break;
         }
 
+        defencedSlot = weakestArmor.equipSlot;
         Debug.Log($"Enemy is defending the {enemyDefenseZone} zone with the weakest armor!");
     }
 

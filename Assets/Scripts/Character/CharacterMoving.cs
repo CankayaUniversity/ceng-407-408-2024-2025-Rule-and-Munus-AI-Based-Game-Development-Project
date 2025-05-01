@@ -264,7 +264,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         Vector3 direction = (targetPosition - shootPoint.transform.position).normalized;
 
         // Oku hızla fırlat
-        arrow.velocity = direction * launchSpeed;
+        arrow.linearVelocity = direction * launchSpeed;
 
         // Okun yönünü hız vektörüne çevir
         arrow.transform.rotation = Quaternion.LookRotation(direction);

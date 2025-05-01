@@ -21,7 +21,7 @@ public class EquipmentManager : MonoBehaviour {
 
 	#endregion
 
-	Equipment[] currentEquipment;   // Items we currently have equipped
+	public Equipment[] currentEquipment;   // Items we currently have equipped
 
 	// Callback for when an item is equipped/unequipped
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
