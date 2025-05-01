@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterMovingButtons : MonoBehaviour
 {
+    [Header("Character Moving Reference")]
     [SerializeField] private CharacterMoving characterMoving;
     [SerializeField] private List<Button> attackButtons;
     [SerializeField] private List<Button> defenceButtons;
@@ -14,6 +15,13 @@ public class CharacterMovingButtons : MonoBehaviour
     [SerializeField] private GameObject SwordPanel;
     [SerializeField] private GameObject ArrowPanel;
 
+
+    [Header("Weapon Prefabs")]
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject sword;
+
+
+    [Header("Button Indexes")]
     public int attackIndex;
     public int defenceIndex;
     public int arrowIndex;
@@ -47,6 +55,8 @@ public class CharacterMovingButtons : MonoBehaviour
             ChangeSwordButton.SetActive(true);
             SwordPanel.SetActive(false);
             ArrowPanel.SetActive(true);
+            arrow.SetActive(true);
+            sword.SetActive(false);
         }
         else
         {
@@ -55,6 +65,8 @@ public class CharacterMovingButtons : MonoBehaviour
             ChangeSwordButton.SetActive(false);
             SwordPanel.SetActive(true);
             ArrowPanel.SetActive(false);
+            arrow.SetActive(false);
+            sword.SetActive(true);
         }
     }
     private void OnDestroy()

@@ -202,57 +202,75 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-            
+
         currentState = CharacterState.Attacking;
         Transform target = TargetHead.transform;
         if (target == null) return;
-        CreateArrow(target.position);
-
 
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
-        //animatorController.SetArrowAttack1();
-        StartCoroutine(ResetState(attackDuration, OnAttackComplete));
+        animatorController.SetArrowAttack1();
+
+        StartCoroutine(ArrowAttackRoutine(target.position, OnAttackComplete));
     }
     public void ArrowAttack2()
     {
         if (currentState != CharacterState.Idle)
             return;
-            
-        currentState = CharacterState.Attacking;
-        Transform target = TargetBody.transform;
-        if (target == null) return;
-        CreateArrow(target.position);
 
+        currentState = CharacterState.Attacking;
+        Transform target = TargetHead.transform;
+        if (target == null) return;
 
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
-        //animatorController.SetArrowAttack2();
-        StartCoroutine(ResetState(attackDuration, OnAttackComplete));
+        animatorController.SetArrowAttack1();
+
+        StartCoroutine(ArrowAttackRoutine(target.position, OnAttackComplete));
     }
     public void ArrowAttack3()
     {
         if (currentState != CharacterState.Idle)
             return;
-            
-        currentState = CharacterState.Attacking;
-        Transform target = TargetLeg.transform;
-        if (target == null) return;
-        CreateArrow(target.position);
 
+        currentState = CharacterState.Attacking;
+        Transform target = TargetHead.transform;
+        if (target == null) return;
 
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
-        //animatorController.SetArrowAttack3();
-        StartCoroutine(ResetState(attackDuration, OnAttackComplete));
+        animatorController.SetArrowAttack1();
+
+        StartCoroutine(ArrowAttackRoutine(target.position, OnAttackComplete));
+    }
+
+    private IEnumerator ArrowAttackRoutine(Vector3 targetPos, Action onComplete)
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Bekledi 3sn");
+
+        CreateArrow(targetPos);
+
+        yield return new WaitForSeconds(attackDuration);
+        currentState = CharacterState.Idle;
+        onComplete?.Invoke();
     }
 
     private void CreateArrow(Vector3 targetPosition)
     {
         Rigidbody arrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.identity);
-        Vector3 launchVelocity = CalculateLaunchVelocity(shootPoint.transform.position, targetPosition, launchSpeed);
-        arrow.linearVelocity = launchVelocity;
+
+        // Hedef yönünü hesapla
+        Vector3 direction = (targetPosition - shootPoint.transform.position).normalized;
+
+        // Oku hızla fırlat
+        arrow.velocity = direction * launchSpeed;
+
+        // Okun yönünü hız vektörüne çevir
+        arrow.transform.rotation = Quaternion.LookRotation(direction);
     }
+
+
 
     private Vector3 CalculateLaunchVelocity(Vector3 start, Vector3 target, float speed)
     {
