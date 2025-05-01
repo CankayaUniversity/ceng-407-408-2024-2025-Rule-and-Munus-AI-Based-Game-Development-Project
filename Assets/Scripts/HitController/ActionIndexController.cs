@@ -4,8 +4,8 @@ public class ActionIndexController : MonoBehaviour
 {
     public CharacterMovingButtons characterMovingButton;
     public CharacterMoving characterMoving;
-    public EnemyHealthController enemyhealthController;
-    public CharacterHealthController characterHealthController;
+    public Attributes enemy;
+    public Attributes character;
     
 
 
@@ -41,7 +41,6 @@ public class ActionIndexController : MonoBehaviour
     public void CorrectDefenceAction(int value)
     {
         value = value - value*3/4;
-        enemyhealthController.DecreaseHealth(value);
-
+        enemy.UpdateHealth(value);
     }
 }

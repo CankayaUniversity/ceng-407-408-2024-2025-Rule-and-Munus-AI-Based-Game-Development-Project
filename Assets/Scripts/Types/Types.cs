@@ -41,12 +41,12 @@ namespace Types
         }
         public enum Rarity
         {
-            Common,
-            Advenced,
-            Uncommon,
-            Rare,
-            Epic,
-            Legendary,
+            Common = 1,
+            Advenced = 2,
+            Uncommon = 3,
+            Rare = 4,
+            Epic = 5,
+            Legendary = 6,
             Default,
         }
         public enum StatType
