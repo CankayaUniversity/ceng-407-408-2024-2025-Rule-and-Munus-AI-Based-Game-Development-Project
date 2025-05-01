@@ -29,6 +29,17 @@ public enum CharacterState
     ReturningToStart
 }
 
+public enum AIState
+{
+    Idle,
+    MovingToTarget,
+    Attacking,
+    Defending,
+    Stepping,
+    Dead,
+    ReturningToStart
+}
+
 
 
 public interface ICharacterMover
