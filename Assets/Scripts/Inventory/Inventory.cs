@@ -91,5 +91,12 @@ public class Inventory : MonoBehaviour {
 		if (onItemChangedCallback != null)
 			onItemChangedCallback.Invoke();
 	}
+	public void Remove (Equipment equipment)
+	{
+		items.Remove(equipment);
 
+		// Trigger callback
+		if (onItemChangedCallback != null)
+			onItemChangedCallback.Invoke();
+	}
 }

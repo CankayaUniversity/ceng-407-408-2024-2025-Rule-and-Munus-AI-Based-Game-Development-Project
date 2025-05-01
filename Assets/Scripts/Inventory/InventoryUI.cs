@@ -6,13 +6,9 @@ public class InventoryUI : MonoBehaviour {
 
 	public Transform itemsParent;	// The parent object of all the items
 	public GameObject inventoryUI;	// The entire UI
-
-	Inventory inventory;	// Our current inventory
-
+	public Inventory inventory;	// Our current inventory
 	InventorySlot[] slots;	// List of all the slots
-
 	void Start () {
-		inventory = Inventory.instance;
 		inventory.onItemChangedCallback += UpdateUI;	// Subscribe to the onItemChanged callback
 
 		// Populate our slots array
@@ -31,7 +27,7 @@ public class InventoryUI : MonoBehaviour {
 	//		- Adding items
 	//		- Clearing empty slots
 	// This is called using a delegate on the Inventory.
-	void UpdateUI ()
+	public void UpdateUI ()
 	{
 		// Loop through all the slots
 		for (int i = 0; i < slots.Length; i++)

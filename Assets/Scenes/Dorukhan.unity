@@ -4012,10 +4012,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 785500934}
     m_Modifications:
-    - target: {fileID: 273035860864012801, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4005988136900063483, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6220,7 +6216,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 273035860864012801, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4005988136900063483, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Pivot.x
@@ -7392,10 +7388,11 @@ MonoBehaviour:
   Name: Lorem
   _class: Fighter
   race: Ipsum
-  MaxHealth: 100
-  CurrentHealth: 0
-  MaxStamina: 100
-  CurrentStamina: 0
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  currentStamina: 0
+  staminaBar: {fileID: 0}
+  isDead: 0
   Limit: 100
   textList:
   - {fileID: 1035494020}
@@ -7471,7 +7468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsParent: {fileID: 785500934}
-  inventoryUI: {fileID: 0}
+  inventoryUI: {fileID: 1245461167}
+  inventory: {fileID: 1725706852}
 --- !u!114 &1744929038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8620,6 +8618,7 @@ MonoBehaviour:
   flag: 0
   defaultEquipment: []
   targetMesh: {fileID: 0}
+  inventoryUI: {fileID: 1744929037}
 --- !u!114 &1920523641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9083,7 +9082,7 @@ PrefabInstance:
       objectReference: {fileID: -1776292142, guid: bc54fd900d3c18b4394883f9f04ba184, type: 3}
     - target: {fileID: 273035860864012801, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4005988136900063483, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Pivot.x
@@ -9354,18 +9353,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 785500934}
     m_Modifications:
-    - target: {fileID: 273035860864012801, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 273035860864012801, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6e330f70715c5ca4b8facae6274719fa, type: 3}
-    - target: {fileID: 273035860864012801, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4005988136900063483, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9450,6 +9437,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

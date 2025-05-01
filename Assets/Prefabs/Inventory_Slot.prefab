@@ -65,8 +65,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1776292142, guid: bc54fd900d3c18b4394883f9f04ba184, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6e330f70715c5ca4b8facae6274719fa, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 273035860864012801}
   removeButton: {fileID: 5754042802030859669}
+  equipmentManager: {fileID: 0}
 --- !u!1 &4808654922399405481
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +249,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6776590413079968353}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114048890377636722, guid: 7ec68f7e1b4a3454bbcd4b04b881feb1, type: 3}
+        m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
+        m_MethodName: UseItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5018733344640717893
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,4 +456,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8074310760690480513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7886400942481126999}
+        m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
+        m_MethodName: OnRemoveButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
