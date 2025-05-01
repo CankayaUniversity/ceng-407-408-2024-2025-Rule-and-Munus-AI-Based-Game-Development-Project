@@ -62,6 +62,21 @@ public static class ItemGenerator
         inventory.Add(generated);
         // inventory.ShowItems();
     }
+
+    public static Equipment Generate(EquipmentType type, Rarity rarity)
+    {
+        Dictionary<StatType, StatModifier> statTypeModifier= new Dictionary<StatType, StatModifier>();
+        generated = ScriptableObject.CreateInstance<Equipment>();
+        fate = 1;
+        equipmentType = type;
+        equipmentRarity = rarity;
+        //Crafts an equipment with damageFactor/defenceFactor but statModifiers
+        Craft(); 
+        //Polishs the equipment for adjusting the statModifiers
+        Polish(ref statTypeModifier);
+        generated.AdjustStatModifiers(statTypeModifier);
+        return generated;
+    }
     public static void Polish(ref Dictionary<StatType, StatModifier> sTM)
     {
         int value = odds.rarityModifiers[equipmentRarity][Random.Range(0, odds.rarityModifiers[equipmentRarity].Length)];

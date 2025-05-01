@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Types;
 using Stats;
+using Icons;
 
 /* An Item that can be equipped. */
 
@@ -19,6 +20,10 @@ public class Equipment : Item {
 	public Dictionary<StatType, StatModifier> statModifiers;
 	public SkinnedMeshRenderer mesh;
     public EquipmentManager.MeshBlendShape[] coveredMeshRegions;
+	// public Equipment()
+	// {
+	// 	this.InitEquipment(EquipmentSlot.Default, Rarity.Default, DamageType.Default, 0, 0, icons.slotMesh[EquipmentSlot.Default], icons.slotImage[EquipmentSlot.Default]);
+	// }
 	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, DamageType damageType, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon)
 	{
 		this.InitEquipment(equipmentSlot, rarity, damageType, armorModifier, damageModifier, mesh, icon);

@@ -7,7 +7,7 @@ public class EquipmentManager : MonoBehaviour {
 
 	#region Singleton
 	public bool flag = false;
-    public enum MeshBlendShape {Torso, Arms, Legs };
+    public enum MeshBlendShape {Head, Body, Legs, Feet, Default};
     public Equipment[] defaultEquipment;
 	public static EquipmentManager instance;
 	public SkinnedMeshRenderer targetMesh;
@@ -27,11 +27,12 @@ public class EquipmentManager : MonoBehaviour {
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 	public OnEquipmentChanged onEquipmentChanged;
 	Inventory inventory;	// Reference to our inventory
+	public InventoryUI inventoryUI;
 	AttributeManager attributeManager;
 	void Start ()
 	{
 		inventory = Inventory.instance;		// Get a reference to our inventory
-		// attributeManager = AttributeManager.instance; // Get a reference to our attributes
+		inventory.ShowItems();
 		attributeManager = GetComponent<AttributeManager>();
 		// Initialize currentEquipment based on number of equipment slots
 		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
@@ -44,6 +45,7 @@ public class EquipmentManager : MonoBehaviour {
 	// Equip a new item
 	public void Equip (Equipment newItem)
 	{
+		// inventory.ShowItems();
 		// Find out what slot the item fits in
 		int slotIndex = (int)newItem.equipSlot;
 
@@ -60,6 +62,8 @@ public class EquipmentManager : MonoBehaviour {
 		flag = true;
 		attributeManager.UpdateStats(newItem, true);
         AttachToMesh(newItem, slotIndex);
+		inventory.ShowItems();
+		inventoryUI.UpdateUI();
 	}
 
 	// Unequip an item with a particular index
@@ -90,6 +94,8 @@ public class EquipmentManager : MonoBehaviour {
 			}
 		}
 		attributeManager.UpdateStats(oldItem, false);
+		inventory.ShowItems();
+		inventoryUI.UpdateUI();
         return oldItem;
 	}
 

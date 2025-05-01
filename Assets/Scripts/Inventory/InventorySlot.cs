@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Types;
+using Equipments;
 
 /* Sits on all InventorySlots. */
 
@@ -7,15 +9,22 @@ public class InventorySlot : MonoBehaviour {
 
 	public Image icon;			// Reference to the Icon image
 	public Button removeButton;	// Reference to the remove button
-
 	Item item;  // Current item in the slot
 	Equipment equipment;
+	public EquipmentManager equipmentManager;
+	public Inventory inventory;
+	bool isEquiped;
 
-	// Add item to the slot
-	public void AddItem (Equipment equipment)
+    // Add item to the slot
+    public void Awake()
+    {
+		isEquiped = false;
+        equipment = ItemGenerator.Generate(EquipmentType.defaultEquipment, Rarity.Default);
+    }
+    public void AddItem (Equipment equipment)
 	{
 		this.equipment = equipment;
-
+		isEquiped = false;
 		icon.sprite = equipment.icon;
 		icon.enabled = true;
 		removeButton.interactable = true;
@@ -33,7 +42,7 @@ public class InventorySlot : MonoBehaviour {
 	public void ClearSlot ()
 	{
 		item = null;
-
+		isEquiped = true;
 		icon.sprite = null;
 		icon.enabled = false;
 		removeButton.interactable = false;
@@ -42,14 +51,22 @@ public class InventorySlot : MonoBehaviour {
 	// Called when the remove button is pressed
 	public virtual void OnRemoveButton ()
 	{
-		Inventory.instance.Remove(item);
+		equipmentManager.Unequip(1);
+		inventory.Remove(item);
+		ClearSlot();
 	}
 	// Called when the item is pressed
 	public void UseItem ()
 	{
-		if (item != null)
+		// if (item != null)
+		// {
+		// 	item.Use();
+		// }
+		if (equipment != null && isEquiped == false)
 		{
-			item.Use();
+			equipmentManager.Equip(equipment);
+			removeButton.interactable = false;
+			isEquiped = true;
 		}
 	}
 
