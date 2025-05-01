@@ -5,27 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Levels/00 - Bootstrapper/Bootstrapper.unity
-    guid: 8332054eadbb5d340bb2e73805a39b47
-  - enabled: 0
-    path: Assets/Levels/01 - Hub/Scenes/Hub_Environment.unity
-    guid: e5ba1b9d2eb07984bb9e4a87f74a4288
-  - enabled: 0
-    path: Assets/Levels/01 - Hub/Scenes/Hub_Gameplay.unity
-    guid: bac2fafadf3cf654f940aa54fcf1ff3a
-  - enabled: 0
-    path: Assets/Levels/01 - Hub/Scenes/Hub_Light.unity
-    guid: 821b340e4e9ade44e9991a1367161a8a
-  - enabled: 0
-    path: Assets/Levels/02 - Promenade/Scenes/Promenade_Environment.unity
-    guid: 18a9bacc5e7f16a46835dbe6e23f0e95
-  - enabled: 0
-    path: Assets/Levels/02 - Promenade/Scenes/Promenade_NavMesh.unity
-    guid: 27dd6cf0dca58d646bd312b9c7db48c2
-  - enabled: 0
-    path: Assets/Levels/02 - Promenade/Scenes/Promenade_Gameplay.unity
-    guid: bcab501c0adad4d4dad385ae10cd224e
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9c2cef193509ac54badd5d2dbeb62d8a
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: edec71f55be7252418dcf47359f9d2b3
+  - enabled: 1
+    path: Assets/Scenes/Dorukhan.unity
+    guid: 7bdadd146d21a9848ab8e2f283267555
+  - enabled: 1
+    path: Assets/Scenes/VillageScene.unity
+    guid: 4168e1dc109a8df4eadc96dba6378359
+  - enabled: 1
+    path: Assets/Scenes/Sezer.unity
+    guid: 95b3194ecd1df8f43ade9d8470828caa
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 6f01ade188ee41041a542c6a0584ed21, type: 3}
   m_UseUCBPForAssetBundles: 0
