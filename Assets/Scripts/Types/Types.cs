@@ -7,12 +7,12 @@ namespace Types
 {   
         public enum EquipmentSlot 
         { 
-            Head, 
-            Body, 
-            Legs, 
-            Weapon,
+            Head = 1, 
+            Body = 2, 
+            Legs = 3, 
+            Feet = 4,
             Secondary,
-            Feet, 
+            Weapon, 
             Hand,
             Accessoire,
             Default,

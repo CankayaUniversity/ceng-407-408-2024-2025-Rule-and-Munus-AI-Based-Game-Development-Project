@@ -688,6 +688,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1028,6 +1036,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1244,6 +1260,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2852,6 +2876,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3032,6 +3064,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3377,6 +3417,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3821,6 +3869,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4096,6 +4152,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5538,6 +5602,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5640,6 +5712,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5742,6 +5822,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6196,6 +6284,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6302,6 +6398,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6404,6 +6508,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6581,6 +6693,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7089,6 +7209,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7906,6 +8034,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8556,6 +8692,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9082,7 +9226,7 @@ PrefabInstance:
       objectReference: {fileID: -1776292142, guid: bc54fd900d3c18b4394883f9f04ba184, type: 3}
     - target: {fileID: 273035860864012801, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4005988136900063483, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Pivot.x
@@ -9168,6 +9312,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5643876095034730950, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776590413079968353, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: equipmentManager
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9437,6 +9597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot
       objectReference: {fileID: 0}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1725706852}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: equipmentManager
       value: 

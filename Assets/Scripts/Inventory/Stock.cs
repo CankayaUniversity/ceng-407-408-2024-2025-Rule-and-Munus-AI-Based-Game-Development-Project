@@ -7,6 +7,7 @@ using System.Linq;
 using TMPro;
 using System.Dynamic;
 using System;
+using UnityEngine.InputSystem.Interactions;
 
 public class Stock : MonoBehaviour {
 
@@ -20,12 +21,6 @@ public class Stock : MonoBehaviour {
 	{
     	instance = this;
 		typeMaterial = materials.typeMaterial;
-		textList = new List<GameObject>(){
-			GameObject.Find("Wood_Count"), 
-			GameObject.Find("Stone_Count"),
-			GameObject.Find("Iron_Count"),
-			GameObject.Find("Cloth_Count")
-		};
 		for(int i = 0; i < typeMaterial.Count; ++i)
 		{
 			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
