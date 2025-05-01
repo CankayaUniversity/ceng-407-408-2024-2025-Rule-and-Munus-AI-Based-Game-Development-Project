@@ -9,6 +9,10 @@ public interface IAnimatorController
     void SetAttacking1();
     void SetAttacking2();
     void SetAttacking3();
+    void SetArrowAttack1();
+    void SetArrowAttack2();
+    void SetArrowAttack3();
+
     void StepForward();
     void StepBackward();
     void SetDefence1(bool value);
@@ -64,7 +68,12 @@ public class AnimatorController : IAnimatorController
     public void SetAttacking1() => animator.SetTrigger(attacking1Hash);
     public void SetAttacking2() => animator.SetTrigger(attacking2Hash);
     public void SetAttacking3() => animator.SetTrigger(attacking3Hash);
-    
+
+    public void SetArrowAttack1() => animator.SetTrigger("isArrowAttacking1");
+    public void SetArrowAttack2() => animator.SetTrigger("isArrowAttacking1");
+    public void SetArrowAttack3() => animator.SetTrigger("isArrowAttacking1");
+
+
     public void StepForward() => animator.SetTrigger(stepForwardHash);
     public void StepBackward() => animator.SetTrigger(stepBackwardHash);
     

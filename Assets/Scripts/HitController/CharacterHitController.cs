@@ -4,9 +4,16 @@ public class CharacterHitController : MonoBehaviour
 {
     public ActionIndexController actionIndexController;
     public void OnTriggerEnter(Collider other) {
-        if(other.tag == "Enemy") 
+        if (other.tag == "Arrow")
         {
-            Debug.Log("Hit by player!");
+            Destroy(other.gameObject);
+            Debug.Log("Hit by enemy!");
+            actionIndexController.IndexController();
+            //healthController.DecreaseHealth(10);
+        }
+        else if (other.tag == "Sword")
+        {
+            Debug.Log("Hit by enemy!");
             actionIndexController.IndexController();
             //healthController.DecreaseHealth(10);
         }
