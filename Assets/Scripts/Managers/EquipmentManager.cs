@@ -1,5 +1,7 @@
 using UnityEngine;
+using System;
 using Types;
+using System.Collections.Generic;
 
 /* Keep track of equipment. Has functions for adding and removing items. */
 
@@ -21,7 +23,7 @@ public class EquipmentManager : MonoBehaviour {
 
 	#endregion
 
-	public Equipment[] currentEquipment;   // Items we currently have equipped
+	public List<Equipment> currentEquipment;   // Items we currently have equipped
 
 	// Callback for when an item is equipped/unequipped
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
@@ -36,7 +38,7 @@ public class EquipmentManager : MonoBehaviour {
 		attributeManager = GetComponent<AttributeManager>();
 		// Initialize currentEquipment based on number of equipment slots
 		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
-		currentEquipment = new Equipment[numSlots];
+		currentEquipment = new List<Equipment>(numSlots);
         currentMeshes = new SkinnedMeshRenderer[numSlots];
 		
         EquipDefaults();
@@ -102,7 +104,7 @@ public class EquipmentManager : MonoBehaviour {
 	// Unequip all items
 	public void UnequipAll ()
 	{
-		for (int i = 0; i < currentEquipment.Length; i++)
+		for (int i = 0; i < currentEquipment.Count; i++)
 		{
 			Unequip(i);
 		}

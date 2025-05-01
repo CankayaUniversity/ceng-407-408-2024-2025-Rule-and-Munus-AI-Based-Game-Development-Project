@@ -15175,9 +15175,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f6ab7ca25632f4e9593b2ff2aa1b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterMoving: {fileID: 661972231}
+  characterState: 0
   playerTransform: {fileID: 661972233}
   arrowCount: 10
   mana: 10
+  turn: 0
   distanceToPlayer: 0
   enemyClass: Warrior
 --- !u!95 &1985197200
