@@ -14,8 +14,8 @@ namespace Icons
             { EquipmentSlot.Legs, Resources.Load<Sprite> ("Default")},
             { EquipmentSlot.Feet, Resources.Load<Sprite> ("Default")},
             { EquipmentSlot.Accessoire, Resources.Load<Sprite> ("Default")},
+            { EquipmentSlot.Secondary, Resources.Load<Sprite> ("Default")},
             { EquipmentSlot.Default, Resources.Load<Sprite> ("Default")},
-
 	    };
         public static readonly Dictionary<EquipmentSlot, Image> slotImage = new Dictionary<EquipmentSlot, Image>() {
 		    { EquipmentSlot.Weapon, Resources.Load<Image> ("Platelegs")},

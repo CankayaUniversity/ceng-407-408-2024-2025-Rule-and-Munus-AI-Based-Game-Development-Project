@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using Types;
 using System.Collections.Generic;
+using Equipments;
 
 /* Keep track of equipment. Has functions for adding and removing items. */
 
@@ -28,22 +29,44 @@ public class EquipmentManager : MonoBehaviour {
 	// Callback for when an item is equipped/unequipped
 	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
 	public OnEquipmentChanged onEquipmentChanged;
-	Inventory inventory;	// Reference to our inventory
+	public Inventory inventory;	
 	public InventoryUI inventoryUI;
 	AttributeManager attributeManager;
 	void Start ()
 	{
-		inventory = Inventory.instance;		// Get a reference to our inventory
+		// inventory = Inventory.instance;		// Get a reference to our inventory
 		inventory.ShowItems();
 		attributeManager = GetComponent<AttributeManager>();
 		// Initialize currentEquipment based on number of equipment slots
-		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+		int numSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new List<Equipment>(numSlots);
+		FillDefault();
         currentMeshes = new SkinnedMeshRenderer[numSlots];
 		
         EquipDefaults();
 	}
-
+	public void FillDefault()
+	{
+		// Equipment equipment;
+		// equipment = ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Common);
+		// Equip(equipment);
+		// equipment = ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Common);
+		// Equip(equipment);
+		// equipment = ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Common);
+		// Equip(equipment);
+		// equipment = ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Common);
+		// Equip(equipment);
+		// equipment = ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common);
+		// Equip(equipment);
+		// equipment = ItemGenerator.Generate(EquipmentType.bow, Rarity.Common);
+		// Equip(equipment);
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Common));
+	    currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bow, Rarity.Common));
+	}
 	// Equip a new item
 	public void Equip (Equipment newItem)
 	{

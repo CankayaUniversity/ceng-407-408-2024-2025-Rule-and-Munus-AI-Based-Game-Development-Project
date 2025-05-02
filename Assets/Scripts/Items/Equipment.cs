@@ -22,7 +22,7 @@ public class Equipment : Item {
     public EquipmentManager.MeshBlendShape[] coveredMeshRegions;
 	// public Equipment()
 	// {
-	// 	this.InitEquipment(EquipmentSlot.Default, Rarity.Default, DamageType.Default, 0, 0, icons.slotMesh[EquipmentSlot.Default], icons.slotImage[EquipmentSlot.Default]);
+	// 	this.InitEquipment(EquipmentSlot.Default, Rarity.Default, DamageType.Default, 0, 0, icons.slotMesh[EquipmentSlot.Default], icons.slotSprite[EquipmentSlot.Default]);
 	// }
 	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, DamageType damageType, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon)
 	{

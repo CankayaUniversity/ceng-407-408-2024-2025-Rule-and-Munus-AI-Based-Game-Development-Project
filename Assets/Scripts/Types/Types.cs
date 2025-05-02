@@ -11,10 +11,10 @@ namespace Types
             Body = 2, 
             Legs = 3, 
             Feet = 4,
-            Secondary,
-            Weapon, 
+            Secondary = 5,
+            Weapon = 6, 
             Hand,
-            Accessoire,
+            Accessoire = 7,
             Default,
         }
         // public enum EquipmentType

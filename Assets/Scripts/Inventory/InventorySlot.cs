@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System;
 using Types;
 using Equipments;
 
@@ -9,17 +11,24 @@ public class InventorySlot : MonoBehaviour {
 
 	public Image icon;			// Reference to the Icon image
 	public Button removeButton;	// Reference to the remove button
-	Item item;  // Current item in the slot
-	Equipment equipment;
+	public Item item;  // Current item in the slot
+	// public ScriptableObject gameObject = new ScriptableObject.CreateInstance<Equipment>();
+	public Equipment equipment;
 	public EquipmentManager equipmentManager;
 	public Inventory inventory;
 	bool isEquiped;
 
     // Add item to the slot
-    public void Awake()
+    // public void Awake()
+    // {
+	// 	isEquiped = false;
+    //     equipment = ItemGenerator.Generate(EquipmentType.defaultEquipment, Rarity.Default);
+    // }
+	public void Start()
     {
 		isEquiped = false;
         equipment = ItemGenerator.Generate(EquipmentType.defaultEquipment, Rarity.Default);
+		// gameObject = Equipment.CreateInstance(equipmentManager);
     }
     public void AddItem (Equipment equipment)
 	{
@@ -51,7 +60,7 @@ public class InventorySlot : MonoBehaviour {
 	// Called when the remove button is pressed
 	public virtual void OnRemoveButton ()
 	{
-		equipmentManager.Unequip(1);
+		// equipmentManager.Unequip(equipment);
 		inventory.Remove(item);
 		ClearSlot();
 	}

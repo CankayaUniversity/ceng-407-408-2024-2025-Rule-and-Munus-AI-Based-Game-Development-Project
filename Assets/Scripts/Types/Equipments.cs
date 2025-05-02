@@ -35,7 +35,7 @@ namespace Equipments
             Resources.Load<Image> ("Default"), Resources.Load<SkinnedMeshRenderer> ("Default"), new List<StatType>(){StatType.STR});
         public static readonly EquipmentType longSword = new EquipmentType(EquipmentSlot.Weapon, DamageType.Slashing, 1.5f, 
             Resources.Load<Image> ("Default"), Resources.Load<SkinnedMeshRenderer> ("Default"), new List<StatType>(){StatType.STR});
-        public static readonly EquipmentType bow = new EquipmentType(EquipmentSlot.Weapon, DamageType.Piercing, 1.0f, 
+        public static readonly EquipmentType bow = new EquipmentType(EquipmentSlot.Secondary, DamageType.Piercing, 1.0f, 
             Resources.Load<Image> ("Default"), Resources.Load<SkinnedMeshRenderer> ("Default"), new List<StatType>(){StatType.DEX});
         public static readonly EquipmentType hammer = new EquipmentType(EquipmentSlot.Weapon, DamageType.Bludgeoning, 1.0f, 
             Resources.Load<Image> ("Default"), Resources.Load<SkinnedMeshRenderer> ("Default"), new List<StatType>(){StatType.STR});
