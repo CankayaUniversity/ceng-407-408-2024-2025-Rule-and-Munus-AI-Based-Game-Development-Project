@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour
     private Node root;
 
     public float distanceToPlayer;
-    private float arenaRadius = 10f;
+    private float arenaRadius = 20f;
     
     private string playerDefenseZone;
     private string enemyDefenseZone;
@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour
         enemyClass = "Archer"; 
         equipmentManager = gameObject.GetComponent<EquipmentManager>() ;
         enemyStats = FindAnyObjectByType<EnemyStats>();
-        targetPlayer = FindAnyObjectByType<Player>();
+        
         
         characterMovingButtons =FindAnyObjectByType<CharacterMovingButtons>();
         
@@ -63,10 +63,6 @@ public class EnemyAI : MonoBehaviour
 
         }
         animatorController = new AnimatorController(GetComponent<Animator>());
-        if (targetPlayer == null)
-        {
-            Debug.LogError("Player bulunamadı! targetPlayer null.");
-        }
         
         if (attributes != null)
         {
@@ -98,15 +94,22 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
 {
-    
 
-    if ( turn == false && characterMoving.currentState == CharacterState.Attacking)
+        Vector3 fixedPosition = transform.position;
+        fixedPosition.y = 0f;
+        transform.position = fixedPosition;
+
+        Vector3 fixedPositionz = transform.position;
+        fixedPositionz.z = 0f;
+        transform.position = fixedPositionz;
+
+        if ( turn == false && characterMoving.currentState == CharacterState.Attacking)
     {
         turn=true;
 
         if (playerTransform != null)
         {
-            distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+                distanceToPlayer= Mathf.Abs(transform.position.x - playerTransform.position.x);
         }
 
         PlayerSelectDefense();
@@ -114,7 +117,7 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(delay());
     }
 
-    // Eğer sıra değiştiyse (örneğin turn dışarıdan false yapılırsa), tekrar aktif olabilsin
+    
     else if (characterMoving.currentState == CharacterState.Idle)
     {
         turn=false;
@@ -149,6 +152,14 @@ public IEnumerator delay(){
         new Sequence(new List<Node> {
             new ConditionNode(() => distanceToPlayer <= 10),
             new Selector(new List<Node> {
+
+
+                new Sequence(new List<Node> {
+                new ConditionNode(() => distanceToPlayer < 3),
+                new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
+                }),
+
+
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.7f), 
                     new ActionNode(() => Attack())
@@ -171,7 +182,7 @@ public IEnumerator delay(){
 
         
         new Sequence(new List<Node> {
-            new ConditionNode(() => distanceToPlayer > 10f ),  
+            new ConditionNode(() => distanceToPlayer > 15f ),  
             new ConditionNode(() => UnityEngine.Random.value <= 0.6f),  
             new ActionNode(() => StartCoroutine(MoveTowardsPlayer())) 
         }),
@@ -201,6 +212,13 @@ public IEnumerator delay(){
         new Sequence(new List<Node> {
             new ConditionNode(() => distanceToPlayer <=10),
             new Selector(new List<Node> {
+
+
+                new Sequence(new List<Node> {
+                new ConditionNode(() => distanceToPlayer < 3),
+                new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
+                }),
+
 
                 //*OK MEVCUT
                 new Sequence(new List<Node> {
@@ -310,7 +328,7 @@ public IEnumerator delay(){
         
         
         new Sequence(new List<Node> {
-            new ConditionNode(() => UnityEngine.Random.value <= 0.8f ),
+            new ConditionNode(() => UnityEngine.Random.value <= 0.8f && distanceToPlayer<=15),
             new ActionNode(() => StartCoroutine(MoveTowardsPlayer())) 
         }),
        
@@ -429,7 +447,7 @@ public IEnumerator delay(){
 
         //*MANA YOK, OK YOK
         new Sequence(new List<Node> {
-            new ConditionNode(() => UnityEngine.Random.value <= 0.8f ),
+            new ConditionNode(() => UnityEngine.Random.value <= 0.8f && distanceToPlayer<15),
             new ActionNode(() => StartCoroutine(MoveTowardsPlayer()))
         }),
         new Sequence(new List<Node> {
@@ -476,22 +494,21 @@ public IEnumerator delay(){
         case EquipmentSlot.Legs:
             enemyDefenseZone = "leg";
             break;
-        case EquipmentSlot.Feet:
-            enemyDefenseZone = "feet";
-            break;
         default:
             enemyDefenseZone = "head";
             break;
     }
 
-    StartCoroutine(PlayDefenseAnimation(enemyDefenseZone, 0.1f)); // Savunma animasyonu başlat
+    StartCoroutine(PlayDefenseAnimation(enemyDefenseZone,1f)); 
     defecencedSlot = selectedArmor.equipSlot;
     Debug.Log($"Enemy is defending the {enemyDefenseZone} zone (selected armor: {selectedArmor.name}, armor: {selectedArmor.armorModifier})");
 }
 private IEnumerator PlayDefenseAnimation(string zone, float duration)
 {
-    
-    if (zone == "head")
+        characterState = CharacterState.Defending;
+
+
+        if (zone == "head")
         animatorController.SetDefence1(true);
     else if (zone == "body")
         animatorController.SetDefence2(true);
@@ -505,12 +522,21 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
     if (zone == "head")
         animatorController.SetDefence1(false);
     else if (zone == "body")
-        animatorController.SetDefence2(false);
+        {
+            if(attributes.isDead==false)
+            {
+                characterState = CharacterState.Idle;
+
+            }
+            animatorController.SetDefence2(false);
+        }
+        
     else if (zone == "leg")
         animatorController.SetDefence3(false);
-    
 
-    LookAt(playerTransform.position);
+    animatorController.SetIdle(true);
+
+        LookAt(playerTransform.position);
 }
 
     private void PlayerSelectDefense()
@@ -567,7 +593,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
         yield return new WaitForSeconds(0.1f);
 
         
-        animatorController.SetRunning(false);
+        
         animatorController.SetIdle(true);
 
         Debug.Log("Enemy approached the player");
@@ -615,15 +641,20 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
     {
         if (arrowCount > 0)
         {
-            var target = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
-            Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz
-            Equipment weapon = enemyStats.GetEquippedWeapon(2); // enemyStats üzerinden silahı alıyoruz
+            var target = ChooseBestTargetArea(); 
+            Equipment targetedEquipment = GetTargetedEquipment(target); 
+            Equipment weapon = enemyStats.GetEquippedWeapon(2);
 
             if (targetedEquipment != null)
             {
                 int finalDamage = CalculateFinalDamage(weapon, targetedEquipment);
+                Transform target1 = TargetHead.transform;
+                if (target1 == null) return;
 
-                
+                targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
+                LookAt(targetPosition);
+                animatorController.SetArrowAttack1();
+                StartCoroutine(ArrowAttackRoutine(target1.position, OnAttackComplete));
                 if (target == playerDefenseZone)
                 {
                     Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone but the player defended!");
@@ -632,18 +663,13 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
                 {
                     Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
                     
-                    attributes.UpdateHealth(-finalDamage);
+                    attributes.UpdateHealth(attributes.currentHealth - finalDamage);
 
 
                     
-                    Transform target1 = TargetHead.transform;
-                    if (target1 == null) return;
+                    
 
-                    targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
-                    LookAt(targetPosition);
-                    animatorController.SetArrowAttack1();
-
-                    StartCoroutine(ArrowAttackRoutine(target1.position, OnAttackComplete));                    
+                                   
                 }
             }
             else
@@ -697,7 +723,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
                 else
                 {
                     Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
-                    attributes.UpdateHealth(-finalDamage);
+                    attributes.UpdateHealth(finalDamage);
                 }
             }
             else
@@ -729,6 +755,8 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
 
         Debug.Log($"[Animation] Enemy attacks {target} with correct animation.");
         LookAt(playerTransform.position);
+        animatorController.SetIdle(true);
+
     }
 
     private void Attack()
@@ -750,7 +778,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
             else
             {
                 Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
-                    attributes.UpdateHealth(-finalDamage);
+                    attributes.UpdateHealth(attributes.currentHealth - finalDamage);
             }
         }
         else

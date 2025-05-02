@@ -8,11 +8,13 @@ public class HitController : MonoBehaviour
     public Attributes attributes;
     public EquipmentManager equipmentManager;
     public CharacterMovingButtons characterMovingButton;
+    public GameObject gameObject;
 
 
     private void Start()
     {
-        attributes = GetComponent<Attributes>();
+        equipmentManager = gameObject.GetComponent<EquipmentManager>();
+
     }
 
     /// <summary>
@@ -90,7 +92,7 @@ public class HitController : MonoBehaviour
             damage = 0;
         }
 
-        attributes.UpdateHealth(-damage);
+        attributes.UpdateHealth(attributes.currentHealth - damage);
         Debug.Log($"Verilen Hasar: {damage}, Kalan Can: {attributes.currentHealth}");
     }
 }

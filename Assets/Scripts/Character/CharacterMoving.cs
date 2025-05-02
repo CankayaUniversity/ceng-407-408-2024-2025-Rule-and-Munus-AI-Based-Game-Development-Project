@@ -69,7 +69,16 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
 
     private void Update()
     {
-        if(currentState == CharacterState.Dead)
+        Vector3 fixedPosition = transform.position;
+        fixedPosition.y = 0f;
+        transform.position = fixedPosition;
+
+
+        Vector3 fixedPositionz = transform.position;
+        fixedPositionz.z = 0f;
+        transform.position = fixedPositionz;
+
+        if (currentState == CharacterState.Dead)
         {
             Dead();
         }
