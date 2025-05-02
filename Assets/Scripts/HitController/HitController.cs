@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using Types;
 
+
 public class HitController : MonoBehaviour
 {
     public Attributes attributes;
     public EquipmentManager equipmentManager;
     public CharacterMovingButtons characterMovingButton;
+
 
     private void Start()
     {
@@ -31,9 +33,9 @@ public class HitController : MonoBehaviour
         int flag = 0;
 
         // EnemyAI’den savunulan yeri al
-        EnemyAI enemyAI = FindObjectOfType<EnemyAI>();
+        EnemyAI enemyAI = FindAnyObjectByType<EnemyAI>();
         int defenceIndex = (int)enemyAI.defecencedSlot;
-
+        
         armor = GetArmorByIndex(defenceIndex);
 
         // Silah türünü belirle
