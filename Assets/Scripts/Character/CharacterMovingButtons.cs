@@ -16,6 +16,7 @@ public class CharacterMovingButtons : MonoBehaviour
     [SerializeField] private GameObject ArrowPanel;
 
 
+
     [Header("Weapon Prefabs")]
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject sword;
@@ -23,8 +24,8 @@ public class CharacterMovingButtons : MonoBehaviour
 
     [Header("Button Indexes")]
     public int attackIndex;
-    public int defenceIndex;
-    public int arrowIndex;
+    public int defenceIndex=-1;
+    public int arrowIndex=-1;
 
     private bool isSelectedAttack;
     private bool isSelectedDefence;

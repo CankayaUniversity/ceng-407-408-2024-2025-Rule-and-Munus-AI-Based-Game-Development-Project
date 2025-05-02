@@ -1221,7 +1221,6 @@ GameObject:
   - component: {fileID: 395526478}
   - component: {fileID: 395526477}
   - component: {fileID: 395526476}
-  - component: {fileID: 395526480}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Enemy
@@ -1318,21 +1317,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &395526480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395526475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049c2b6271a5eb448a60b4aaebb947fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attributes: {fileID: 0}
-  equipmentManager: {fileID: 0}
-  characterMovingButton: {fileID: 0}
 --- !u!1 &405616485
 GameObject:
   m_ObjectHideFlags: 0
@@ -3379,7 +3363,8 @@ MonoBehaviour:
   TargetBody: {fileID: 1009451591}
   TargetLeg: {fileID: 1024880278}
   shootPoint: {fileID: 7891850267671536099}
-  arrowController: {fileID: 0}
+  arrowController: {fileID: 5866666020415964011}
+  hitController: {fileID: 5866666020415964013}
   arrowPrefab: {fileID: 3533574353345698503, guid: 61a45d3500f3fbc49adc9c9603742608, type: 3}
   launchSpeed: 20
   speed: 5
@@ -8783,6 +8768,7 @@ GameObject:
   - component: {fileID: 5866666020415964010}
   - component: {fileID: 5866666020415964011}
   - component: {fileID: 5866666020415964012}
+  - component: {fileID: 5866666020415964013}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -11523,6 +11509,21 @@ MonoBehaviour:
   space: 20
   items: []
   equipments: []
+--- !u!114 &5866666020415964013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148507739049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049c2b6271a5eb448a60b4aaebb947fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attributes: {fileID: 0}
+  equipmentManager: {fileID: 680806083}
+  characterMovingButton: {fileID: 263033968}
 --- !u!1 &5885810298257933961
 GameObject:
   m_ObjectHideFlags: 0

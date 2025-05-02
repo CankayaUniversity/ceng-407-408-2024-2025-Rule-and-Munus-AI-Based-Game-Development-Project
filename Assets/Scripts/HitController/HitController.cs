@@ -1,100 +1,94 @@
 using UnityEngine;
-using UnityEditor;
-using NUnit.Framework;
 using System.Collections.Generic;
 using Types;
-using static UnityEngine.Rendering.DebugUI;
+
 public class HitController : MonoBehaviour
 {
-    //public ActionIndexController actionIndexController;
     public Attributes attributes;
     public EquipmentManager equipmentManager;
     public CharacterMovingButtons characterMovingButton;
-    private EnemyAI enemyAI;
-
-
 
     private void Start()
     {
         attributes = GetComponent<Attributes>();
     }
-    public void OnTriggerEnter(Collider other)
+
+    /// <summary>
+    /// Saldýrý yapýldýðýnda çaðrýlýr (örn. animasyon eventinden veya butondan).
+    /// </summary>
+    /// <param name="attackerInventory">Saldýran karakterin envanteri</param>
+    /// <param name="isArrow">True ise ok saldýrýsý, False ise kýlýç</param>
+    public void ApplyHit(Inventory attackerInventory, bool isArrow)
     {
-        int flag = 0; 
-        Equipment armor = null; 
-        if (other.tag == "Arrow")
+        if (attackerInventory == null)
         {
-            int index = IndexFind();
-            int index2 = (int)enemyAI.defecencedSlot;
-
-            if (index2 == 1)
-            {
-                armor = equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Head);
-            }
-            else if (index2 == 2)
-            {
-                armor = equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Body);
-            }
-            else if (index2 == 3)
-            {
-                armor = equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Legs);
-            }
-
-            Equipment weapon = other.gameObject.GetComponent<Inventory>().equipments.Find(x => x.equipSlot == EquipmentSlot.Secondary);
-
-            Destroy(other.gameObject);
-            if(characterMovingButton.attackIndex == index)
-            {
-                flag = 1;
-                Debug.Log("Attack index is equal to defence index!");
-                calculateDamage(weapon, armor,flag);
-            }
-            calculateDamage(weapon, armor, flag);
+            Debug.LogWarning("Saldýran Inventory boþ!");
+            return;
         }
+
+        Equipment weapon = null;
+        Equipment armor = null;
+        int flag = 0;
+
+        // EnemyAI’den savunulan yeri al
+        EnemyAI enemyAI = FindObjectOfType<EnemyAI>();
+        int defenceIndex = (int)enemyAI.defecencedSlot;
+
+        armor = GetArmorByIndex(defenceIndex);
+
+        // Silah türünü belirle
+        weapon = attackerInventory.equipments.Find(x =>
+            x.equipSlot == (isArrow ? EquipmentSlot.Secondary : EquipmentSlot.Weapon));
+
+        // Eðer saldýrý yönü savunulan yerse, hasar sýfýrlanýr
+        int attackIndex = isArrow ? characterMovingButton.arrowIndex : characterMovingButton.attackIndex;
+
+        if (attackIndex == defenceIndex)
+        {
+            flag = 1;
+            Debug.Log((isArrow ? "Ok" : "Kýlýç") + " saldýrýsý engellendi!");
+        }
+
+        calculateDamage(weapon, armor, flag);
     }
 
-    public int IndexFind()
+    private Equipment GetArmorByIndex(int index)
     {
-        int index = 0;   
-        switch (characterMovingButton.attackIndex)
+        switch (index)
         {
-            case 0:
-                index = 0;
-                break;
             case 1:
-                index = 1;
-                Debug.Log("Attack index is 1");
-                break;
+                return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Head);
             case 2:
-                index = 2;
-                Debug.Log("Attack index is 2");
-                break;
+                return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Body);
             case 3:
-                index = 3;
-                Debug.Log("Attack index is 3");
-                break;
+                return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Legs);
             default:
-                Debug.Log("Invalid attack index");
-                break;
+                Debug.LogWarning("Geçersiz savunma bölgesi!");
+                return null;
         }
-        return index;
     }
 
-
-
-    public void calculateDamage(Equipment weapon, Equipment armor, int flag)
+    private void calculateDamage(Equipment weapon, Equipment armor, int flag)
     {
-        int damage = weapon.damageModifier-armor.armorModifier;
-        if(weapon.damageType == armor.damageType)
+        if (weapon == null || armor == null)
         {
-            damage = damage + damage / 2;
+            Debug.LogWarning("Silah veya zýrh eksik!");
+            return;
         }
-        if(flag == 1)
+
+        int damage = weapon.damageModifier - armor.armorModifier;
+
+        if (weapon.damageType == armor.damageType)
+        {
+            damage += damage / 2;
+        }
+
+        if (flag == 1)
         {
             damage = 0;
         }
 
-        //actionIndexController.IndexController(attributes,damage);
         attributes.UpdateHealth(-damage);
+        Debug.Log($"Verilen Hasar: {damage}, Kalan Can: {attributes.currentHealth}");
     }
 }

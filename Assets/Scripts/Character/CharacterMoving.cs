@@ -11,6 +11,8 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     [SerializeField] private GameObject TargetLeg;
     [SerializeField] private GameObject shootPoint;
     [SerializeField] private ArrowController arrowController;
+    [SerializeField] private HitController hitController;
+    private Inventory inventory;
 
     [Header("Arrow Settings")]
     [SerializeField] private Rigidbody arrowPrefab;
@@ -49,6 +51,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     
     private void Awake()
     {
+        inventory = FindObjectOfType<Inventory>();
         if (targetObject == null)
         {
             Debug.LogError("Target object missing on CharacterMoving!");
@@ -276,6 +279,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         CreateArrow(targetPos);
         yield return new WaitForSeconds(attackDuration);
         currentState = CharacterState.Idle;
+        hitController.ApplyHit(inventory, true);
         arrowController.arrowCounter();
         onComplete?.Invoke();
     }
@@ -287,36 +291,6 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         arrow.linearVelocity = direction * launchSpeed;
         arrow.transform.rotation = Quaternion.LookRotation(direction);
     }
-
-    private Vector3 CalculateLaunchVelocity(Vector3 start, Vector3 target, float speed)
-    {
-        Vector3 toTarget = target - start;
-        Vector3 toTargetXZ = new Vector3(toTarget.x, 0, toTarget.z);
-
-        float y = toTarget.y;
-        float xz = toTargetXZ.magnitude;
-
-        float gravity = Mathf.Abs(Physics.gravity.y);
-
-       
-        float underTheSqrt = speed * speed * speed * speed - gravity * (gravity * xz * xz + 2 * y * speed * speed);
-        if (underTheSqrt < 0)
-        {
-            Debug.LogWarning("Hedef çok uzak veya çok yüksek!");
-            return toTarget.normalized * speed;
-        }
-
-        float sqrt = Mathf.Sqrt(underTheSqrt);
-
-        float angleHigh = Mathf.Atan((speed * speed + sqrt) / (gravity * xz));
-
-        Vector3 launchDir = toTargetXZ.normalized;
-        Vector3 launchVelocity = launchDir * speed * Mathf.Cos(angleHigh) + Vector3.up * speed * Mathf.Sin(angleHigh);
-
-        return launchVelocity;
-    }
-
-
 
     public void Defence1()
     {
@@ -395,7 +369,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         yield return new WaitForSeconds(duration);
         resetAction(false);
-        if(characterHealthController.isDead || enemyHealthController.isDead)
+        if(characterHealthController.isDead /*|| enemyHealthController.isDead*/)
         {
             animatorController.SetDie();
             currentState = CharacterState.Dead;
