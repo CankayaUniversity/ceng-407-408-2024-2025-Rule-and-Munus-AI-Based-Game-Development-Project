@@ -9,9 +9,21 @@ using JetBrains.Annotations;
 
 public class EnemyAI : MonoBehaviour 
 {
+
+    [SerializeField] private GameObject targetObject;
+    [SerializeField] private GameObject TargetHead;
+    [SerializeField] private GameObject TargetBody;
+    [SerializeField] private GameObject TargetLeg;
+    private Vector3 targetPosition;
+    public event Action OnAttackComplete;
+    [SerializeField] private Rigidbody arrowPrefab;
+    [SerializeField] private GameObject shootPoint;
+    [SerializeField] private float launchSpeed = 20f;
+
+
     public CharacterMoving characterMoving;
     public CharacterState characterState;
-    private Player targetPlayer;
+     private Player targetPlayer;
     private EquipmentManager equipmentManager;
     public Transform playerTransform;
     private CharacterMovingButtons characterMovingButtons;
@@ -42,16 +54,16 @@ public class EnemyAI : MonoBehaviour
     private EnemyStats enemyStats;
 
 
-    public string enemyClass;
+    [SerializeField] private string enemyClass;
     
 
     void Start()
     {
-        enemyClass = "Warrior"; 
+        enemyClass = "Archer"; 
         equipmentManager = FindAnyObjectByType<EquipmentManager>();
         enemyStats = FindAnyObjectByType<EnemyStats>();
         targetPlayer = FindAnyObjectByType<Player>();
-        attributes = GetComponent<Attributes>();
+        attributes = FindAnyObjectByType<Attributes>();
         characterMovingButtons =FindAnyObjectByType<CharacterMovingButtons>();
         
         if(characterMovingButtons==null){
@@ -149,10 +161,12 @@ public IEnumerator delay(){
                     new ConditionNode(() => UnityEngine.Random.value <= 0.7f), 
                     new ActionNode(() => Attack())
                 }),
+                /*
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.15f && mana > 0), 
                     new ActionNode(() => CastSpell())
                 }),
+                */
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.10f && arrowCount > 0), 
                     new ActionNode(() => UseRangedAttack())  
@@ -176,13 +190,13 @@ public IEnumerator delay(){
             new ActionNode(() => UseRangedAttack())  
         }),
 
-        
+        /*
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.5f && mana > 0 ),
             new ActionNode(() => CastSpell())  
         }),
 
-       
+       */
          
          new ActionNode(() => StartCoroutine(MoveAwayFromPlayer())) 
         
@@ -209,10 +223,12 @@ public IEnumerator delay(){
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
                     new ActionNode(() => Attack())
                 }),
+                /*
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.1f && arrowCount > 0 && mana > 0),
                     new ActionNode(() => CastSpell())
                 }),
+                */
                 //OK MEVCUT*
 
                 //*OK MEVCUT DEĞİL,MANA VAR
@@ -224,11 +240,12 @@ public IEnumerator delay(){
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
                     new ActionNode(() =>  StartCoroutine(MoveAwayFromPlayer()))
                 }),
+                /*
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
                     new ActionNode(() => CastSpell())
                 }),
-
+                */
                 //OK MEVCUT DEĞİL,MANA VAR*
 
 
@@ -258,10 +275,12 @@ public IEnumerator delay(){
             new ConditionNode(() => UnityEngine.Random.value <= 0.4f && arrowCount > 0 && mana > 0),
             new ActionNode(() => UseRangedAttack())  
         }),
+        /*
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount > 0 && mana > 0),
             new ActionNode(() => CastSpell())
         }),
+        */
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount > 0 && mana > 0),
             new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
@@ -280,12 +299,13 @@ public IEnumerator delay(){
 
 
 
-
+/*
         //*OK MEVCUT DEĞİL,MANA VAR
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
             new ActionNode(() => CastSpell())  
         }),
+        */
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount == 0 && mana > 0),
             new ActionNode(() =>StartCoroutine(MoveAwayFromPlayer()))
@@ -329,10 +349,12 @@ public IEnumerator delay(){
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && mana > 0),
                     new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 }),
+                /*
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && mana > 0),
                     new ActionNode(() => CastSpell())
                 }),
+                */
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && mana > 0),
                     new ActionNode(() => Attack())
@@ -376,10 +398,12 @@ public IEnumerator delay(){
         //*UZAK MESAFE İŞLEMLERİ
 
         //*MANA VAR, OK VAR
+        /*
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.4f && mana > 0 && arrowCount > 0),
             new ActionNode(() => CastSpell())
         }),
+        */
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && mana > 0 && arrowCount > 0),
             new ActionNode(() => UseRangedAttack())
@@ -485,7 +509,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
 
     yield return new WaitForSeconds(duration);
 
-    // Bitir
+    
     if (zone == "head")
         animatorController.SetDefence1(false);
     else if (zone == "body")
@@ -599,7 +623,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
     {
         if (arrowCount > 0)
         {
-            var (target, score) = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
+            var target = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
             Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz
             Equipment weapon = enemyStats.GetEquippedWeapon(2); // enemyStats üzerinden silahı alıyoruz
 
@@ -607,7 +631,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
             {
                 int finalDamage = CalculateFinalDamage(weapon, targetedEquipment);
 
-                // Hedef savunma bölgesine vuruluyor mu?
+                
                 if (target == playerDefenseZone)
                 {
                     Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone but the player defended!");
@@ -615,7 +639,19 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
                 else
                 {
                     Debug.Log($"Enemy attacked with a {weapon.damageType} weapon at the {target} zone and hit!");
+                    
                     attributes.UpdateHealth(-finalDamage);
+
+
+                    
+                    Transform target1 = TargetHead.transform;
+                    if (target1 == null) return;
+
+                    targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
+                    LookAt(targetPosition);
+                    animatorController.SetArrowAttack1();
+
+                    StartCoroutine(ArrowAttackRoutine(target1.position, OnAttackComplete));                    
                 }
             }
             else
@@ -624,8 +660,31 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
             }
         }
     }
+    private IEnumerator ArrowAttackRoutine(Vector3 targetPos, Action onComplete)
+        {
+            yield return new WaitForSeconds(1f);
+            Debug.Log("Bekledi 3sn");
 
+            CreateArrow(targetPos);
 
+            yield return new WaitForSeconds(1f);
+            characterState = CharacterState.Idle;
+            onComplete?.Invoke();
+        }
+    private void CreateArrow(Vector3 targetPosition)
+    {
+        Rigidbody arrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.identity);
+
+        // Hedef yönünü hesapla
+        Vector3 direction = (targetPosition - shootPoint.transform.position).normalized;
+
+        // Oku hızla fırlat
+        arrow.linearVelocity = direction * launchSpeed;
+
+        // Okun yönünü hız vektörüne çevir
+        arrow.transform.rotation = Quaternion.LookRotation(direction);
+    }
+/*
     private void CastSpell()
     {
         if (mana > 0)
@@ -656,7 +715,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
         }
         
     }
-
+*/
     private void PlayAttackAnimation(string target)
     {
         switch (target.ToLower())
@@ -672,7 +731,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
                 animatorController.SetAttacking3();
                 break;
             default:
-                animatorController.SetAttacking1(); // Yedek animasyon
+                animatorController.SetAttacking1(); 
                 break;
         }
 
@@ -682,7 +741,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
 
     private void Attack()
     {
-        var (target, score) = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
+        var target = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
         PlayAttackAnimation(target);
         Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz
         Equipment weapon = enemyStats.GetEquippedWeapon(2); // enemyStats üzerinden silahı alıyoruz
@@ -719,8 +778,8 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
                 return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Body) ? equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Body) : null;
             case "legs":
                 return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Legs) ? equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Legs) : null;
-            case "feet": 
-                return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Feet) ? equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Feet) : null;
+    //        case "feet": 
+//                return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Feet) ? equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Feet) : null;
             default:
                 return null;
         }
@@ -749,41 +808,34 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
     //              SALDIRI KISMI*
 
 
+//değişicek
+    private string ChooseBestTargetArea()
+{
+    var head = equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Head);
+    var body = equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Body);
+    var legs = equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Legs);
 
-    private (string target, int score) ChooseBestTargetArea()
+    Dictionary<string, int> zoneWeights = new Dictionary<string, int>();
+
+    // Eğer bölge boşsa en düşük armor gibi say (öncelik ver)
+    zoneWeights["head"] = head == null ? 10 : Math.Max(1, 20 - head.armorModifier);
+    zoneWeights["body"] = body == null ? 10 : Math.Max(1, 20 - body.armorModifier);
+    zoneWeights["legs"] = legs == null ? 10 : Math.Max(1, 20 - legs.armorModifier);
+
+    // Ağırlıklı seçim için bir liste oluştur
+    List<string> weightedTargets = new List<string>();
+    foreach (var pair in zoneWeights)
     {
-        
-        EquipmentSlot[] targetSlots = { EquipmentSlot.Head, EquipmentSlot.Body, EquipmentSlot.Legs, EquipmentSlot.Feet };
-        string selectedTarget = "";
-        int lowestScore = int.MaxValue;
-
-        foreach (var slot in targetSlots)
+        for (int i = 0; i < pair.Value; i++)
         {
-            if (targetPlayer.equippedItems.ContainsKey(slot))
-            {
-                Equipment equipment = targetPlayer.equippedItems[slot];
-                int score = equipment.armorModifier;  // ArmorModifier'ı direk olarak kullanıyoruz
-
-                Debug.Log($"Slot: {slot}, Score: {score}");
-
-                if (score < lowestScore)
-                {
-                    lowestScore = score;
-                    selectedTarget = slot.ToString().ToLower();
-                }
-            }
-            else
-            {
-                Debug.Log($"Slot: {slot} is EMPTY. Prioritizing this.");
-                lowestScore = 10; // Boş koruma = düşük savunma, öncelikli hedef
-                selectedTarget = slot.ToString().ToLower();
-                break;
-            }
+            weightedTargets.Add(pair.Key);
         }
-
-        return (selectedTarget, lowestScore);
     }
 
+    // Rastgele bir bölge seç
+    int index = UnityEngine.Random.Range(0, weightedTargets.Count);
+    return weightedTargets[index];
+}
 
 
     public void LookAt(Vector3 targetPosition)
