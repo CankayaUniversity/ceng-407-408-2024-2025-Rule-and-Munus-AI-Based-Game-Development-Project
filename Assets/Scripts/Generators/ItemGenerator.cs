@@ -174,6 +174,7 @@ public static class ItemGenerator
     {
         int value = DamageFactor();
         generated.InitEquipment(equipmentType.slot, equipmentRarity, equipmentType.damageType, 0, 0, equipmentType.mesh, slotSprite[equipmentType.slot]);
+        generated.name = equipmentType.ToString();
         switch(equipmentType.slot)
         {
             case EquipmentSlot.Weapon:

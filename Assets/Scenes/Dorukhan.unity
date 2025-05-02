@@ -4691,6 +4691,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986780313}
   m_CullTransparentMesh: 1
+--- !u!114 &1021104870 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+  m_PrefabInstance: {fileID: 3594581047399374900}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1035494020
 GameObject:
   m_ObjectHideFlags: 0
@@ -8762,7 +8773,10 @@ MonoBehaviour:
   flag: 0
   defaultEquipment: []
   targetMesh: {fileID: 0}
+  currentEquipment: []
+  inventory: {fileID: 1725706852}
   inventoryUI: {fileID: 1744929037}
+  attributeManager: {fileID: 0}
 --- !u!114 &1920523641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8829,7 +8843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa18abfa817db142bf3259e95efe61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 1725706842}
+  attributes: {fileID: 1725706850}
 --- !u!1 &1922001515
 GameObject:
   m_ObjectHideFlags: 0
@@ -9601,6 +9615,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1725706852}
+    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: removeButton
+      value: 
+      objectReference: {fileID: 1021104870}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: equipmentManager
       value: 

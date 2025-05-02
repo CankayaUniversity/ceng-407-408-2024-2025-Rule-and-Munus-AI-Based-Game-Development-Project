@@ -16,11 +16,11 @@ public class AttributeManager : MonoBehaviour {
 	}
 
 	#endregion
-	public new GameObject gameObject;
-	Attributes attributes;
+	// public new GameObject gameObject;
+	public Attributes attributes;
 	void Start ()
 	{
-		attributes = gameObject.GetComponent<Attributes>();
+		// attributes = gameObject.GetComponent<Attributes>();
 	}
 	// void Update()
 	// {

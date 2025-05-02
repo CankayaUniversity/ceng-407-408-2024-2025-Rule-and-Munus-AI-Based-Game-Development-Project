@@ -40,7 +40,7 @@ public class Stat
     public virtual void IncreaseBase()
     {
         flag = true;
-        baseValue += 1;
+        baseValue += 11;
     }
     public void DecreaseBase()
     {

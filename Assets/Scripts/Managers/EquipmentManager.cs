@@ -31,7 +31,7 @@ public class EquipmentManager : MonoBehaviour {
 	public OnEquipmentChanged onEquipmentChanged;
 	public Inventory inventory;	
 	public InventoryUI inventoryUI;
-	AttributeManager attributeManager;
+	public AttributeManager attributeManager;
 	void Start ()
 	{
 		// inventory = Inventory.instance;		// Get a reference to our inventory
@@ -41,54 +41,52 @@ public class EquipmentManager : MonoBehaviour {
 		int numSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new List<Equipment>(numSlots);
 		FillDefault();
+		foreach (Equipment equipment in currentEquipment)
+		{
+			Debug.Log($"I have: {equipment.name} with {equipment.rarirty}");
+		}
+		Equip(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Legendary));
+		foreach (Equipment equipment in currentEquipment)
+		{
+			Debug.Log($"I have: {equipment.rarirty}");
+		}
         currentMeshes = new SkinnedMeshRenderer[numSlots];
 		
-        EquipDefaults();
+        // EquipDefaults();
 	}
 	public void FillDefault()
 	{
-		// Equipment equipment;
-		// equipment = ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Common);
-		// Equip(equipment);
-		// equipment = ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Common);
-		// Equip(equipment);
-		// equipment = ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Common);
-		// Equip(equipment);
-		// equipment = ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Common);
-		// Equip(equipment);
-		// equipment = ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common);
-		// Equip(equipment);
-		// equipment = ItemGenerator.Generate(EquipmentType.bow, Rarity.Common);
-		// Equip(equipment);
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Legendary));
-	    currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Legendary));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Legendary));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Legendary));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Legendary));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bow, Rarity.Legendary));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Common));
+	    currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bow, Rarity.Common));
 	}
 	// Equip a new item
 	public void Equip (Equipment newItem)
 	{
+		// ref Equipment old = currentEquipment.Find(x => x.equipSlot == newItem.equipSlot);
 		// inventory.ShowItems();
 		// Find out what slot the item fits in
-		int slotIndex = (int)newItem.equipSlot;
+		int slotIndex = (int)newItem.equipSlot-1;
+		Debug.Log($"New Item is: {newItem.rarirty}");
 
-        Equipment oldItem = Unequip(slotIndex);
+        // Equipment oldItem = Unequip(slotIndex);
 
 		// An item has been equipped so we trigger the callback
-		if (onEquipmentChanged != null)
-		{
-			onEquipmentChanged.Invoke(newItem, oldItem);
-		}
+		// if (onEquipmentChanged != null)
+		// {
+		// 	onEquipmentChanged.Invoke(newItem, oldItem);
+		// }
 
 		// Insert the item into the slot
 		currentEquipment[slotIndex] = newItem;
 		flag = true;
 		attributeManager.UpdateStats(newItem, true);
-        AttachToMesh(newItem, slotIndex);
+        // AttachToMesh(newItem, slotIndex);
 		inventory.ShowItems();
-		inventoryUI.UpdateUI();
+		// inventoryUI.UpdateUI();
 	}
 
 	// Unequip an item with a particular index
