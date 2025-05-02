@@ -20,39 +20,31 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private GameObject shootPoint;
     [SerializeField] private float launchSpeed = 20f;
 
-
     public CharacterMoving characterMoving;
     public CharacterState characterState;
-     private Player targetPlayer;
+    private Player targetPlayer;
     private EquipmentManager equipmentManager;
+    public GameObject gameObject;
     public Transform playerTransform;
     private CharacterMovingButtons characterMovingButtons;
     public EquipmentSlot defecencedSlot;
-    private Attributes attributes;
+    public Attributes attributes;
 
     public int arrowCount = 10;
     public int mana = 10;
-    public bool turn=false;
-    private bool hasActed = false;
+    public bool turn = false;
 
     private Node root;
 
     public float distanceToPlayer;
     private float arenaRadius = 10f;
     
-
-    
     private string playerDefenseZone;
     private string enemyDefenseZone;
 
-    
-
-
     private IAnimatorController animatorController;
-
     
     private EnemyStats enemyStats;
-
 
     [SerializeField] private string enemyClass;
     
@@ -60,10 +52,10 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         enemyClass = "Archer"; 
-        equipmentManager = FindAnyObjectByType<EquipmentManager>();
+        equipmentManager = gameObject.GetComponent<EquipmentManager>() ;
         enemyStats = FindAnyObjectByType<EnemyStats>();
         targetPlayer = FindAnyObjectByType<Player>();
-        attributes = FindAnyObjectByType<Attributes>();
+        
         characterMovingButtons =FindAnyObjectByType<CharacterMovingButtons>();
         
         if(characterMovingButtons==null){
@@ -817,12 +809,10 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
 
     Dictionary<string, int> zoneWeights = new Dictionary<string, int>();
 
-    // Eğer bölge boşsa en düşük armor gibi say (öncelik ver)
     zoneWeights["head"] = head == null ? 10 : Math.Max(1, 20 - head.armorModifier);
     zoneWeights["body"] = body == null ? 10 : Math.Max(1, 20 - body.armorModifier);
     zoneWeights["legs"] = legs == null ? 10 : Math.Max(1, 20 - legs.armorModifier);
 
-    // Ağırlıklı seçim için bir liste oluştur
     List<string> weightedTargets = new List<string>();
     foreach (var pair in zoneWeights)
     {
@@ -832,7 +822,6 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
         }
     }
 
-    // Rastgele bir bölge seç
     int index = UnityEngine.Random.Range(0, weightedTargets.Count);
     return weightedTargets[index];
 }

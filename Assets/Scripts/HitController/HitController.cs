@@ -16,15 +16,15 @@ public class HitController : MonoBehaviour
     }
 
     /// <summary>
-    /// Saldýrý yapýldýðýnda çaðrýlýr (örn. animasyon eventinden veya butondan).
+    /// Saldï¿½rï¿½ yapï¿½ldï¿½ï¿½ï¿½nda ï¿½aï¿½rï¿½lï¿½r (ï¿½rn. animasyon eventinden veya butondan).
     /// </summary>
-    /// <param name="attackerInventory">Saldýran karakterin envanteri</param>
-    /// <param name="isArrow">True ise ok saldýrýsý, False ise kýlýç</param>
+    /// <param name="attackerInventory">Saldï¿½ran karakterin envanteri</param>
+    /// <param name="isArrow">True ise ok saldï¿½rï¿½sï¿½, False ise kï¿½lï¿½ï¿½</param>
     public void ApplyHit(Inventory attackerInventory, bool isArrow)
     {
         if (attackerInventory == null)
         {
-            Debug.LogWarning("Saldýran Inventory boþ!");
+            Debug.LogWarning("Saldï¿½ran Inventory boï¿½!");
             return;
         }
 
@@ -32,23 +32,23 @@ public class HitController : MonoBehaviour
         Equipment armor = null;
         int flag = 0;
 
-        // EnemyAI’den savunulan yeri al
+        // EnemyAIï¿½den savunulan yeri al
         EnemyAI enemyAI = FindAnyObjectByType<EnemyAI>();
         int defenceIndex = (int)enemyAI.defecencedSlot;
         
         armor = GetArmorByIndex(defenceIndex);
 
-        // Silah türünü belirle
+        // Silah tï¿½rï¿½nï¿½ belirle
         weapon = attackerInventory.equipments.Find(x =>
             x.equipSlot == (isArrow ? EquipmentSlot.Secondary : EquipmentSlot.Weapon));
 
-        // Eðer saldýrý yönü savunulan yerse, hasar sýfýrlanýr
+        // Eï¿½er saldï¿½rï¿½ yï¿½nï¿½ savunulan yerse, hasar sï¿½fï¿½rlanï¿½r
         int attackIndex = isArrow ? characterMovingButton.arrowIndex : characterMovingButton.attackIndex;
 
         if (attackIndex == defenceIndex)
         {
             flag = 1;
-            Debug.Log((isArrow ? "Ok" : "Kýlýç") + " saldýrýsý engellendi!");
+            Debug.Log((isArrow ? "Ok" : "Kï¿½lï¿½ï¿½") + " saldï¿½rï¿½sï¿½ engellendi!");
         }
 
         calculateDamage(weapon, armor, flag);
@@ -65,7 +65,7 @@ public class HitController : MonoBehaviour
             case 3:
                 return equipmentManager.currentEquipment.Find(x => x.equipSlot == EquipmentSlot.Legs);
             default:
-                Debug.LogWarning("Geçersiz savunma bölgesi!");
+                Debug.LogWarning("Geï¿½ersiz savunma bï¿½lgesi!");
                 return null;
         }
     }
@@ -74,7 +74,7 @@ public class HitController : MonoBehaviour
     {
         if (weapon == null || armor == null)
         {
-            Debug.LogWarning("Silah veya zýrh eksik!");
+            Debug.LogWarning("Silah veya zï¿½rh eksik!");
             return;
         }
 

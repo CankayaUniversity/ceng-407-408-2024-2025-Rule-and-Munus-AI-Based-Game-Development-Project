@@ -57,8 +57,8 @@ public class EnemyStats : MonoBehaviour
             if (type == DamageType.Default)
                 continue;
 
-            Equipment shortSword = ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common);
-            Equipment bow = ItemGenerator.Generate(EquipmentType.bow, Rarity.Common);
+            Equipment shortSword = ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Legendary);
+            Equipment bow = ItemGenerator.Generate(EquipmentType.bow, Rarity.Legendary);
 
             enemyEquipments.Add(shortSword);
             enemyEquipments.Add(bow);

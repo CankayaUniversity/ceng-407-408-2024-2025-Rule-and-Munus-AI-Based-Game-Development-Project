@@ -60,12 +60,12 @@ public class EquipmentManager : MonoBehaviour {
 		// Equip(equipment);
 		// equipment = ItemGenerator.Generate(EquipmentType.bow, Rarity.Common);
 		// Equip(equipment);
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Common));
-	    currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Common));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Common));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Common));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bow, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Legendary));
+	    currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Legendary));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Legendary));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Legendary));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Legendary));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bow, Rarity.Legendary));
 	}
 	// Equip a new item
 	public void Equip (Equipment newItem)

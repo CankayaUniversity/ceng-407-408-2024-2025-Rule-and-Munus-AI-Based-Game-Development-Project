@@ -6346,8 +6346,10 @@ MonoBehaviour:
   launchSpeed: 20
   characterMoving: {fileID: 2124124170}
   characterState: 0
+  gameObject: {fileID: 1008928570}
   playerTransform: {fileID: 2124124169}
   defecencedSlot: 0
+  attributes: {fileID: 2124124177}
   arrowCount: 10
   mana: 10
   turn: 0
@@ -17334,56 +17336,6 @@ Transform:
   - {fileID: 127280219}
   m_Father: {fileID: 2006283503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2115647559
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2115647561}
-  - component: {fileID: 2115647560}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2115647560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115647559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f311c5acc12eddf4d8b67ec90f807eae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flag: 0
-  defaultEquipment: []
-  targetMesh: {fileID: 0}
-  currentEquipment: []
-  inventory: {fileID: 0}
-  inventoryUI: {fileID: 0}
---- !u!4 &2115647561
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115647559}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.516764, y: 5.351376, z: 3.1776733}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2120283544
 GameObject:
   m_ObjectHideFlags: 0
@@ -17432,6 +17384,7 @@ GameObject:
   - component: {fileID: 2124124173}
   - component: {fileID: 2124124175}
   - component: {fileID: 2124124176}
+  - component: {fileID: 2124124177}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -17562,7 +17515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes: {fileID: 0}
-  equipmentManager: {fileID: 2115647560}
+  equipmentManager: {fileID: 0}
   characterMovingButton: {fileID: 1071506965}
 --- !u!114 &2124124175
 MonoBehaviour:
@@ -17592,6 +17545,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textList: []
   isUpdated: 0
+--- !u!114 &2124124177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124124168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8246e26f241677940befbbd9fda8c4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Lorem
+  _class: Fighter
+  race: Ipsum
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  currentStamina: 0
+  staminaBar: {fileID: 0}
+  isDead: 0
+  Limit: 100
+  textList: []
 --- !u!1 &2142361868
 GameObject:
   m_ObjectHideFlags: 0
@@ -17643,5 +17618,4 @@ SceneRoots:
   - {fileID: 1426557894}
   - {fileID: 1931220787}
   - {fileID: 850514019}
-  - {fileID: 2115647561}
   - {fileID: 1008928577}

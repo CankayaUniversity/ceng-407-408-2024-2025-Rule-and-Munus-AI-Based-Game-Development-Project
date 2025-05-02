@@ -179,6 +179,9 @@ public static class ItemGenerator
             case EquipmentSlot.Weapon:
                 generated.setDamageModifier(value);
                 break;
+            case EquipmentSlot.Secondary:
+                generated.setDamageModifier(value);
+                break;
             case EquipmentSlot.Head:
                 generated.setArmorModifier(value);
                 break;
