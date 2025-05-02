@@ -10,7 +10,8 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     [SerializeField] private GameObject TargetBody;
     [SerializeField] private GameObject TargetLeg;
     [SerializeField] private GameObject shootPoint;
-    
+    [SerializeField] private ArrowController arrowController;
+
     [Header("Arrow Settings")]
     [SerializeField] private Rigidbody arrowPrefab;
     [SerializeField] private float launchSpeed = 20f;
@@ -25,6 +26,10 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     [SerializeField] private float defence3Duration = 1f;
     [SerializeField] private float stepForwardDuration = 0.6f;
     [SerializeField] private float stepBackwardDuration = 0.4f;
+
+    [Header("Panels")]
+    [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private GameObject WinPanel;
 
     private Vector3 targetPosition;
     private Vector3 startingPosition;
@@ -58,7 +63,27 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     }
 
     #region ICharacterMover Implementation
-    
+
+    private void Update()
+    {
+        if(currentState == CharacterState.Dead)
+        {
+            Dead();
+        }
+    }
+
+    private void Dead()
+    {
+        animatorController.SetDie();
+        StartCoroutine(waitForDeadAnim());
+
+    }
+
+    private IEnumerator waitForDeadAnim()
+    {
+        yield return new WaitForSeconds(2f);
+        GameOverPanel.SetActive(true);
+    }
     public void MoveTo(Vector3 targetPosition)
     {
         if (currentState != CharacterState.Idle && currentState != CharacterState.MovingToTarget)
@@ -248,29 +273,20 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         yield return new WaitForSeconds(1f);
         Debug.Log("Bekledi 3sn");
-
         CreateArrow(targetPos);
-
         yield return new WaitForSeconds(attackDuration);
         currentState = CharacterState.Idle;
+        arrowController.arrowCounter();
         onComplete?.Invoke();
     }
 
     private void CreateArrow(Vector3 targetPosition)
     {
         Rigidbody arrow = Instantiate(arrowPrefab, shootPoint.transform.position, Quaternion.identity);
-
-        // Hedef yönünü hesapla
         Vector3 direction = (targetPosition - shootPoint.transform.position).normalized;
-
-        // Oku hızla fırlat
         arrow.linearVelocity = direction * launchSpeed;
-
-        // Okun yönünü hız vektörüne çevir
         arrow.transform.rotation = Quaternion.LookRotation(direction);
     }
-
-
 
     private Vector3 CalculateLaunchVelocity(Vector3 start, Vector3 target, float speed)
     {

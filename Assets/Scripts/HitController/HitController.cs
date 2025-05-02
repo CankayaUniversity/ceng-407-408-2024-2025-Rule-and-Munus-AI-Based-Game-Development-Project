@@ -6,7 +6,7 @@ using Types;
 using static UnityEngine.Rendering.DebugUI;
 public class HitController : MonoBehaviour
 {
-    public ActionIndexController actionIndexController;
+    //public ActionIndexController actionIndexController;
     public Attributes attributes;
     public EquipmentManager equipmentManager;
     public CharacterMovingButtons characterMovingButton;
@@ -20,12 +20,12 @@ public class HitController : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        int flag = 0; // Flag to check if attack index is equal to defence index
+        int flag = 0; 
         Equipment armor = null; 
         if (other.tag == "Arrow")
         {
             int index = IndexFind();
-            int index2 = (int)enemyAI.defencedSlot;
+            int index2 = (int)enemyAI.defecencedSlot;
 
             if (index2 == 1)
             {

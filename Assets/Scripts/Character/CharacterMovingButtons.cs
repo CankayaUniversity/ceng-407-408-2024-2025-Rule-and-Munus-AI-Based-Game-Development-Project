@@ -10,7 +10,7 @@ public class CharacterMovingButtons : MonoBehaviour
     [SerializeField] private List<Button> attackButtons;
     [SerializeField] private List<Button> defenceButtons;
     [SerializeField] private List<Button> ArrowButtons;
-    [SerializeField] private GameObject ChangeArrowButton;
+    [SerializeField] public GameObject ChangeArrowButton;
     [SerializeField] private GameObject ChangeSwordButton;
     [SerializeField] private GameObject SwordPanel;
     [SerializeField] private GameObject ArrowPanel;
