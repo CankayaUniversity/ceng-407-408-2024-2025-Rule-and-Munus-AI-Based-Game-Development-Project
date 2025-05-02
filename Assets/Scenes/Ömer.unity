@@ -6318,6 +6318,7 @@ GameObject:
   - component: {fileID: 850514015}
   - component: {fileID: 850514020}
   - component: {fileID: 850514022}
+  - component: {fileID: 850514023}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -6459,6 +6460,28 @@ MonoBehaviour:
   space: 20
   items: []
   equipments: []
+--- !u!114 &850514023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850514014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8246e26f241677940befbbd9fda8c4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Lorem
+  _class: Fighter
+  race: Ipsum
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  currentStamina: 100
+  staminaBar: {fileID: 0}
+  isDead: 0
+  Limit: 100
+  textList: []
 --- !u!1 &856473748
 GameObject:
   m_ObjectHideFlags: 0
@@ -17515,9 +17538,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049c2b6271a5eb448a60b4aaebb947fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attributes: {fileID: 0}
+  attributes: {fileID: 2124124177}
   equipmentManager: {fileID: 0}
   characterMovingButton: {fileID: 1071506965}
+  gameObject: {fileID: 1008928570}
 --- !u!114 &2124124175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17561,7 +17585,7 @@ MonoBehaviour:
   Name: Lorem
   _class: Fighter
   race: Ipsum
-  currentHealth: 400
+  currentHealth: 100
   healthBar: {fileID: 0}
   currentStamina: 0
   staminaBar: {fileID: 0}
