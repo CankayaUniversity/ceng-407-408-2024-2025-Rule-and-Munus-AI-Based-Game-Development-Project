@@ -90,11 +90,11 @@ public class HitController : MonoBehaviour
     {
         if (weapon == null || armor == null)
         {
-            Debug.LogWarning("Silah veya z�rh eksik!");
+            Debug.Log("Silah veya z�rh eksik!");
             return;
         }
 
-        int damage = weapon.damageModifier - armor.armorModifier;
+        int damage =  armor.armorModifier - weapon.damageModifier;
 
         Debug.Log("Hasarü: " + damage);
 
@@ -107,8 +107,8 @@ public class HitController : MonoBehaviour
         {
             damage = 0;
         }
-
-        attributes.UpdateHealth(attributes.currentHealth - damage);
+        attributes.currentHealth = attributes.currentHealth - damage;
+        attributes.UpdateHealth(attributes.currentHealth);
         Debug.Log($"Verilen Hasar: {damage}, Kalan Can: {attributes.currentHealth}");
     }
 }
