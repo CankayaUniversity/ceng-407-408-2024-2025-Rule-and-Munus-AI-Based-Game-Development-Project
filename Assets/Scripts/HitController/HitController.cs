@@ -8,22 +8,23 @@ public class HitController : MonoBehaviour
     public Attributes attributes;
     public EquipmentManager equipmentManager;
     public CharacterMovingButtons characterMovingButton;
-    public GameObject gameObject;
+    //public GameObject gameObject;
 
 
     private void Start()
     {
-        equipmentManager = gameObject.GetComponent<EquipmentManager>();
-
+        //equipmentManager = GetComponent<EquipmentManager>();
+        attributes = GetComponent<Attributes>();
     }
 
     /// <summary>
     /// Sald�r� yap�ld���nda �a�r�l�r (�rn. animasyon eventinden veya butondan).
     /// </summary>
-    /// <param name="attackerInventory">Sald�ran karakterin envanteri</param>
-    /// <param name="isArrow">True ise ok sald�r�s�, False ise k�l��</param>
+    /// <param //name="attackerInventory">Sald�ran karakterin envanteri</param>
+    /// <param //name="isArrow">True ise ok sald�r�s�, False ise k�l��</param>
     public void ApplyHit(Inventory attackerInventory, bool isArrow)
     {
+        Debug.Log("ApplyHit e geldi");
         if (attackerInventory == null)
         {
             Debug.LogWarning("Sald�ran Inventory bo�!");
@@ -32,19 +33,25 @@ public class HitController : MonoBehaviour
 
         Equipment weapon = null;
         Equipment armor = null;
+
+        
         int flag = 0;
 
         // EnemyAI�den savunulan yeri al
         EnemyAI enemyAI = FindAnyObjectByType<EnemyAI>();
         int defenceIndex = (int)enemyAI.defecencedSlot;
-        
+        Debug.Log($"Savunulan b�lge: {defenceIndex}");
         armor = GetArmorByIndex(defenceIndex);
 
-        // Silah t�r�n� belirle
-        weapon = attackerInventory.equipments.Find(x =>
-            x.equipSlot == (isArrow ? EquipmentSlot.Secondary : EquipmentSlot.Weapon));
+        Debug.Log(armor != null ? $"Savunulan z�rh: {armor.name}" : "Savunulan z�rh yok!");
 
-        // E�er sald�r� y�n� savunulan yerse, hasar s�f�rlan�r
+
+        weapon = attackerInventory.equipments.Find(x =>
+           x.equipSlot == (isArrow ? EquipmentSlot.Secondary : EquipmentSlot.Weapon));
+
+        Debug.Log(weapon != null ? $"Sald�r�lan silah: {weapon.name}" : "Sald�r�lan silah yok!");
+
+        
         int attackIndex = isArrow ? characterMovingButton.arrowIndex : characterMovingButton.attackIndex;
 
         if (attackIndex == defenceIndex)

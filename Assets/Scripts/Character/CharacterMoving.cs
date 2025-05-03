@@ -12,7 +12,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     [SerializeField] private GameObject shootPoint;
     [SerializeField] private ArrowController arrowController;
     [SerializeField] private HitController hitController;
-    private Inventory inventory;
+    public Inventory inventory;
 
     [Header("Arrow Settings")]
     [SerializeField] private Rigidbody arrowPrefab;
@@ -51,7 +51,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     
     private void Awake()
     {
-        inventory = FindObjectOfType<Inventory>();
+        //inventory = FindObjectOfType<Inventory>();
         if (targetObject == null)
         {
             Debug.LogError("Target object missing on CharacterMoving!");

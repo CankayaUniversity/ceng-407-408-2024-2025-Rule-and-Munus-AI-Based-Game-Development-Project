@@ -6319,6 +6319,7 @@ GameObject:
   - component: {fileID: 850514020}
   - component: {fileID: 850514022}
   - component: {fileID: 850514023}
+  - component: {fileID: 850514024}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -6482,6 +6483,21 @@ MonoBehaviour:
   isDead: 0
   Limit: 100
   textList: []
+--- !u!114 &850514024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850514014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049c2b6271a5eb448a60b4aaebb947fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attributes: {fileID: 0}
+  equipmentManager: {fileID: 1008928576}
+  characterMovingButton: {fileID: 1071506965}
 --- !u!1 &856473748
 GameObject:
   m_ObjectHideFlags: 0
@@ -17404,7 +17420,6 @@ GameObject:
   - component: {fileID: 2124124170}
   - component: {fileID: 2124124172}
   - component: {fileID: 2124124171}
-  - component: {fileID: 2124124174}
   - component: {fileID: 2124124173}
   - component: {fileID: 2124124175}
   - component: {fileID: 2124124176}
@@ -17458,7 +17473,8 @@ MonoBehaviour:
   TargetLeg: {fileID: 605651221}
   shootPoint: {fileID: 1318821179}
   arrowController: {fileID: 2124124175}
-  hitController: {fileID: 2124124174}
+  hitController: {fileID: 850514024}
+  inventory: {fileID: 2124124173}
   arrowPrefab: {fileID: 3533574353345698503, guid: 61a45d3500f3fbc49adc9c9603742608, type: 3}
   launchSpeed: 20
   speed: 5
@@ -17481,7 +17497,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124124168}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ae491885cb2c54393de194f676f5d0, type: 3}
   m_Name: 
@@ -17526,22 +17542,6 @@ MonoBehaviour:
   space: 20
   items: []
   equipments: []
---- !u!114 &2124124174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2124124168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049c2b6271a5eb448a60b4aaebb947fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attributes: {fileID: 2124124177}
-  equipmentManager: {fileID: 0}
-  characterMovingButton: {fileID: 1071506965}
-  gameObject: {fileID: 1008928570}
 --- !u!114 &2124124175
 MonoBehaviour:
   m_ObjectHideFlags: 0
