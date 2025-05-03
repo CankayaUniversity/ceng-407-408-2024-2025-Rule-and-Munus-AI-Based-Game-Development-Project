@@ -3870,7 +3870,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 37.3
+  m_Value: 49.4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6477,9 +6477,9 @@ MonoBehaviour:
   _class: Fighter
   race: Ipsum
   currentHealth: 100
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 78906112}
   currentStamina: 100
-  staminaBar: {fileID: 0}
+  staminaBar: {fileID: 1726433353}
   isDead: 0
   Limit: 100
   textList: []
@@ -17586,9 +17586,9 @@ MonoBehaviour:
   _class: Fighter
   race: Ipsum
   currentHealth: 100
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 578009339}
   currentStamina: 0
-  staminaBar: {fileID: 0}
+  staminaBar: {fileID: 834699467}
   isDead: 0
   Limit: 100
   textList: []
