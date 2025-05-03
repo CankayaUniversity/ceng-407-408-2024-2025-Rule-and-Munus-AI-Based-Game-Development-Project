@@ -94,7 +94,7 @@ public class HitController : MonoBehaviour
             return;
         }
 
-        int damage = weapon.damageModifier - armor.armorModifier;
+        int damage = armor.armorModifier - weapon.damageModifier ;
 
         Debug.Log("Hasarü: " + damage);
 

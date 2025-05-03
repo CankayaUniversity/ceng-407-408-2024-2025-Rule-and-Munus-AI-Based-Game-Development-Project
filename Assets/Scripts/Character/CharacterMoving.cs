@@ -176,6 +176,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
             
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         MoveTo(targetPosition);
+        hitController.ApplyHit(equipmentManager, false);
         StartCoroutine(CompleteAttackSequence());
     }
 
@@ -208,6 +209,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
         animatorController.SetAttacking1();
+        hitController.ApplyHit(equipmentManager, false);
         StartCoroutine(ResetState(attackDuration, OnAttackComplete));
     }
 
@@ -220,6 +222,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
         animatorController.SetAttacking2();
+        hitController.ApplyHit(equipmentManager, false);
         StartCoroutine(ResetState(attackDuration, OnAttackComplete));
     }
 
@@ -232,6 +235,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         LookAt(targetPosition);
         animatorController.SetAttacking3();
+        hitController.ApplyHit(equipmentManager, false);
         StartCoroutine(ResetState(attackDuration, OnAttackComplete));
     }
 
@@ -256,7 +260,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
             return;
 
         currentState = CharacterState.Attacking;
-        Transform target = TargetHead.transform;
+        Transform target = TargetBody.transform;
         if (target == null) return;
 
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
@@ -271,7 +275,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
             return;
 
         currentState = CharacterState.Attacking;
-        Transform target = TargetHead.transform;
+        Transform target = TargetLeg.transform;
         if (target == null) return;
 
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
