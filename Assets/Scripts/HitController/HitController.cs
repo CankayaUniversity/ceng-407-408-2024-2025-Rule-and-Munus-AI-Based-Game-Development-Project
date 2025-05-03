@@ -20,16 +20,23 @@ public class HitController : MonoBehaviour
     /// <summary>
     /// Sald�r� yap�ld���nda �a�r�l�r (�rn. animasyon eventinden veya butondan).
     /// </summary>
-    /// <param //name="attackerInventory">Sald�ran karakterin envanteri</param>
-    /// <param //name="isArrow">True ise ok sald�r�s�, False ise k�l��</param>
-    public void ApplyHit(Inventory attackerInventory, bool isArrow)
+    /// <param name="attackerInventory">Sald�ran karakterin envanteri</param>
+    /// <param name="isArrow">True ise ok sald�r�s�, False ise k�l��</param>
+    public void ApplyHit(EquipmentManager equipmentManager, bool isArrow)
     {
         Debug.Log("ApplyHit e geldi");
-        if (attackerInventory == null)
+        if (equipmentManager.currentEquipment == null)
         {
             Debug.LogWarning("Sald�ran Inventory bo�!");
             return;
         }
+
+        foreach (var eq in equipmentManager.currentEquipment)
+        {
+            Debug.Log($"Ekipman: {eq.name}, Slot: {eq.equipSlot}");
+        }
+            
+
 
         Equipment weapon = null;
         Equipment armor = null;
@@ -46,10 +53,10 @@ public class HitController : MonoBehaviour
         Debug.Log(armor != null ? $"Savunulan z�rh: {armor.name}" : "Savunulan z�rh yok!");
 
 
-        weapon = attackerInventory.equipments.Find(x =>
+        weapon = equipmentManager.currentEquipment.Find(x =>
            x.equipSlot == (isArrow ? EquipmentSlot.Secondary : EquipmentSlot.Weapon));
 
-        Debug.Log(weapon != null ? $"Sald�r�lan silah: {weapon.name}" : "Sald�r�lan silah yok!");
+        Debug.Log(weapon != null ? $"Sald�r�lan silah: {weapon.equipSlot}" : "Sald�r�lan silah yok!");
 
         
         int attackIndex = isArrow ? characterMovingButton.arrowIndex : characterMovingButton.attackIndex;
@@ -88,6 +95,8 @@ public class HitController : MonoBehaviour
         }
 
         int damage = weapon.damageModifier - armor.armorModifier;
+
+        Debug.Log("Hasarü: " + damage);
 
         if (weapon.damageType == armor.damageType)
         {

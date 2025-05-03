@@ -6476,7 +6476,7 @@ MonoBehaviour:
   Name: Lorem
   _class: Fighter
   race: Ipsum
-  currentHealth: 0
+  currentHealth: 100
   healthBar: {fileID: 0}
   currentStamina: 100
   staminaBar: {fileID: 0}
@@ -17474,7 +17474,7 @@ MonoBehaviour:
   shootPoint: {fileID: 1318821179}
   arrowController: {fileID: 2124124175}
   hitController: {fileID: 850514024}
-  inventory: {fileID: 2124124173}
+  equipmentManager: {fileID: 1008928576}
   arrowPrefab: {fileID: 3533574353345698503, guid: 61a45d3500f3fbc49adc9c9603742608, type: 3}
   launchSpeed: 20
   speed: 5

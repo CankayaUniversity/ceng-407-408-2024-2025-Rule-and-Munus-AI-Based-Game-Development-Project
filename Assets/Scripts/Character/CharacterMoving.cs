@@ -12,7 +12,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     [SerializeField] private GameObject shootPoint;
     [SerializeField] private ArrowController arrowController;
     [SerializeField] private HitController hitController;
-    public Inventory inventory;
+    public EquipmentManager equipmentManager;
 
     [Header("Arrow Settings")]
     [SerializeField] private Rigidbody arrowPrefab;
@@ -288,7 +288,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         CreateArrow(targetPos);
         yield return new WaitForSeconds(attackDuration);
         currentState = CharacterState.Idle;
-        hitController.ApplyHit(inventory, true);
+        hitController.ApplyHit(equipmentManager, true);
         arrowController.arrowCounter();
         onComplete?.Invoke();
     }
