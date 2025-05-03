@@ -103,7 +103,8 @@ public class Attributes : MonoBehaviour
     public void UpdateHealth(int value)
     {
         this.currentHealth = (int)math.clamp(value, 0, maxHealth);
-        if(this.currentHealth <= 0)
+        HealthBar(currentHealth);
+        if (this.currentHealth <= 0)
         {
             isDead = true;
             Debug.Log($"{Name} is dead!");

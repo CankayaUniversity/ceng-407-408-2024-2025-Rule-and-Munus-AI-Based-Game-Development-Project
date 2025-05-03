@@ -94,7 +94,7 @@ public class HitController : MonoBehaviour
             return;
         }
 
-        int damage =  armor.armorModifier - weapon.damageModifier;
+        int damage = weapon.damageModifier - armor.armorModifier;
 
         Debug.Log("Hasarü: " + damage);
 
@@ -107,8 +107,8 @@ public class HitController : MonoBehaviour
         {
             damage = 0;
         }
-        attributes.currentHealth = attributes.currentHealth - damage;
-        attributes.UpdateHealth(attributes.currentHealth);
+       
+        attributes.UpdateHealth(attributes.currentHealth - damage);
         Debug.Log($"Verilen Hasar: {damage}, Kalan Can: {attributes.currentHealth}");
     }
 }

@@ -47,15 +47,18 @@ public class EnemyAI : MonoBehaviour
     private EnemyStats enemyStats;
 
     [SerializeField] private string enemyClass;
-    
+
+
+    HitController hitController;
+
 
     void Start()
     {
         enemyClass = "Archer"; 
         equipmentManager = gameObject.GetComponent<EquipmentManager>() ;
         enemyStats = FindAnyObjectByType<EnemyStats>();
-        
-        
+        hitController = GetComponent<HitController>();
+
         characterMovingButtons =FindAnyObjectByType<CharacterMovingButtons>();
         
         if(characterMovingButtons==null){
@@ -89,41 +92,46 @@ public class EnemyAI : MonoBehaviour
        
 
         root = CreateBehaviorTree();
-        
+
     }
 
     void Update()
-{
-
-        Vector3 fixedPosition = transform.position;
-        fixedPosition.y = 0f;
-        transform.position = fixedPosition;
-
-        Vector3 fixedPositionz = transform.position;
-        fixedPositionz.z = 0f;
-        transform.position = fixedPositionz;
-
-        if ( turn == false && characterMoving.currentState == CharacterState.Attacking)
     {
-        turn=true;
-
-        if (playerTransform != null)
+        // Ölüm kontrolü (bir kereye mahsus çalışmalı)
+        if (attributes != null && hitController.attributes.isDead)
         {
-                distanceToPlayer= Mathf.Abs(transform.position.x - playerTransform.position.x);
+            animatorController.SetDie();
+            return; // Karakter öldüyse geri dön
         }
 
-        PlayerSelectDefense();
-        EnemySelectDefense();
-        StartCoroutine(delay());
-    }
+        // Aşağısı yalnızca yaşayan karakterler için çalışır
+        Vector3 fixedPosition = transform.position;
+        fixedPosition.y = 0f;
+        fixedPosition.z = 0f;
+        transform.position = fixedPosition;
 
-    
-    else if (characterMoving.currentState == CharacterState.Idle)
-    {
-        turn=false;
+        if (!attributes.isDead && turn == false && characterMoving.currentState == CharacterState.Attacking)
+        {
+            turn = true;
+
+            if (playerTransform != null)
+                distanceToPlayer = Mathf.Abs(transform.position.x - playerTransform.position.x);
+
+            PlayerSelectDefense();
+            EnemySelectDefense();
+            StartCoroutine(delay());
+        }
+        else if (characterMoving.currentState == CharacterState.Idle)
+        {
+            turn = false;
+        }
+
+        if (attributes.isDead)
+        {
+            characterMoving.animatorController.SetDie();
+        }
     }
-}
-public IEnumerator delay(){
+    public IEnumerator delay(){
     yield return new WaitForSeconds(2f);
     root.Evaluate();
 
@@ -282,7 +290,7 @@ public IEnumerator delay(){
 
         //*OK VAR,MANA VAR
         new Sequence(new List<Node> {
-            new ConditionNode(() => UnityEngine.Random.value <= 0.4f && arrowCount > 0 && mana > 0),
+            new ConditionNode(() => UnityEngine.Random.value <= 0.7f && arrowCount > 0 && mana > 0),
             new ActionNode(() => UseRangedAttack())  
         }),
         /*

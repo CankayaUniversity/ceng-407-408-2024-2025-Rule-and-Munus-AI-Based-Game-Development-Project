@@ -35,7 +35,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
 
     private Vector3 targetPosition;
     private Vector3 startingPosition;
-    private IAnimatorController animatorController;
+    public IAnimatorController animatorController;
     public CharacterState currentState = CharacterState.Idle;
     
     public event Action OnAttackComplete;
