@@ -67,16 +67,7 @@ public class EnemyAI : MonoBehaviour
         }
         animatorController = new AnimatorController(GetComponent<Animator>());
         
-        if (attributes != null)
-        {
-            attributes.Name = "Enemy";
-            attributes._class = enemyClass;
-            attributes.race = "";
-            attributes.currentHealth = 100;
-            attributes.currentStamina = 40;
-
-            Debug.Log($"Enemy Initialized: Name={attributes.Name}, Class={attributes._class}");
-        }
+        
         if (targetPlayer != null)
         {
             ChooseBestTargetArea();
@@ -97,14 +88,16 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        // Ölüm kontrolü (bir kereye mahsus çalışmalı)
         if (attributes != null && hitController.attributes.isDead)
         {
             animatorController.SetDie();
-            return; // Karakter öldüyse geri dön
+            return; 
         }
-
-        // Aşağısı yalnızca yaşayan karakterler için çalışır
+        if (attributes.isDead)
+        {
+            characterMoving.Dead();
+            return; 
+        }
         Vector3 fixedPosition = transform.position;
         fixedPosition.y = 0f;
         fixedPosition.z = 0f;
@@ -164,22 +157,30 @@ public class EnemyAI : MonoBehaviour
 
                 new Sequence(new List<Node> {
                 new ConditionNode(() => distanceToPlayer < 3),
+                new ConditionNode(() => hitController.attributes.currentStamina > 0), 
+
                 new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 }),
 
 
                 new Sequence(new List<Node> {
-                    new ConditionNode(() => UnityEngine.Random.value <= 0.7f), 
+                    new ConditionNode(() => UnityEngine.Random.value <= 0.7f),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+
                     new ActionNode(() => Attack())
                 }),
                 /*
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.15f && mana > 0), 
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0), 
+
                     new ActionNode(() => CastSpell())
                 }),
                 */
                 new Sequence(new List<Node> {
-                    new ConditionNode(() => UnityEngine.Random.value <= 0.10f && arrowCount > 0), 
+                    new ConditionNode(() => UnityEngine.Random.value <= 0.10f && arrowCount > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+
                     new ActionNode(() => UseRangedAttack())  
                 }),
                 
@@ -191,26 +192,34 @@ public class EnemyAI : MonoBehaviour
         
         new Sequence(new List<Node> {
             new ConditionNode(() => distanceToPlayer > 15f ),  
-            new ConditionNode(() => UnityEngine.Random.value <= 0.6f),  
+            new ConditionNode(() => UnityEngine.Random.value <= 0.6f),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
+
             new ActionNode(() => StartCoroutine(MoveTowardsPlayer())) 
         }),
 
        
         new Sequence(new List<Node> {
-            new ConditionNode(() => distanceToPlayer > 10f && arrowCount > 0 && UnityEngine.Random.value <= 0.3f), 
+            new ConditionNode(() => distanceToPlayer > 10f && arrowCount > 0 && UnityEngine.Random.value <= 0.3f),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
+
             new ActionNode(() => UseRangedAttack())  
         }),
 
         /*
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.5f && mana > 0 ),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0), 
+
             new ActionNode(() => CastSpell())  
         }),
 
        */
-         
-         new ActionNode(() => StartCoroutine(MoveAwayFromPlayer())) 
-        
+        new Sequence(new List<Node> {
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
+
+            new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
+        }),
     });
     }
     private Node CreateArcherTree()
@@ -224,6 +233,8 @@ public class EnemyAI : MonoBehaviour
 
                 new Sequence(new List<Node> {
                 new ConditionNode(() => distanceToPlayer < 3),
+                new ConditionNode(() => hitController.attributes.currentStamina > 0),
+
                 new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 }),
 
@@ -231,19 +242,24 @@ public class EnemyAI : MonoBehaviour
                 //*OK MEVCUT
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+
                     new ActionNode(() =>  StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() => UseRangedAttack())
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() => Attack())
                 }),
                 /*
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.1f && arrowCount > 0 && mana > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() => CastSpell())
                 }),
                 */
@@ -252,15 +268,18 @@ public class EnemyAI : MonoBehaviour
                 //*OK MEVCUT DEĞİL,MANA VAR
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.4f && arrowCount == 0 && mana > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() => Attack())
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() =>  StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 /*
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() => CastSpell())
                 }),
                 */
@@ -270,10 +289,12 @@ public class EnemyAI : MonoBehaviour
                 //*OK MEVCUT DEĞİL,MANA MEVCUT DEĞİL
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.6f && arrowCount == 0 && mana == 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() => Attack())
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.4f && arrowCount == 0 && mana == 0),
+                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
                     new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 })
                 //OK MEVCUT DEĞİL,MANA MEVCUT DEĞİL*
@@ -291,16 +312,19 @@ public class EnemyAI : MonoBehaviour
         //*OK VAR,MANA VAR
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.7f && arrowCount > 0 && mana > 0),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() => UseRangedAttack())  
         }),
         /*
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount > 0 && mana > 0),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() => CastSpell())
         }),
         */
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount > 0 && mana > 0),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
         }),
        //OK VAR,MANA VAR*
@@ -310,6 +334,7 @@ public class EnemyAI : MonoBehaviour
         //*OK VAR,MANA YOK
        new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount > 0 && mana == 0),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
         }),
        //OK VAR,MANA YOK*
@@ -321,11 +346,13 @@ public class EnemyAI : MonoBehaviour
         //*OK MEVCUT DEĞİL,MANA VAR
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() => CastSpell())  
         }),
         */
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.2f && arrowCount == 0 && mana > 0),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() =>StartCoroutine(MoveAwayFromPlayer()))
         }),
         //OK MEVCUT DEĞİL,MANA VAR*
@@ -337,11 +364,12 @@ public class EnemyAI : MonoBehaviour
         
         new Sequence(new List<Node> {
             new ConditionNode(() => UnityEngine.Random.value <= 0.8f && distanceToPlayer<=15),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() => StartCoroutine(MoveTowardsPlayer())) 
         }),
        
         new Sequence(new List<Node> {
-            
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new ActionNode(() => StartCoroutine(MoveAwayFromPlayer())) 
         })
 
@@ -586,9 +614,9 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
     {
         // Düşman oyuncuya yaklaşırken, koşma animasyonunu başlat
         animatorController.StepForward();
-        
 
-        
+        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 10);
+
         Vector3 direction = (playerTransform.position - transform.position).normalized;  
         LookAt(direction);
         
@@ -616,7 +644,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
         animatorController.StepBackward();
         animatorController.SetIdle(false);
 
-        
+        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 10);
         Vector3 direction = (transform.position - playerTransform.position).normalized;
         Vector3 newPosition = transform.position + direction * 1f; 
 
@@ -649,6 +677,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
     {
         if (arrowCount > 0)
         {
+            hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 20);
             var target = ChooseBestTargetArea(); 
             Equipment targetedEquipment = GetTargetedEquipment(target); 
             Equipment weapon = enemyStats.GetEquippedWeapon(2);
@@ -769,6 +798,8 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
 
     private void Attack()
     {
+        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 20);
+
         var target = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
         PlayAttackAnimation(target);
         Equipment targetedEquipment = GetTargetedEquipment(target); // Hedef zırhı alıyoruz

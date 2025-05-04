@@ -6478,7 +6478,7 @@ MonoBehaviour:
   race: Ipsum
   currentHealth: 100
   healthBar: {fileID: 78906112}
-  currentStamina: 100
+  currentStamina: 80
   staminaBar: {fileID: 1726433353}
   isDead: 0
   Limit: 100
@@ -17490,6 +17490,7 @@ MonoBehaviour:
   currentState: 0
   characterHealthController: {fileID: 2124124171}
   enemyHealthController: {fileID: 504452221}
+  enemyAI: {fileID: 850514015}
 --- !u!114 &2124124171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17587,7 +17588,7 @@ MonoBehaviour:
   race: Ipsum
   currentHealth: 100
   healthBar: {fileID: 578009339}
-  currentStamina: 0
+  currentStamina: 100
   staminaBar: {fileID: 834699467}
   isDead: 0
   Limit: 100

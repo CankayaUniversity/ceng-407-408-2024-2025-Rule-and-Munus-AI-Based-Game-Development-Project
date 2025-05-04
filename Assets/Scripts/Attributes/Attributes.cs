@@ -115,6 +115,7 @@ public class Attributes : MonoBehaviour
     public void UpdateStamina(int value)
     {
         this.currentStamina = (int)math.clamp(value, 0, maxStamina);
+        StaminaBar(currentStamina);
         Debug.Log($"{currentStamina} Health Adjusted {value}.");
     }
 
