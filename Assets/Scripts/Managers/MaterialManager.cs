@@ -8,24 +8,17 @@ using TMPro;
 public class MaterialManager : MonoBehaviour {
 
 	#region Singleton
-	public static new GameObject gameObject;
 	public static MaterialManager instance;
-
+	public Stock stock;	
 	void Awake ()
 	{
 		instance = this;
-		gameObject = GameObject.Find("Player");
 	}
 
 	#endregion
-
-	Stock stock;	// Reference to our stock
-
-
-    // private Dictionary<MaterialType, TextMeshProUGUI> materialTexts;
 	void Start ()
 	{
-		stock = gameObject.GetComponent<Stock>();		// Get a reference to our stock
+
 	}
 
 	public void Gather (MaterialType gatheredType, int gatheredAmount)
@@ -39,13 +32,5 @@ public class MaterialManager : MonoBehaviour {
 		stock.Add(givenType, (-1)*givenAmount);
 		// UpdateMaterialTexts();
 	}
-	// private void UpdateMaterialTexts()
-    // {
-    //     foreach (var material in materialTexts.Keys)
-    //     {
-    //         int amount = stock.typeMaterial[material].Count; // Assuming your Stock class has Get(MaterialType)
-    //         materialTexts[material].text = amount.ToString();
-    //     }
-    // }
 }
 

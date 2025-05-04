@@ -19,7 +19,6 @@ public class LootManager : MonoBehaviour
 	#endregion
     void Start()
     {
-        // gameObject = GameObject.Find("Player");
         luck = gameObject.GetComponent<Attributes>().stats[StatType.LUCK];
     }
 

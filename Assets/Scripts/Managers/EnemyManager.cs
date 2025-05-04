@@ -3,15 +3,13 @@ using System.Linq;
 using Types;
 using UnityEngine;
 using TMPro;
-
-public class AttributeManager : MonoBehaviour {
+public class EnemyManager : MonoBehaviour {
 
 	#region Singleton
 
-	public static AttributeManager instance;
+	public static EnemyManager instance;
 	public Attributes attributes;
 	public List<GameObject> textList; //On the inspector, assign objects that have textmeshprogui component, where the attributes will be displayed.
-
 	void Awake ()
 	{
 		instance = this;

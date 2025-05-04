@@ -16,6 +16,21 @@ public static class ItemGenerator
     public static EquipmentType equipmentType;
     public static int fate;
     public static Dictionary<EquipmentSlot, Sprite> slotSprite = icons.slotSprite;
+    public static Equipment ForSale(EquipmentType type, Rarity rarity, Stat luck)
+    {
+        Dictionary<StatType, StatModifier> statTypeModifier= new Dictionary<StatType, StatModifier>();
+        generated = ScriptableObject.CreateInstance<Equipment>();
+        fate = (int)luck.value;
+        equipmentType = type;
+        equipmentRarity = rarity;
+        //Crafts an equipment with damageFactor/defenceFactor but statModifiers
+        Craft(); 
+        //Polishs the equipment for adjusting the statModifiers
+        Polish(ref statTypeModifier);
+
+        generated.AdjustStatModifiers(statTypeModifier);
+        return generated;
+    }
     public static void Generate(EquipmentType type, Rarity rarity, Stat luck)
     {
         Dictionary<StatType, StatModifier> statTypeModifier= new Dictionary<StatType, StatModifier>();
