@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
             ActivateDecreaseButtons();
         }
     }
+
+    public void NextSceneButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
     public void ActivateIncreaseButtons()
     {
         for(int i = 0; i < attrbiuteIncreaseButtons.Count; i++)
