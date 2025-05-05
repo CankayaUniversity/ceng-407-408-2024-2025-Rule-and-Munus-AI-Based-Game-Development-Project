@@ -6689,7 +6689,9 @@ MonoBehaviour:
   _class: Fighter
   race: Ipsum
   currentHealth: 100
+  healthBar: {fileID: 78906112}
   currentStamina: 80
+  staminaBar: {fileID: 1726433353}
   isDead: 0
   attackModifier: 10
   defenceModifier: 5
@@ -18326,7 +18328,9 @@ MonoBehaviour:
   _class: Fighter
   race: Ipsum
   currentHealth: 100
+  healthBar: {fileID: 578009339}
   currentStamina: 100
+  staminaBar: {fileID: 834699467}
   isDead: 0
   attackModifier: 10
   defenceModifier: 5

@@ -30,8 +30,8 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     [SerializeField] private float stepBackwardDuration = 0.4f;
 
     [Header("Panels")]
-    [SerializeField] private GameObject GameOverPanel;
-    [SerializeField] private GameObject WinPanel;
+    [SerializeField] public GameObject GameOverPanel;
+    [SerializeField] public GameObject WinPanel;
 
     private Vector3 targetPosition;
     private Vector3 startingPosition;

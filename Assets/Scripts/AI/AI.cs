@@ -91,6 +91,7 @@ public class EnemyAI : MonoBehaviour
         if (attributes != null && hitController.attributes.isDead)
         {
             animatorController.SetDie();
+            characterMoving.WinPanel.SetActive(true);
             return; 
         }
         if (attributes.isDead)
