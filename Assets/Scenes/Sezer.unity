@@ -272,6 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7818448053de024bb30544f521121ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 0
+  attributeManager: {fileID: 0}
 --- !u!4 &123266319
 Transform:
   m_ObjectHideFlags: 0
@@ -2779,7 +2781,9 @@ MonoBehaviour:
   defaultEquipment: []
   targetMesh: {fileID: 0}
   currentEquipment: []
+  inventory: {fileID: 0}
   inventoryUI: {fileID: 0}
+  attributeManager: {fileID: 0}
 --- !u!4 &680806084
 Transform:
   m_ObjectHideFlags: 0
@@ -3365,6 +3369,7 @@ MonoBehaviour:
   shootPoint: {fileID: 7891850267671536099}
   arrowController: {fileID: 5866666020415964011}
   hitController: {fileID: 5866666020415964013}
+  equipmentManager: {fileID: 0}
   arrowPrefab: {fileID: 3533574353345698503, guid: 61a45d3500f3fbc49adc9c9603742608, type: 3}
   launchSpeed: 20
   speed: 5
@@ -3380,6 +3385,7 @@ MonoBehaviour:
   currentState: 0
   characterHealthController: {fileID: 5866666020415964010}
   enemyHealthController: {fileID: 0}
+  enemyAI: {fileID: 0}
 --- !u!1 &772662537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3972,7 +3978,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 911255027}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 543238795}
+        m_TargetAssemblyTypeName: CollesiumUIController, Assembly-CSharp
+        m_MethodName: BackToPhaseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &911255027
 MonoBehaviour:
   m_ObjectHideFlags: 0

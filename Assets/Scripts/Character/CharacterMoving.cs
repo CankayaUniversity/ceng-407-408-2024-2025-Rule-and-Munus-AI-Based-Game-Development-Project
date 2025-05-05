@@ -377,6 +377,8 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     
     #endregion
 
+
+
     #region Helper Coroutines
     
     private IEnumerator ResetState(float duration, Action onComplete = null)
