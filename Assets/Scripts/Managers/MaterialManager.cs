@@ -1,10 +1,5 @@
 using UnityEngine;
 using Types;
-using Unity.VisualScripting;
-using Unity.AppUI.UI;
-using System.Collections.Generic;
-using TMPro;
-
 public class MaterialManager : MonoBehaviour {
 
 	#region Singleton

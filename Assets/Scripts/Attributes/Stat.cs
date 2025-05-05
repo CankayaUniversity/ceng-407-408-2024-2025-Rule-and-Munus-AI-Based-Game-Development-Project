@@ -42,11 +42,11 @@ public class Stat
         flag = true;
         baseValue += 11;
     }
-    public void DecreaseBase()
+    public bool DecreaseBase()
     {
         flag = true;
-        if(baseValue>0) { baseValue -= 1; }
-        else { baseValue = 0; }
+        if(baseValue>0) { baseValue -= 1; return true;}
+        else { baseValue = 0; return false;}
     }
     protected virtual int CompareOrder(StatModifier first, StatModifier second)
     {

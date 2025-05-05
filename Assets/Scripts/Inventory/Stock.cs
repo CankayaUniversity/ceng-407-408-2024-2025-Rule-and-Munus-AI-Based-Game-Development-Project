@@ -21,12 +21,15 @@ public class Stock : MonoBehaviour {
 	{
     	instance = this;
 		typeMaterial = materials.typeMaterial;
-		for(int i = 0; i < typeMaterial.Count; ++i)
+		if(textList.Count > 0)
 		{
-			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
-			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
+			for(int i = 0; i < typeMaterial.Count; ++i)
+			{
+				textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
+				Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
+			}
+			Debug.Log($"Stock Created!");
 		}
-		Debug.Log($"Stock Created!");
 	}
     // public void Update()
     // {

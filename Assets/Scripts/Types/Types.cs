@@ -51,14 +51,14 @@ namespace Types
         }
         public enum StatType
         {
-            STR,
-            DEX,
-            INT,
-            WIS,
-            CON,
-            CHA,
-            LUCK,
-            Default,
+            STR = 1,
+            DEX = 2,
+            INT = 3,
+            WIS = 4,
+            CON = 5,
+            CHA = 6,
+            LUCK = 7,
+            Default = 8,
         }
         public enum MaterialType
         {

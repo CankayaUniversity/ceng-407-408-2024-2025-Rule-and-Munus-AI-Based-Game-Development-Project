@@ -3,18 +3,21 @@ using System.Linq;
 using Types;
 using UnityEngine;
 using TMPro;
-
 public class AttributeManager : MonoBehaviour {
 
 	#region Singleton
-
+	public GameManager gameManager;
 	public static AttributeManager instance;
 	public Attributes attributes;
+	public int attributtePoints;
+	private int maxPoint = 5;
 	public List<GameObject> textList; //On the inspector, assign objects that have textmeshprogui component, where the attributes will be displayed.
 
 	void Awake ()
 	{
 		instance = this;
+		attributtePoints = maxPoint;
+		UpdateTexts();
 	}
 
 	#endregion
@@ -22,7 +25,10 @@ public class AttributeManager : MonoBehaviour {
 	{
 
 	}
-
+	public void SetAttributePoints(int points)
+	{
+		attributtePoints = points;
+	}
 	public void UpdateStats(Equipment equipment, bool isEquiped)
 	{
 		Dictionary<StatType, StatModifier> modifiers = equipment.statModifiers;
@@ -57,9 +63,10 @@ public class AttributeManager : MonoBehaviour {
         //In order to: STR -> DEX -> CON -> INT -> WIS -> CHA -> LUCK -> DEFAULT
         if(textList.Count > 0)
         {
-            foreach(Stat stat in attributes.stats.Values)
+            foreach(StatType type in attributes.stats.Keys)
 		    {
-                textList[index++].GetComponent<TextMeshProUGUI>().text = stat.value.ToString();
+				if(type != StatType.Default)
+                textList[index++].GetComponent<TextMeshProUGUI>().text = attributes.stats[type].value.ToString();
 		    }
         }
 	}
@@ -77,15 +84,30 @@ public class AttributeManager : MonoBehaviour {
         attributes.Remove(type, modifier);
 		UpdateTexts();
     }
-    public void IncreaseBaseStat(StatType type)
+    public void IncreaseBaseStat(int index)
     {
-        attributes.IncreaseBase(type);
-		UpdateTexts();
+		StatType type = (StatType)index;
+        if(attributtePoints > 0){
+			attributes.IncreaseBase(type);
+			attributtePoints--;
+			UpdateTexts();
+		}
+		else
+		{
+			gameManager.DeactivateIncreaseButtons();
+		}
     }
-    public void DecreaseBaseStat(StatType type)
+    public void DecreaseBaseStat(int index)
     {
-        attributes.DecreaseBase(type);
-		UpdateTexts();
+		StatType type = (StatType)index;
+        if(attributtePoints < maxPoint && attributes.DecreaseBase(type)){
+			attributtePoints++;
+			UpdateTexts();
+		}
+		else
+		{
+			gameManager.DeactivateDecreaseButtons();
+		}
     }
     public bool UpdateHealth(int value)
     {

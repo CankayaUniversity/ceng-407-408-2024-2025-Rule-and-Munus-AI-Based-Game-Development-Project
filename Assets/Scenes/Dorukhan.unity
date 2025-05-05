@@ -334,14 +334,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: IncreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: IncreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: STR
           m_BoolArgument: 0
@@ -788,14 +788,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: IncreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: IncreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: LUCK
           m_BoolArgument: 0
@@ -1360,14 +1360,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: DecreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: DecreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: CHA
           m_BoolArgument: 0
@@ -1703,14 +1703,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: IncreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: IncreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: INT
           m_BoolArgument: 0
@@ -1835,14 +1835,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: DecreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: DecreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: WIS
           m_BoolArgument: 0
@@ -2103,14 +2103,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: DecreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: DecreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: STR
           m_BoolArgument: 0
@@ -2205,9 +2205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab96d1a14b18874ebed23569811764e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultEquipment: []
-  defaultMaterial: []
-  gameObject: {fileID: 1725706842}
+  attributes: {fileID: 1725706850}
+  stock: {fileID: 1725706851}
   luck:
     baseValue: 1
 --- !u!114 &453548099
@@ -2386,14 +2385,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: IncreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: IncreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: WIS
           m_BoolArgument: 0
@@ -4373,14 +4372,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: DecreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: DecreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: INT
           m_BoolArgument: 0
@@ -4641,14 +4640,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: DecreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: DecreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: CON
           m_BoolArgument: 0
@@ -5214,14 +5213,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: DecreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: DecreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: DEX
           m_BoolArgument: 0
@@ -5933,14 +5932,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: DecreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: DecreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: LUCK
           m_BoolArgument: 0
@@ -6937,14 +6936,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: IncreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: IncreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: CON
           m_BoolArgument: 0
@@ -7528,19 +7527,10 @@ MonoBehaviour:
   _class: Fighter
   race: Ipsum
   currentHealth: 0
-  healthBar: {fileID: 0}
   currentStamina: 0
-  staminaBar: {fileID: 0}
   isDead: 0
-  Limit: 100
-  textList:
-  - {fileID: 1035494020}
-  - {fileID: 1364220974}
-  - {fileID: 1880713376}
-  - {fileID: 347144590}
-  - {fileID: 970760998}
-  - {fileID: 686603778}
-  - {fileID: 382047886}
+  attackModifier: 10
+  defenceModifier: 5
 --- !u!114 &1725706851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8776,7 +8766,7 @@ MonoBehaviour:
   currentEquipment: []
   inventory: {fileID: 1725706852}
   inventoryUI: {fileID: 1744929037}
-  attributeManager: {fileID: 0}
+  attributeManager: {fileID: 1920523645}
 --- !u!114 &1920523641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8802,6 +8792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fccab2a14e49d14e869aa2e0614a8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stock: {fileID: 1725706851}
 --- !u!114 &1920523643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8814,9 +8805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab96d1a14b18874ebed23569811764e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultEquipment: []
-  defaultMaterial: []
-  gameObject: {fileID: 1725706842}
+  attributes: {fileID: 1725706850}
+  stock: {fileID: 1725706851}
   luck:
     baseValue: 1
 --- !u!114 &1920523644
@@ -8831,6 +8821,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7818448053de024bb30544f521121ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 0
+  attributeManager: {fileID: 1920523645}
 --- !u!114 &1920523645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8843,7 +8835,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa18abfa817db142bf3259e95efe61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1920523644}
   attributes: {fileID: 1725706850}
+  attributtePoints: 0
+  textList:
+  - {fileID: 1035494020}
+  - {fileID: 1364220974}
+  - {fileID: 970760998}
+  - {fileID: 1880713376}
+  - {fileID: 347144590}
+  - {fileID: 686603778}
+  - {fileID: 382047886}
 --- !u!1 &1922001515
 GameObject:
   m_ObjectHideFlags: 0
@@ -8965,14 +8967,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: IncreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: IncreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: CHA
           m_BoolArgument: 0
@@ -9097,14 +9099,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725706850}
-        m_TargetAssemblyTypeName: Attributes, Assembly-CSharp
-        m_MethodName: IncreaseBase
-        m_Mode: 5
+      - m_Target: {fileID: 1920523645}
+        m_TargetAssemblyTypeName: AttributeManager, Assembly-CSharp
+        m_MethodName: IncreaseBaseStat
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: DEX
           m_BoolArgument: 0

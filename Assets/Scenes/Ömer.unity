@@ -6481,8 +6481,8 @@ MonoBehaviour:
   currentStamina: 80
   staminaBar: {fileID: 1726433353}
   isDead: 0
-  Limit: 100
-  textList: []
+  attackModifier: 10
+  defenceModifier: 5
 --- !u!114 &850514024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7907,6 +7907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fccab2a14e49d14e869aa2e0614a8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stock: {fileID: 2124124176}
 --- !u!114 &1008928573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7919,9 +7920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab96d1a14b18874ebed23569811764e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultEquipment: []
-  defaultMaterial: []
-  gameObject: {fileID: 2124124168}
+  attributes: {fileID: 2124124177}
+  stock: {fileID: 2124124176}
   luck:
     baseValue: 1
 --- !u!114 &1008928574
@@ -7936,6 +7936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7818448053de024bb30544f521121ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 0
+  attributeManager: {fileID: 1008928575}
 --- !u!114 &1008928575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7948,7 +7950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa18abfa817db142bf3259e95efe61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attributes: {fileID: 0}
+  gameManager: {fileID: 1008928574}
+  attributes: {fileID: 2124124177}
+  attributtePoints: 0
+  textList: []
 --- !u!114 &1008928576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8044,6 +8049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7818448053de024bb30544f521121ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 0
+  attributeManager: {fileID: 0}
 --- !u!4 &1031711066
 Transform:
   m_ObjectHideFlags: 0
@@ -17591,8 +17598,8 @@ MonoBehaviour:
   currentStamina: 100
   staminaBar: {fileID: 834699467}
   isDead: 0
-  Limit: 100
-  textList: []
+  attackModifier: 10
+  defenceModifier: 5
 --- !u!1 &2142361868
 GameObject:
   m_ObjectHideFlags: 0

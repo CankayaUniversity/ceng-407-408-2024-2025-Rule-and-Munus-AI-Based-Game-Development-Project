@@ -15,20 +15,17 @@ public class Attributes : MonoBehaviour
     private readonly int maxHealth = 100;
     [SerializeField]
     public int currentHealth = 100;
-    public Slider healthBar; 
+    // public Slider healthBar; 
     private readonly int maxStamina = 80;
     [SerializeField]
     public int currentStamina = 80;
-    public Slider staminaBar; 
+    // public Slider staminaBar; 
     public bool isDead = false;
     [SerializeField]
     private int attackModifier = 10;
     [SerializeField]
-    private int defenceModifier = 10;
+    private int defenceModifier = 5;
     public Dictionary<StatType, Stat> stats = _stats.stats;
-    public List<GameObject> textList;
-
-
     #region Singleton
 
 	public static Attributes instance;
@@ -39,13 +36,13 @@ public class Attributes : MonoBehaviour
         StaminaBar(currentStamina);
         HealthBar(currentHealth);
         isDead = false;
-		for(int i = 0; i < stats.Count - 1 ; ++i)
-		{
-			textList[i].GetComponent<TextMeshProUGUI>().text = stats.ElementAt(i).Value.value.ToString();
-			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
-		}
-		Debug.Log($"Stats Bounded");
-        // ShowStats();
+		// for(int i = 0; i < stats.Count - 1 ; ++i)
+		// {
+		// 	textList[i].GetComponent<TextMeshProUGUI>().text = stats.ElementAt(i).Value.value.ToString();
+		// 	Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
+		// }
+		// Debug.Log($"Stats Bounded");
+        // // ShowStats();
 	}
 
 	#endregion
@@ -66,9 +63,9 @@ public class Attributes : MonoBehaviour
     {
         stats[type].IncreaseBase();
     }
-    public void DecreaseBase(StatType type)
+    public bool DecreaseBase(StatType type)
     {
-        stats[type].DecreaseBase();
+        return stats[type].DecreaseBase();
     }
     public bool IsDead()
     {
@@ -113,11 +110,11 @@ public class Attributes : MonoBehaviour
     }
     public void StaminaBar(int value)
     {
-        staminaBar.value = value;
+        // staminaBar.value = value;
     }
 	public void HealthBar(int value)
     {
-        healthBar.value = value;
+        // healthBar.value = value;
     }
     public Stat GetStat(StatType type)
     {
