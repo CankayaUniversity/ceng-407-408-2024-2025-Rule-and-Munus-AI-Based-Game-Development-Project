@@ -15,11 +15,11 @@ public class Attributes : MonoBehaviour
     private readonly int maxHealth = 100;
     [SerializeField]
     public int currentHealth = 100;
-    // public Slider healthBar; 
+     public Slider healthBar; 
     private readonly int maxStamina = 80;
     [SerializeField]
     public int currentStamina = 80;
-    // public Slider staminaBar; 
+     public Slider staminaBar; 
     public bool isDead = false;
     [SerializeField]
     private int attackModifier = 10;
@@ -73,7 +73,7 @@ public class Attributes : MonoBehaviour
     }
     public void UpdateHealth(int value)
     {
-        this.currentHealth = (int)math.clamp(currentHealth + value, 0, maxHealth);
+        this.currentHealth = (int)math.clamp( value, 0, maxHealth);
         if(this.currentHealth <= 0)
         {
             isDead = true;
@@ -85,7 +85,7 @@ public class Attributes : MonoBehaviour
 
     public void UpdateStamina(int value)
     {
-        this.currentStamina = (int)math.clamp(currentStamina + value, 0, maxStamina);
+        this.currentStamina = (int)math.clamp(value, 0, maxStamina);
         StaminaBar(this.currentStamina);
         Debug.Log($"{currentStamina} Stamina Adjusted by {value}.");
     }
@@ -110,11 +110,11 @@ public class Attributes : MonoBehaviour
     }
     public void StaminaBar(int value)
     {
-        // staminaBar.value = value;
+         staminaBar.value = value;
     }
 	public void HealthBar(int value)
     {
-        // healthBar.value = value;
+         healthBar.value = value;
     }
     public Stat GetStat(StatType type)
     {
