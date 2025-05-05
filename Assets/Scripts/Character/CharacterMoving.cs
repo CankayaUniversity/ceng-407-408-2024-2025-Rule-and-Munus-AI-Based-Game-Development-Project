@@ -37,7 +37,8 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     private Vector3 startingPosition;
     public IAnimatorController animatorController;
     public CharacterState currentState = CharacterState.Idle;
-    
+    public Attributes attributes;
+
     public event Action OnAttackComplete;
     public event Action OnDefenceComplete;
     public event Action OnMoveComplete;
@@ -77,7 +78,10 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
         Vector3 fixedPositionz = transform.position;
         fixedPositionz.z = 0f;
         transform.position = fixedPositionz;
-
+        if(attributes.currentHealth <= 0)
+        {
+            currentState = CharacterState.Dead;
+        }
         if (currentState == CharacterState.Dead)
         {
             Dead();

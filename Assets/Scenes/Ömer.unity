@@ -18229,6 +18229,7 @@ MonoBehaviour:
   GameOverPanel: {fileID: 1644314001}
   WinPanel: {fileID: 812516270}
   currentState: 0
+  attributes: {fileID: 2124124177}
   characterHealthController: {fileID: 2124124171}
   enemyHealthController: {fileID: 504452221}
   enemyAI: {fileID: 850514015}
