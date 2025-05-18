@@ -33,8 +33,8 @@ public class Attributes : MonoBehaviour
 	void Awake()
 	{
         instance = this;
-        StaminaBar(currentStamina);
-        HealthBar(currentHealth);
+        // StaminaBar(currentStamina);
+        // HealthBar(currentHealth);
         isDead = false;
 		// for(int i = 0; i < stats.Count - 1 ; ++i)
 		// {

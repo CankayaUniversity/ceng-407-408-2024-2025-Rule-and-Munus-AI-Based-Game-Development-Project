@@ -5,13 +5,13 @@ using Equipments;
 
 public static class LootGenerator
 {
-    public static void RandomEquipment(Stat luck) 
+    public static Equipment RandomEquipment(Stat luck) 
     {
         int randomIndex = UnityEngine.Random.Range(0, EquipmentType.equipmentList.Count);
         var randomType = EquipmentType.equipmentList[randomIndex];
         Rarity rarity = RarityFactor((int) luck.value); 
         Debug.Log($"Chosen Type: {randomType}");
-        ItemGenerator.Generate(randomType, rarity, luck);
+        return ItemGenerator.Generate(randomType, rarity, luck);
     }
     // public static void EquipmentbyType(EquipmentType type, Stat luck) 
     // {

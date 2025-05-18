@@ -26,7 +26,7 @@ public class Stock : MonoBehaviour {
 			for(int i = 0; i < typeMaterial.Count; ++i)
 			{
 				textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
-				Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
+				//Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
 			}
 			Debug.Log($"Stock Created!");
 		}
@@ -45,7 +45,7 @@ public class Stock : MonoBehaviour {
 		for(int i = 0; i < textList.Count; ++i)
 		{
 			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
-			Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
+			//Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
 		}
 	}
 

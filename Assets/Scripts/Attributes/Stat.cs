@@ -35,7 +35,7 @@ public class Stat
     {
         flag = true;
         statModifiers.Add(mod);
-        statModifiers.Sort();
+        //statModifiers.Sort();
     }
     public virtual void IncreaseBase()
     {

@@ -4826,17 +4826,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986780313}
   m_CullTransparentMesh: 1
---- !u!114 &1021104870 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-  m_PrefabInstance: {fileID: 3594581047399374900}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1035494020
 GameObject:
   m_ObjectHideFlags: 0
@@ -7520,7 +7509,6 @@ GameObject:
   - component: {fileID: 1725706846}
   - component: {fileID: 1725706845}
   - component: {fileID: 1725706844}
-  - component: {fileID: 1725706843}
   - component: {fileID: 1725706851}
   - component: {fileID: 1725706850}
   - component: {fileID: 1725706852}
@@ -7531,18 +7519,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1725706843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725706842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f714c72cdaebcbd4a9a8cb5bb757d537, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1725706844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7796,7 +7772,9 @@ MonoBehaviour:
   _class: Fighter
   race: Ipsum
   currentHealth: 0
+  healthBar: {fileID: 0}
   currentStamina: 0
+  staminaBar: {fileID: 0}
   isDead: 0
   attackModifier: 10
   defenceModifier: 5
@@ -9883,18 +9861,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot
       objectReference: {fileID: 0}
-    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-      propertyPath: inventory
-      value: 
-      objectReference: {fileID: 1725706852}
-    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-      propertyPath: removeButton
-      value: 
-      objectReference: {fileID: 1021104870}
-    - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
-      propertyPath: equipmentManager
-      value: 
-      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

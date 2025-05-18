@@ -3,9 +3,7 @@ using System;
 using Types;
 using System.Collections.Generic;
 using Equipments;
-
-/* Keep track of equipment. Has functions for adding and removing items. */
-
+using Unity.AppUI.UI;
 public class EquipmentManager : MonoBehaviour {
 
 	#region Singleton
@@ -14,45 +12,54 @@ public class EquipmentManager : MonoBehaviour {
     public Equipment[] defaultEquipment;
 	public static EquipmentManager instance;
 	public SkinnedMeshRenderer targetMesh;
-
-    SkinnedMeshRenderer[] currentMeshes;
-
-	void Awake ()
-	{
-		instance = this;
-	}
-
-	#endregion
-
 	public List<Equipment> currentEquipment;   // Items we currently have equipped
-
-	// Callback for when an item is equipped/unequipped
-	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
-	public OnEquipmentChanged onEquipmentChanged;
 	public Inventory inventory;	
 	public InventoryUI inventoryUI;
 	public AttributeManager attributeManager;
-	void Start ()
+	public List<Button> removeButtons;
+	public List<Button> useButtons;
+    SkinnedMeshRenderer[] currentMeshes;
+	void Awake ()
 	{
-		// inventory = Inventory.instance;		// Get a reference to our inventory
-		inventory.ShowItems();
-		attributeManager = GetComponent<AttributeManager>();
+		instance = this;
 		// Initialize currentEquipment based on number of equipment slots
 		int numSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
 		currentEquipment = new List<Equipment>(numSlots);
 		FillDefault();
 		foreach (Equipment equipment in currentEquipment)
 		{
-			Debug.Log($"I have: {equipment.name} with {equipment.rarirty}");
+			Debug.Log($"I have: {equipment.equipSlot} with {equipment.rarirty}");
 		}
 		Equip(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Legendary));
 		foreach (Equipment equipment in currentEquipment)
 		{
-			Debug.Log($"I have: {equipment.rarirty}");
+			Debug.Log($"I have: {equipment.rarirty}, {equipment.equipSlot}");
 		}
         currentMeshes = new SkinnedMeshRenderer[numSlots];
-		
-        // EquipDefaults();
+		// EquipDefaults();
+	}
+	#endregion
+	void Start ()
+	{
+		//inventory.ShowItems();
+		attributeManager = GetComponent<AttributeManager>();
+		//inventoryUI.SetupSlots(RemoveEquipmentAt, UseEquipmentAt);
+	}
+	public void RemoveEquipmentAt(int index)
+	{
+		if (index < inventory.equipments.Count && inventory.equipments[index] != null)
+		{
+			inventory.Remove(index);
+			inventoryUI.UpdateUI();
+    	}
+	}
+
+	public void UseEquipmentAt(int index)
+	{
+    	if (index < inventory.equipments.Count && inventory.equipments[index] != null)
+    	{
+    	    Equip(inventory.equipments[index]);
+    	}
 	}
 	public void FillDefault()
 	{
@@ -66,60 +73,48 @@ public class EquipmentManager : MonoBehaviour {
 	// Equip a new item
 	public void Equip (Equipment newItem)
 	{
-		// ref Equipment old = currentEquipment.Find(x => x.equipSlot == newItem.equipSlot);
-		// inventory.ShowItems();
-		// Find out what slot the item fits in
-		int slotIndex = (int)newItem.equipSlot-1;
-		Debug.Log($"New Item is: {newItem.rarirty}");
-
-        // Equipment oldItem = Unequip(slotIndex);
-
-		// An item has been equipped so we trigger the callback
-		// if (onEquipmentChanged != null)
-		// {
-		// 	onEquipmentChanged.Invoke(newItem, oldItem);
-		// }
-
-		// Insert the item into the slot
-		currentEquipment[slotIndex] = newItem;
-		flag = true;
-		attributeManager.UpdateStats(newItem, true);
-        // AttachToMesh(newItem, slotIndex);
-		inventory.ShowItems();
-		// inventoryUI.UpdateUI();
+		if(newItem != null)
+		{
+			int slotIndex = (int)newItem.equipSlot-1;
+			if(currentEquipment[slotIndex] != null)
+			{
+				if(inventory.equipments.Count>=20)
+				{
+					inventory.Remove(newItem);
+				}
+				Unequip(slotIndex);
+			}
+			currentEquipment[slotIndex] = newItem;
+			attributeManager.UpdateStats(newItem, true);
+			inventory.Remove(newItem);
+			inventoryUI.UpdateUI();
+			//inventory.ShowItems();
+		}
+		else
+		{
+			Debug.Log("newItem is null!");
+		}
 	}
 
 	// Unequip an item with a particular index
-	public Equipment Unequip (int slotIndex)
+	public void Unequip (int slotIndex)
 	{
-        Equipment oldItem = null;
 		// Only do this if an item is there
-		if (currentEquipment[slotIndex] != null)
+		if (currentEquipment[slotIndex] != null && inventory.equipments.Count<20)
 		{
 			// Add the item to the inventory
-			oldItem = currentEquipment[slotIndex];
+			Equipment oldItem = currentEquipment[slotIndex];
 			inventory.Add(oldItem);
 
-            SetBlendShapeWeight(oldItem, 0);
-            // Destroy the mesh
-            if (currentMeshes[slotIndex] != null)
-            {
-                Destroy(currentMeshes[slotIndex].gameObject);
-            }
-
-			// Remove the item from the equipment array
 			currentEquipment[slotIndex] = null;
-
-			// Equipment has been removed so we trigger the callback
-			if (onEquipmentChanged != null)
-			{
-				onEquipmentChanged.Invoke(null, oldItem);
-			}
+			attributeManager.UpdateStats(oldItem, false);
+			//inventory.ShowItems();
+			inventoryUI.UpdateUI();
 		}
-		attributeManager.UpdateStats(oldItem, false);
-		inventory.ShowItems();
-		inventoryUI.UpdateUI();
-        return oldItem;
+		else
+		{
+			Debug.Log("Either Inventory is full or specified slot is empty!");
+		}
 	}
 
 	// Unequip all items
@@ -132,7 +127,11 @@ public class EquipmentManager : MonoBehaviour {
 
         EquipDefaults();
 	}
-
+	public void Add(Equipment equipment)
+	{
+		inventory.Add(equipment);
+		inventoryUI.UpdateUI();
+	}
     void AttachToMesh(Equipment item, int slotIndex)
 	{
 
@@ -160,10 +159,7 @@ public class EquipmentManager : MonoBehaviour {
 
     void EquipDefaults()
     {
-		foreach (Equipment e in defaultEquipment)
-		{
-			Equip(e);
-		}
+
     }
 
 	void Update ()

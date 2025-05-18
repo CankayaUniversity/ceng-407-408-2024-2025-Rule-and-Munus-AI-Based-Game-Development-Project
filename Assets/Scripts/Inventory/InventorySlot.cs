@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System;
-using Types;
-using Equipments;
 
 /* Sits on all InventorySlots. */
 
@@ -11,69 +8,64 @@ public class InventorySlot : MonoBehaviour {
 
 	public Image icon;			// Reference to the Icon image
 	public Button removeButton;	// Reference to the remove button
+	public Button useButton;	// Reference to the remove button
 	public Item item;  // Current item in the slot
-	// public ScriptableObject gameObject = new ScriptableObject.CreateInstance<Equipment>();
 	public Equipment equipment;
-	public EquipmentManager equipmentManager;
-	public Inventory inventory;
 	bool isEquiped;
-
-    // Add item to the slot
-    // public void Awake()
-    // {
-	// 	isEquiped = false;
-    //     equipment = ItemGenerator.Generate(EquipmentType.defaultEquipment, Rarity.Default);
-    // }
+	public int slotIndex; // NEW - To keep track of this slot's index in the UI
 	public void Start()
     {
 		isEquiped = false;
-        equipment = ItemGenerator.Generate(EquipmentType.defaultEquipment, Rarity.Default);
-		// gameObject = Equipment.CreateInstance(equipmentManager);
+    }
+
+    public void Setup(int index, Action<int> onRemove, Action<int> onUse)
+    {
+        slotIndex = index;
+        removeButton.onClick.AddListener(() => onRemove(slotIndex));
+        useButton.onClick.AddListener(() => onUse(slotIndex));
     }
     public void AddItem (Equipment equipment)
 	{
+		if (equipment == null)
+		{
+			Debug.LogError("AGA!");
+		}
+		//Debug.LogError("Slot created!");
+		//Debug.Log($"Upcoming slot: {equipment.equipSlot}");
+		//Debug.Log($"Upcoming icon: {equipment.icon}");
 		this.equipment = equipment;
 		isEquiped = false;
 		icon.sprite = equipment.icon;
 		icon.enabled = true;
+		useButton.interactable = true;
 		removeButton.interactable = true;
 	}
 	public void AddItem (Item newItem)
 	{
 		item = newItem;
-
 		icon.sprite = item.icon;
 		icon.enabled = true;
+		useButton.interactable = true;
 		removeButton.interactable = true;
 	}
-
-	// Clear the slot
 	public void ClearSlot ()
 	{
+		Debug.LogError("Slot cleared!");
 		item = null;
 		isEquiped = true;
 		icon.sprite = null;
 		icon.enabled = false;
+		useButton.interactable = false;
 		removeButton.interactable = false;
 	}
-
-	// Called when the remove button is pressed
-	public virtual void OnRemoveButton ()
-	{
-		// equipmentManager.Unequip(equipment);
-		inventory.Remove(item);
-		ClearSlot();
-	}
-	// Called when the item is pressed
+	// public virtual void OnRemoveButton ()
+	// {
+	// 	ClearSlot();
+	// }
 	public void UseItem ()
 	{
-		// if (item != null)
-		// {
-		// 	item.Use();
-		// }
 		if (equipment != null && isEquiped == false)
 		{
-			equipmentManager.Equip(equipment);
 			removeButton.interactable = false;
 			isEquiped = true;
 		}

@@ -5,7 +5,7 @@ using Types;
 using Odds;
 using Icons;
 using Equipments;
-using Unity.VisualScripting;
+// using Unity.VisualScripting;
 // using Microsoft.Unity.VisualStudio.Editor;
 public static class ItemGenerator
 {
@@ -31,15 +31,15 @@ public static class ItemGenerator
         generated.AdjustStatModifiers(statTypeModifier);
         return generated;
     }
-    public static void Generate(EquipmentType type, Rarity rarity, Stat luck)
+    public static Equipment Generate(EquipmentType type, Rarity rarity, Stat luck)
     {
-        Dictionary<StatType, StatModifier> statTypeModifier= new Dictionary<StatType, StatModifier>();
+        Dictionary<StatType, StatModifier> statTypeModifier = new Dictionary<StatType, StatModifier>();
         generated = ScriptableObject.CreateInstance<Equipment>();
         fate = (int)luck.value;
         equipmentType = type;
         equipmentRarity = rarity;
         //Crafts an equipment with damageFactor/defenceFactor but statModifiers
-        Craft(); 
+        Craft();
         //Polishs the equipment for adjusting the statModifiers
         Polish(ref statTypeModifier);
         /* switch(type.slot)
@@ -74,8 +74,9 @@ public static class ItemGenerator
         } */
 
         generated.AdjustStatModifiers(statTypeModifier);
-        inventory.Add(generated);
-        // inventory.ShowItems();
+        return generated;
+        // inventory.Add(generated);
+        //inventory.ShowItems();
     }
 
     public static Equipment Generate(EquipmentType type, Rarity rarity)
