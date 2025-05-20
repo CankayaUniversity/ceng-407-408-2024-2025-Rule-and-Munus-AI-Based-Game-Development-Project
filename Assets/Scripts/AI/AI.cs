@@ -616,7 +616,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
         // Düşman oyuncuya yaklaşırken, koşma animasyonunu başlat
         animatorController.StepForward();
 
-        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 10);
+        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 4);
 
         Vector3 direction = (playerTransform.position - transform.position).normalized;  
         LookAt(direction);
@@ -645,7 +645,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
         animatorController.StepBackward();
         animatorController.SetIdle(false);
 
-        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 10);
+        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 4);
         Vector3 direction = (transform.position - playerTransform.position).normalized;
         Vector3 newPosition = transform.position + direction * 1f; 
 
@@ -678,7 +678,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
     {
         if (arrowCount > 0)
         {
-            hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 20);
+            hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 5);
             var target = ChooseBestTargetArea(); 
             Equipment targetedEquipment = GetTargetedEquipment(target); 
             Equipment weapon = enemyStats.GetEquippedWeapon(2);
@@ -799,7 +799,7 @@ private IEnumerator PlayDefenseAnimation(string zone, float duration)
 
     private void Attack()
     {
-        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 20);
+        hitController.attributes.UpdateStamina(hitController.attributes.currentStamina - 5);
 
         var target = ChooseBestTargetArea(); // Yeni method: hedef ve score döner
         PlayAttackAnimation(target);
