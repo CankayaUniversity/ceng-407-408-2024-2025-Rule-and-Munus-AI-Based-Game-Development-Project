@@ -153,12 +153,13 @@ public class EnemyAI : MonoBehaviour
         // Kılıç Saldırısı - Oyuncuya çok yakınsa
         new Sequence(new List<Node> {
             new ConditionNode(() => distanceToPlayer <= 10),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new Selector(new List<Node> {
 
 
                 new Sequence(new List<Node> {
                 new ConditionNode(() => distanceToPlayer < 3),
-                new ConditionNode(() => hitController.attributes.currentStamina > 0), 
+                
 
                 new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 }),
@@ -229,12 +230,13 @@ public class EnemyAI : MonoBehaviour
     {   //*YAKIN MESAFE İŞLEMLERİ
         new Sequence(new List<Node> {
             new ConditionNode(() => distanceToPlayer <=10),
+            new ConditionNode(() => hitController.attributes.currentStamina > 0),
             new Selector(new List<Node> {
 
 
                 new Sequence(new List<Node> {
                 new ConditionNode(() => distanceToPlayer < 3),
-                new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                
 
                 new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 }),
@@ -243,18 +245,18 @@ public class EnemyAI : MonoBehaviour
                 //*OK MEVCUT
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
-                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                    
 
                     new ActionNode(() =>  StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
-                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                    
                     new ActionNode(() => UseRangedAttack())
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount > 0),
-                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                    
                     new ActionNode(() => Attack())
                 }),
                 /*
@@ -269,12 +271,12 @@ public class EnemyAI : MonoBehaviour
                 //*OK MEVCUT DEĞİL,MANA VAR
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.4f && arrowCount == 0 && mana > 0),
-                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                    
                     new ActionNode(() => Attack())
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.3f && arrowCount == 0 && mana > 0),
-                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                    
                     new ActionNode(() =>  StartCoroutine(MoveAwayFromPlayer()))
                 }),
                 /*
@@ -290,12 +292,12 @@ public class EnemyAI : MonoBehaviour
                 //*OK MEVCUT DEĞİL,MANA MEVCUT DEĞİL
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.6f && arrowCount == 0 && mana == 0),
-                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                    
                     new ActionNode(() => Attack())
                 }),
                 new Sequence(new List<Node> {
                     new ConditionNode(() => UnityEngine.Random.value <= 0.4f && arrowCount == 0 && mana == 0),
-                    new ConditionNode(() => hitController.attributes.currentStamina > 0),
+                    
                     new ActionNode(() => StartCoroutine(MoveAwayFromPlayer()))
                 })
                 //OK MEVCUT DEĞİL,MANA MEVCUT DEĞİL*

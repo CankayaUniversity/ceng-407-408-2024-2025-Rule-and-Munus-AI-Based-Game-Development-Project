@@ -104,7 +104,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle && currentState != CharacterState.MovingToTarget)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 10);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 4);
         currentState = CharacterState.MovingToTarget;
         animatorController.SetIdle(false);
         animatorController.SetRunning(true);
@@ -137,7 +137,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Attacking)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 10);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 4);
 
         currentState = CharacterState.ReturningToStart;
         animatorController.SetAttacking0(false);
@@ -178,7 +178,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 20);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 5);
 
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
         MoveTo(targetPosition);
@@ -210,7 +210,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 20);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 5);
 
         currentState = CharacterState.Attacking;
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
@@ -224,7 +224,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 20);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 5);
 
         currentState = CharacterState.Attacking;
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
@@ -238,7 +238,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 20);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 5);
 
         currentState = CharacterState.Attacking;
         targetPosition = new Vector3(targetObject.transform.position.x, transform.position.y, transform.position.z);
@@ -252,7 +252,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 20);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 5);
 
         currentState = CharacterState.Attacking;
         Transform target = TargetHead.transform;
@@ -268,7 +268,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 20);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 5);
 
         currentState = CharacterState.Attacking;
         Transform target = TargetBody.transform;
@@ -284,7 +284,7 @@ public class CharacterMoving : MonoBehaviour, ICharacterMover//, ICharacterComba
     {
         if (currentState != CharacterState.Idle)
             return;
-        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 20);
+        enemyAI.attributes.UpdateStamina(enemyAI.attributes.currentStamina - 5);
 
         currentState = CharacterState.Attacking;
         Transform target = TargetLeg.transform;
