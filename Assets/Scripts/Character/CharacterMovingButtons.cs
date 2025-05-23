@@ -20,6 +20,7 @@ public class CharacterMovingButtons : MonoBehaviour
     [Header("Weapon Prefabs")]
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject sword;
+    [SerializeField] private GameObject shield;
 
 
     [Header("Button Indexes")]
@@ -58,6 +59,7 @@ public class CharacterMovingButtons : MonoBehaviour
             ArrowPanel.SetActive(true);
             arrow.SetActive(true);
             sword.SetActive(false);
+            shield.SetActive(false);
         }
         else
         {
@@ -68,6 +70,7 @@ public class CharacterMovingButtons : MonoBehaviour
             ArrowPanel.SetActive(false);
             arrow.SetActive(false);
             sword.SetActive(true);
+            shield.SetActive(true);
         }
     }
     private void OnDestroy()
