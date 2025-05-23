@@ -1,5 +1,6 @@
 fileFormatVersion: 2
 guid: 4b41423c437533647900652d9e0ce7a6
+<<<<<<< Updated upstream
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,6 +9,23 @@ TextureImporter:
     mipMapMode: 0
     enableMipMap: 1
     sRGBTexture: 1
+=======
+AssetOrigin:
+  serializedVersion: 1
+  productId: 228680
+  packageName: Stylized Nature Textures
+  packageVersion: 1.0
+  assetPath: Assets/Yoge/Textures/Stylized - Nature/Texture_1_Diffuse2.png
+  uploadId: 536909
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 0
+>>>>>>> Stashed changes
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -20,10 +38,18 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+<<<<<<< Updated upstream
+=======
+    flipGreenChannel: 0
+>>>>>>> Stashed changes
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+<<<<<<< Updated upstream
+=======
+  ignoreMipmapLimit: 0
+>>>>>>> Stashed changes
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -52,7 +78,11 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
+<<<<<<< Updated upstream
   textureType: 0
+=======
+  textureType: 1
+>>>>>>> Stashed changes
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -62,8 +92,15 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+<<<<<<< Updated upstream
   platformSettings:
   - serializedVersion: 3
+=======
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+>>>>>>> Stashed changes
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -73,12 +110,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+<<<<<<< Updated upstream
+=======
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+>>>>>>> Stashed changes
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
     outline: []
+<<<<<<< Updated upstream
+=======
+    customData: 
+>>>>>>> Stashed changes
     physicsShape: []
     bones: []
     spriteID: 
@@ -88,6 +146,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+<<<<<<< Updated upstream
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
@@ -101,3 +160,13 @@ AssetOrigin:
   packageVersion: 1.0
   assetPath: Assets/Yoge/Textures/Stylized - Nature/Texture_1_Diffuse2.png
   uploadId: 536909
+=======
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> Stashed changes
