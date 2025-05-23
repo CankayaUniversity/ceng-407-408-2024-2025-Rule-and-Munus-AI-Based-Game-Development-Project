@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b61829061d5dc774b866e5bb9257dfa1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161188
+  packageName: The Illustrated Nature - Sample
+  packageVersion: 1.0
+  assetPath: Assets/IL3DN/Graphics/Materials/IL3DN_Backdrop.mat
+  uploadId: 347611

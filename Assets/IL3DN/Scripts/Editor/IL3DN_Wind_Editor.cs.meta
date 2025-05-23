@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f1689139bd090d04786b31a962c000df
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161188
+  packageName: The Illustrated Nature - Sample
+  packageVersion: 1.0
+  assetPath: Assets/IL3DN/Scripts/Editor/IL3DN_Wind_Editor.cs
+  uploadId: 347611

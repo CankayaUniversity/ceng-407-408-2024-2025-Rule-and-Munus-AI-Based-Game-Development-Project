@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: cf6616a168132ca47848460c33996053
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161188
+  packageName: The Illustrated Nature - Sample
+  packageVersion: 1.0
+  assetPath: Assets/IL3DN/Scripts/IL3DN_SimpleMouseLook.cs
+  uploadId: 347611

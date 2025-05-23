@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ada68b3c42756204b808c7cdb45b987a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 281338
+  packageName: Low Poly Stylized Nature
+  packageVersion: 1.0.2
+  assetPath: Assets/Cody Dreams/Low Poly Stylized Nature/Editor/FeedbackWindowLPSNP.cs
+  uploadId: 720103

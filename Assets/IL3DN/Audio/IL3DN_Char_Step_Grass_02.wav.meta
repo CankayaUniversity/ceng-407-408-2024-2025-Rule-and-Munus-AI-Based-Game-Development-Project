@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 07d6c79ac5a1e3a4094f31a17377867e
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161188
+  packageName: The Illustrated Nature - Sample
+  packageVersion: 1.0
+  assetPath: Assets/IL3DN/Audio/IL3DN_Char_Step_Grass_02.wav
+  uploadId: 347611

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f7e7c1c5853a7d84196761aab5cf649c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161188
+  packageName: The Illustrated Nature - Sample
+  packageVersion: 1.0
+  assetPath: Assets/IL3DN/Post-Processing_Profile/IL3DN_PPProfile_FreeDemo.asset
+  uploadId: 347611

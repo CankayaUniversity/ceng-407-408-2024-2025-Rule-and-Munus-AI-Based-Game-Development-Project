@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 045fe5e079298364598f4ad27f90ee28
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161188
+  packageName: The Illustrated Nature - Sample
+  packageVersion: 1.0
+  assetPath: Assets/IL3DN/Scripts/IL3DN_ChangeWalkingSound.cs
+  uploadId: 347611

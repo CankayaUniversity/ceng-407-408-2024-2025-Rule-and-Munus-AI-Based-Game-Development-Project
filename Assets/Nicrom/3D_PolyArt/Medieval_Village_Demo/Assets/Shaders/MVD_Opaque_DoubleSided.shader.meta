@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a0aa07bf845ef6042bc443af61ce631a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274109
+  packageName: Medieval Village - POLY Pack - Demo
+  packageVersion: 1.0.1
+  assetPath: Assets/Nicrom/3D_PolyArt/Medieval_Village_Demo/Assets/Shaders/MVD_Opaque_DoubleSided.shader
+  uploadId: 650086
