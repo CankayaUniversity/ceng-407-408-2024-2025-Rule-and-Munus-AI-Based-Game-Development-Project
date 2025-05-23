@@ -5,6 +5,7 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< Updated upstream
 AssetOrigin:
   serializedVersion: 1
   productId: 274109
@@ -12,3 +13,5 @@ AssetOrigin:
   packageVersion: 1.0.1
   assetPath: Assets/Nicrom/3D_PolyArt/Medieval_Village_Demo/UpgradePackages/MVD_URP_2021.3.33.unitypackage
   uploadId: 650086
+=======
+>>>>>>> Stashed changes
