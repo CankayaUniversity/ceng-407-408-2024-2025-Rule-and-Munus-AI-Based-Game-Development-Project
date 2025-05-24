@@ -12,7 +12,6 @@ public class InventoryUI : MonoBehaviour {
 	void Awake () {
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
 	}
-	
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.E))
 		{
