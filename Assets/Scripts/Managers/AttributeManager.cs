@@ -31,46 +31,46 @@ public class AttributeManager : MonoBehaviour {
 	}
 	public void UpdateStats(Equipment equipment, bool isEquiped)
 	{
-		Dictionary<StatType, StatModifier> modifiers = equipment.statModifiers;
-		var statList = attributes.stats.Keys;
-		StatType stat;
 		if (isEquiped)
 		{
-			for (int i = 0; i < modifiers.Count; ++i)
+			foreach (StatType type in equipment.statModifiers.Keys)
 			{
-				stat = statList.ElementAt(i);
-				if (modifiers.ContainsKey(stat))
+				if (attributes.stats.ContainsKey(type))
 				{
-					attributes.Add(stat, modifiers[stat]);
+					attributes.Add(type, equipment.statModifiers[type]);	
 				}
 			}
 		}
 		else
 		{
-			for (int i = 0; i < modifiers.Count; ++i)
+			foreach (StatType type in equipment.statModifiers.Keys)
 			{
-				stat = statList.ElementAt(i);
-				if (modifiers.ContainsKey(stat))
+				if (attributes.stats.ContainsKey(type))
 				{
-					attributes.Remove(stat, modifiers[stat]);
+					attributes.Remove(type, equipment.statModifiers[type]);	
 				}
 			}
 		}
+		//ShowStats();
 		UpdateTexts();
+	}
+	public void ShowStats()
+	{
+		attributes.ShowStats();
 	}
 	public void UpdateTexts()
 	{
-        int index = 0;
-        //In order to: STR -> DEX -> CON -> INT -> WIS -> CHA -> LUCK -> DEFAULT
-        if(textList.Count > 0)
-        {
-            foreach(StatType type in attributes.stats.Keys)
-		    {
+		int index = 0;
+		//In order to: STR -> DEX -> CON -> INT -> WIS -> CHA -> LUCK -> DEFAULT
+		if (textList.Count > 0)
+		{
+			foreach (StatType type in attributes.stats.Keys)
+			{
 				if ((int)type != (int)StatType.Default)
-				//Debug.LogError($"Attribute: {(int)type} Value: {attributes.stats[type].value}");
-                textList[index++].GetComponent<TextMeshProUGUI>().text = attributes.stats[type].value.ToString();
-		    }
-        }
+					//Debug.LogError($"Attribute: {(int)type} Value: {attributes.stats[type].value}");
+					textList[index++].GetComponent<TextMeshProUGUI>().text = attributes.stats[type].value.ToString();
+			}
+		}
 	}
 	public void SetName(string name)
     {

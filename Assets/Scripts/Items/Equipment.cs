@@ -4,13 +4,14 @@ using UnityEngine;
 using Types;
 using Stats;
 using Icons;
+using Equipments;
 
 /* An Item that can be equipped. */
 
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Equipment")]
 public class Equipment : Item {
 	public EquipmentSlot equipSlot; // Slot to store equipment in
-	// public Player player; //Character of the player
+	public EquipmentType equipmentType;
 	public Rarity rarirty;
 	public int armorModifier;		// Increase/decrease in armor
 	public int damageModifier;      // Increase/decrease in damage
@@ -28,9 +29,26 @@ public class Equipment : Item {
 	{
 		this.InitEquipment(equipmentSlot, rarity, damageType, armorModifier, damageModifier, mesh, icon);
 	}
-	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, DamageType damageType, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon, Dictionary<StatType, StatModifier> modifiers): this(equipmentSlot, rarity, damageType, armorModifier, damageModifier, mesh, icon)
+	public Equipment(EquipmentType equipmentType, EquipmentSlot equipmentSlot, Rarity rarity, DamageType damageType, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon)
+	{
+		this.InitEquipment(equipmentType, equipmentSlot, rarity, damageType, armorModifier, damageModifier, mesh, icon);
+	}
+	public Equipment(EquipmentSlot equipmentSlot, Rarity rarity, DamageType damageType, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon, Dictionary<StatType, StatModifier> modifiers) : this(equipmentSlot, rarity, damageType, armorModifier, damageModifier, mesh, icon)
 	{
 		AdjustStatModifiers(modifiers);
+	}
+	public void InitEquipment(EquipmentType equipmentType, EquipmentSlot equipmentSlot, Rarity rarity, DamageType damageType, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon)
+	{
+		this.InitItem();
+		this.SetIcon(icon);
+		this.mesh = mesh;
+		statModifiers = _stats.statModifiers;
+		this.equipmentType = equipmentType;
+		this.damageType = damageType;
+		this.equipSlot = equipmentSlot;
+		this.rarirty = rarity;
+		this.armorModifier = armorModifier;
+		this.damageModifier = damageModifier;
 	}
 	public void InitEquipment(EquipmentSlot equipmentSlot, Rarity rarity, DamageType damageType, int armorModifier, int damageModifier, SkinnedMeshRenderer mesh, Sprite icon)
 	{

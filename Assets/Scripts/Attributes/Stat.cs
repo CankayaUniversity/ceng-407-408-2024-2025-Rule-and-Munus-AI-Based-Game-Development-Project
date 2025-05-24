@@ -20,12 +20,12 @@ public class Stat
     protected bool flag = true;
     protected float _value = 0.0f; 
     protected float finalBaseValue = float.MinValue;
-    protected readonly List<StatModifier> statModifiers;
-    public readonly ReadOnlyCollection<StatModifier> StatModifiers;
+    public readonly List<StatModifier> statModifiers;
+    //public readonly ReadOnlyCollection<StatModifier> StatModifiers;
     public Stat()
     {
         statModifiers = new List<StatModifier>();
-        StatModifiers = statModifiers.AsReadOnly();
+        //StatModifiers = statModifiers.AsReadOnly();
     }
     public Stat(float bValue) : this()
     {

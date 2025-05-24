@@ -42,9 +42,10 @@ public class Stock : MonoBehaviour {
     // }
     public void UpdateText()
 	{
-		for(int i = 0; i < textList.Count; ++i)
+		for (int i = 0; i < textList.Count; ++i)
 		{
 			textList[i].GetComponent<TextMeshProUGUI>().text = typeMaterial.ElementAt(i).Value.Count.ToString();
+
 			//Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
 		}
 	}

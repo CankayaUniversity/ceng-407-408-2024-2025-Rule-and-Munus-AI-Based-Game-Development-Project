@@ -8,7 +8,7 @@ public class EquipmentManager : MonoBehaviour {
 
 	#region Singleton
 	public bool flag = false;
-    public enum MeshBlendShape {Head, Body, Legs, Feet, Default};
+    public enum MeshBlendShape {Head, Body, Legs, Feet, Secondary, Weapon, Accessoire, Default};
     public Equipment[] defaultEquipment;
 	public static EquipmentManager instance;
 	public SkinnedMeshRenderer targetMesh;
@@ -16,8 +16,6 @@ public class EquipmentManager : MonoBehaviour {
 	public Inventory inventory;	
 	public InventoryUI inventoryUI;
 	public AttributeManager attributeManager;
-	public List<Button> removeButtons;
-	public List<Button> useButtons;
     SkinnedMeshRenderer[] currentMeshes;
 	void Awake ()
 	{
@@ -42,7 +40,6 @@ public class EquipmentManager : MonoBehaviour {
 	void Start ()
 	{
 		attributeManager = GetComponent<AttributeManager>();
-		//inventoryUI.SetupSlots(RemoveEquipmentAt, UseEquipmentAt);
 	}
 	public void RemoveEquipmentAt(int index)
 	{
@@ -55,49 +52,67 @@ public class EquipmentManager : MonoBehaviour {
 
 	public void UseEquipmentAt(int index)
 	{
-    	if (index < inventory.equipments.Count && inventory.equipments[index] != null)
-    	{
-    	    Equip(inventory.equipments[index]);
-    	}
+		if (index < inventory.equipments.Count && inventory.equipments[index] != null)
+		{
+			Equip(inventory.equipments[index]);
+		}
 	}
 	public void FillDefault()
 	{
 		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.headLeatherArmor, Rarity.Common));
-	    currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bodyLeatherArmor, Rarity.Common));
 		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.legLeatherArmor, Rarity.Common));
 		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.feetLeatherArmor, Rarity.Common));
-		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common));
 		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bow, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.accessoire, Rarity.Common));
+		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.defaultEquipment, Rarity.Common));
 	}
 	public void Equip (Equipment newItem)
 	{
 		if(newItem != null)
 		{
 			int slotIndex = (int)newItem.equipSlot-1;
-			if (currentEquipment[slotIndex] != null)
+			if (currentEquipment[slotIndex].equipSlot == newItem.equipSlot)
 			{
-				inventory.Remove(newItem);
-				Unequip(slotIndex);
+				if (currentEquipment[slotIndex] != null)
+				{
+
+					Unequip(slotIndex);
+				}
+				Debug.LogError($"Equiped: {newItem.equipmentType}: {newItem.equipSlot}");
+				foreach (StatType type in newItem.statModifiers.Keys)
+				{
+					Debug.LogError($"{type}: {newItem.statModifiers[type].value}");
+				}
 				currentEquipment[slotIndex] = newItem;
 				attributeManager.UpdateStats(newItem, true);
+				inventory.Remove(newItem);
 				inventoryUI.UpdateUI(inventory.equipments);
 			}
 		}
-		else
-		{
-			Debug.Log("newItem is null!");
-		}
+			else
+			{
+				Debug.Log("newItem is null!");
+			}
 	}
 	public void Unequip (int slotIndex)
 	{
 		if (currentEquipment[slotIndex] != null && inventory.equipments.Count<20)
 		{
-			// Add the item to the inventory
 			Equipment oldItem = currentEquipment[slotIndex];
-			inventory.Add(oldItem);
-			currentEquipment[slotIndex] = null;
-			attributeManager.UpdateStats(oldItem, false);
-			inventoryUI.UpdateUI(inventory.equipments);
+			if (currentEquipment[slotIndex].equipSlot == oldItem.equipSlot)
+			{
+				Debug.LogError($"Unequiped: {oldItem.equipmentType}: {oldItem.equipSlot}");
+				foreach (StatType type in oldItem.statModifiers.Keys)
+				{
+					Debug.LogError($"{type}: {oldItem.statModifiers[type].value}");
+				}
+				currentEquipment[slotIndex] = ItemGenerator.Generate(oldItem.equipmentType, Rarity.Default);
+				attributeManager.UpdateStats(oldItem, false);
+				inventory.Add(oldItem);
+				inventoryUI.UpdateUI(inventory.equipments);
+			}
 		}
 		else
 		{

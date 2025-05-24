@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
         Debug.Log($"Before Equipping => Damage: {baseDamage}, Armor: {baseArmor}");
 
-        // Bütün slotlara ekipman yarat ve kuþan
+        // Bï¿½tï¿½n slotlara ekipman yarat ve kuï¿½an
         EquipAllSlots();
 
         Debug.Log($"After Full Equipping => Damage: {baseDamage}, Armor: {baseArmor}");
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     {
         if (equippedItems.ContainsKey(equipment.equipSlot))
         {
-            // Eski ekipmanýn etkisini geri al
+            // Eski ekipmanï¿½n etkisini geri al
             baseDamage -= equippedItems[equipment.equipSlot].damageModifier;
             baseArmor -= equippedItems[equipment.equipSlot].armorModifier;
             equippedItems[equipment.equipSlot] = equipment;
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     private void EquipAllSlots()
     {
-        // Tüm slotlar için farklý ekipmanlar yarat
+        // Tï¿½m slotlar iï¿½in farklï¿½ ekipmanlar yarat
         List<Equipment> equipments = new List<Equipment>()
         {
             CreateEquipment(EquipmentSlot.Head, Rarity.Rare, DamageType.Piercing, 5, 2),
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Basit ekipman oluþturucu
+    // Basit ekipman oluï¿½turucu
     private Equipment CreateEquipment(EquipmentSlot slot, Rarity rarity, DamageType dmgType, int armorMod, int dmgMod)
     {
         Equipment equipment = ScriptableObject.CreateInstance<Equipment>();

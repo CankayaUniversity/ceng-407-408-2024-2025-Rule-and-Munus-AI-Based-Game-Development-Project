@@ -53,9 +53,9 @@ namespace Types
         {
             STR = 1,
             DEX = 2,
-            INT = 3,
-            WIS = 4,
-            CON = 5,
+            CON = 3,
+            INT = 4,
+            WIS = 5,
             CHA = 6,
             LUCK = 7,
             Default = 8,

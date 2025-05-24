@@ -36,13 +36,6 @@ public class Attributes : MonoBehaviour
         // StaminaBar(currentStamina);
         // HealthBar(currentHealth);
         isDead = false;
-		// for(int i = 0; i < stats.Count - 1 ; ++i)
-		// {
-		// 	textList[i].GetComponent<TextMeshProUGUI>().text = stats.ElementAt(i).Value.value.ToString();
-		// 	Debug.Log($"{textList[i].GetComponent<TextMeshProUGUI>().text}");
-		// }
-		// Debug.Log($"Stats Bounded");
-        // // ShowStats();
 	}
 
 	#endregion
@@ -93,9 +86,13 @@ public class Attributes : MonoBehaviour
     public void ShowStats()
     {
         Debug.Log($"{Name}");
-        for(int i = 0; i < stats.Count; ++i)
+        for (int i = 0; i < stats.Count; ++i)
         {
-        Debug.Log($"{stats.ElementAt(i).Key}: {stats.ElementAt(i).Value.value}");
+            Debug.LogError($"{stats.ElementAt(i).Key}: {stats.ElementAt(i).Value.value}");
+            for (int j = 0; j < stats.ElementAt(i).Value.statModifiers.Count; ++j)
+            {
+                Debug.LogError($"{stats.ElementAt(i).Value.statModifiers[j].source}: {stats.ElementAt(i).Value.statModifiers[j].value}");
+            }
         }
     }
     public void UpdateAttackModifier(int value)

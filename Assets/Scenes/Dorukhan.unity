@@ -1477,6 +1477,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -1485,6 +1497,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3317,6 +3341,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -3325,6 +3361,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4819,6 +4867,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -4827,6 +4887,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7019,7 +7091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiPanel: {fileID: 737141980}
-  inventorySystem: {fileID: 1828353827}
+  inventorySystem: {fileID: 0}
   resultText: {fileID: 831694640}
 --- !u!65 &400199394
 BoxCollider:
@@ -11549,6 +11621,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -11557,6 +11641,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12751,6 +12847,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -12759,6 +12867,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13326,6 +13446,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -13334,6 +13466,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14498,6 +14642,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -14506,6 +14662,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15851,6 +16019,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -15859,6 +16039,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22336,6 +22528,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -22344,6 +22548,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22589,6 +22805,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -22597,6 +22825,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23241,6 +23481,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -23249,6 +23501,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24040,6 +24304,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -24048,6 +24324,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24697,6 +24985,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -24705,6 +25005,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25086,6 +25398,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -25094,6 +25418,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25530,6 +25866,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -25538,6 +25886,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28384,6 +28744,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -28392,6 +28764,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29166,7 +29550,7 @@ MonoBehaviour:
   uiPanel: {fileID: 392212661}
   levelText: {fileID: 340254263}
   resultText: {fileID: 435965219}
-  inventorySystem: {fileID: 1828353827}
+  inventorySystem: {fileID: 0}
   craftedItemName: Sword
 --- !u!65 &1740343059
 BoxCollider:
@@ -30688,6 +31072,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -30696,6 +31092,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30706,66 +31114,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4005988136900063483, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
   m_PrefabInstance: {fileID: 1824470504}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1828353826
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1828353829}
-  - component: {fileID: 1828353827}
-  - component: {fileID: 1828353828}
-  m_Layer: 0
-  m_Name: GameManager (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1828353827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828353826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b294c6cc1b90534aa201d1eda3e481e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items: []
---- !u!114 &1828353828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828353826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7818448053de024bb30544f521121ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phase: 0
-  attributeManager: {fileID: 0}
---- !u!4 &1828353829
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828353826}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1832865032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32589,6 +32937,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7886400942481126999, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: inventory
       value: 
@@ -32597,6 +32957,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35864,6 +36236,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6776590413079968353, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -35876,6 +36260,18 @@ PrefabInstance:
       propertyPath: equipmentManager
       value: 
       objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37490,6 +37886,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory_Slot
       objectReference: {fileID: 0}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
+    - target: {fileID: 5754042802030859669, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEquipmentAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334536757292930460, guid: 0c7afc84d51e50a46940c3aff2e2adbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1920523640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37685,5 +38093,4 @@ SceneRoots:
   - {fileID: 2068572724}
   - {fileID: 1752900691}
   - {fileID: 767510727}
-  - {fileID: 1828353829}
   - {fileID: 1740343063}
