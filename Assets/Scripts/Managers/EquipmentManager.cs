@@ -41,7 +41,6 @@ public class EquipmentManager : MonoBehaviour {
 	#endregion
 	void Start ()
 	{
-		//inventory.ShowItems();
 		attributeManager = GetComponent<AttributeManager>();
 		//inventoryUI.SetupSlots(RemoveEquipmentAt, UseEquipmentAt);
 	}
@@ -50,7 +49,7 @@ public class EquipmentManager : MonoBehaviour {
 		if (index < inventory.equipments.Count && inventory.equipments[index] != null)
 		{
 			inventory.Remove(index);
-			inventoryUI.UpdateUI();
+			inventoryUI.UpdateUI(inventory.equipments);
     	}
 	}
 
@@ -70,46 +69,35 @@ public class EquipmentManager : MonoBehaviour {
 		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.shortSword, Rarity.Common));
 		currentEquipment.Add(ItemGenerator.Generate(EquipmentType.bow, Rarity.Common));
 	}
-	// Equip a new item
 	public void Equip (Equipment newItem)
 	{
 		if(newItem != null)
 		{
 			int slotIndex = (int)newItem.equipSlot-1;
-			if(currentEquipment[slotIndex] != null)
+			if (currentEquipment[slotIndex] != null)
 			{
-				if(inventory.equipments.Count>=20)
-				{
-					inventory.Remove(newItem);
-				}
+				inventory.Remove(newItem);
 				Unequip(slotIndex);
+				currentEquipment[slotIndex] = newItem;
+				attributeManager.UpdateStats(newItem, true);
+				inventoryUI.UpdateUI(inventory.equipments);
 			}
-			currentEquipment[slotIndex] = newItem;
-			attributeManager.UpdateStats(newItem, true);
-			inventory.Remove(newItem);
-			inventoryUI.UpdateUI();
-			//inventory.ShowItems();
 		}
 		else
 		{
 			Debug.Log("newItem is null!");
 		}
 	}
-
-	// Unequip an item with a particular index
 	public void Unequip (int slotIndex)
 	{
-		// Only do this if an item is there
 		if (currentEquipment[slotIndex] != null && inventory.equipments.Count<20)
 		{
 			// Add the item to the inventory
 			Equipment oldItem = currentEquipment[slotIndex];
 			inventory.Add(oldItem);
-
 			currentEquipment[slotIndex] = null;
 			attributeManager.UpdateStats(oldItem, false);
-			//inventory.ShowItems();
-			inventoryUI.UpdateUI();
+			inventoryUI.UpdateUI(inventory.equipments);
 		}
 		else
 		{
@@ -130,7 +118,7 @@ public class EquipmentManager : MonoBehaviour {
 	public void Add(Equipment equipment)
 	{
 		inventory.Add(equipment);
-		inventoryUI.UpdateUI();
+		inventoryUI.UpdateUI(inventory.equipments);
 	}
     void AttachToMesh(Equipment item, int slotIndex)
 	{

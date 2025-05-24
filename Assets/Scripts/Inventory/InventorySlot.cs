@@ -28,7 +28,7 @@ public class InventorySlot : MonoBehaviour {
 	{
 		if (equipment == null)
 		{
-			Debug.LogError("AGA!");
+			Debug.LogError("Upcoming Equipment to Slot is Null!");
 		}
 		//Debug.LogError("Slot created!");
 		//Debug.Log($"Upcoming slot: {equipment.equipSlot}");
@@ -50,7 +50,7 @@ public class InventorySlot : MonoBehaviour {
 	}
 	public void ClearSlot ()
 	{
-		Debug.LogError("Slot cleared!");
+		//Debug.LogError("Slot cleared!");
 		item = null;
 		isEquiped = true;
 		icon.sprite = null;

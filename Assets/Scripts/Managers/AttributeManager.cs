@@ -34,12 +34,12 @@ public class AttributeManager : MonoBehaviour {
 		Dictionary<StatType, StatModifier> modifiers = equipment.statModifiers;
 		var statList = attributes.stats.Keys;
 		StatType stat;
-		if(isEquiped)
+		if (isEquiped)
 		{
-			for(int i = 0; i < modifiers.Count; ++i)
+			for (int i = 0; i < modifiers.Count; ++i)
 			{
 				stat = statList.ElementAt(i);
-				if(modifiers.ContainsKey(stat))
+				if (modifiers.ContainsKey(stat))
 				{
 					attributes.Add(stat, modifiers[stat]);
 				}
@@ -47,15 +47,16 @@ public class AttributeManager : MonoBehaviour {
 		}
 		else
 		{
-			for(int i = 0; i < modifiers.Count; ++i)
+			for (int i = 0; i < modifiers.Count; ++i)
 			{
 				stat = statList.ElementAt(i);
-				if(modifiers.ContainsKey(stat))
+				if (modifiers.ContainsKey(stat))
 				{
 					attributes.Remove(stat, modifiers[stat]);
 				}
 			}
 		}
+		UpdateTexts();
 	}
 	public void UpdateTexts()
 	{
@@ -65,7 +66,8 @@ public class AttributeManager : MonoBehaviour {
         {
             foreach(StatType type in attributes.stats.Keys)
 		    {
-				if(type != StatType.Default)
+				if ((int)type != (int)StatType.Default)
+				//Debug.LogError($"Attribute: {(int)type} Value: {attributes.stats[type].value}");
                 textList[index++].GetComponent<TextMeshProUGUI>().text = attributes.stats[type].value.ToString();
 		    }
         }

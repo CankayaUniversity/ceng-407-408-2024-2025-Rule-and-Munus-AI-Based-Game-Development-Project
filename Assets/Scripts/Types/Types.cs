@@ -13,9 +13,9 @@ namespace Types
             Feet = 4,
             Secondary = 5,
             Weapon = 6, 
-            Hand,
-            Accessoire = 7,
-            Default,
+            Hand = 7,
+            Accessoire = 8,
+            Default = 9,
         }
         // public enum EquipmentType
         // {
@@ -47,7 +47,7 @@ namespace Types
             Rare = 4,
             Epic = 5,
             Legendary = 6,
-            Default,
+            Default = 7,
         }
         public enum StatType
         {
